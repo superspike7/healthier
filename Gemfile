@@ -68,4 +68,7 @@ group :development do
 
   # preview email in browser
   gem 'letter_opener'
+
+  # n+1 query checker
+  gem 'bullet'
 end
