@@ -6,8 +6,12 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
 
+<<<<<<< HEAD
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
+=======
+  resources :conversations, only: %i[show create]
+>>>>>>> add messages controller
 
   root 'dashboard#index'
 end
