@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
 
-  root 'static_pages#home'
+  root 'dashboard#index'
 end
