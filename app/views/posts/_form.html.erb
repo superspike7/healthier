@@ -1,0 +1,12 @@
+<%= form_with(model: post) do |form| %>
+
+<div>
+    <%= form.label :post %>
+    <%= form.text_area :body%>
+</div>
+
+<div>
+    <%= form.submit%>
+</div>
+
+<% end %>

@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2022_07_28_210054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +39,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_210054) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+=======
+ActiveRecord::Schema[7.0].define(version: 2022_07_27_074043) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "posts", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+>>>>>>> add ability to create post
   end
 
   create_table "users", force: :cascade do |t|
@@ -65,4 +78,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_210054) do
   add_foreign_key "members", "users"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "posts", "users"
 end
