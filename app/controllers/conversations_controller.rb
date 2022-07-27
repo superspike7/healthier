@@ -3,20 +3,20 @@ class ConversationsController < ApplicationController
     #show the specific conversation
 
     @conversation = current_user.conversations
+    @conversation_messages = Message.where(conversation: params[:conversation_id])
   end
 
   def create
     # link to access the conversation.
-
-    # Scenario 1: Creating a new conversation
-      # The user clicks another user to chat him/her.
-      # If conversation does not exist yet,
-      # we create a new conversation then in after_create callback we add the members of 
-      # current_user id and the id that you clicked. Conversation.members.build(id ni current_user and id nung other user)
-      # then redirect to the show conversation page
-
-
-    # if a conversation is present between them, choose that.
-    # if not, create one.
+    # ?other_user=1
+    other_user = User.find(id: params[:other_user])
+    conversation = current_user.existing_conversation_with(other_user:) ||
+                   Conversation.create_direct!(current_user, other_user)
+    redirect_to conversation_url(conversation)
+  rescue ActiveRecord::Rollback
+    redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
   end
 end
+
+
+# User.first.conversations.first.members.where(user: User.second)
