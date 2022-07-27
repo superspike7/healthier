@@ -1,4 +1,15 @@
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
+# frozen_string_literal: true
+
+GOOGLE_SETUP_PROC = lambda do |env|
+  request = Rack::Request.new(env)
+  scope = %w[email profile]
+  # TODO: Add additional scope below here when accessing google calendar API
+  # scope << "calendar.readonly" if request.params["origin"] != "login"
+  env['omniauth.strategy'].options[:scope] = scope.join(',')
 end
-OmniAuth.config.allowed_request_methods = %i[get]
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :google_oauth2, Figaro.env.google_client_id, Figaro.env.google_client_secret,
+           { name: 'google', scope: GOOGLE_SETUP_PROC }
+end
+# OmniAuth.config.allowed_request_methods = %i[post]
