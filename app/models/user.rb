@@ -3,6 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
+  has_many :conversation, through: :members
+  has_many :messages
+
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 
   def self.from_omniauth(auth)
