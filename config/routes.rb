@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :exercises, only: [:new, :show]
 =======
   resources :conversations, only: %i[show create]
+<<<<<<< HEAD
 >>>>>>> add messages controller
+=======
+  resources :conversation_messages, only: %i[create]
+>>>>>>> replace messages controller with conversation_messages controller
 
   root 'dashboard#index'
 end
