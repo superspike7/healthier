@@ -8,20 +8,11 @@
 
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
   </head>
 
   <body>
     <div class="h-screen w-screen flex">
+      <!-- side navigation bar -->
       <div class="h-full w-24 bg-gray-100 flex flex-col justify-between gap-16 items-center py-5">
         <div class="h-14 w-14 bg-gray-500 text-center text-white rounded-full flex items-center justify-center">
           LOGO
@@ -42,8 +33,19 @@
         </ul>
         <button class="bg-blue-500 rounded-full p-2"><%= vite_image_tag 'icons/plus.svg', class: 'h-8' %></button>
       </div>
+      
       <div class="flex-1">
-        <%= yield %>
+        <!-- header bar -->
+        <div class="flex justify-between p-1 py-4 border-b border-gray-300">
+          <div class="flex-1">
+          </div>
+          <div class="h-10 w-10 bg-green-500 text-center text-white rounded-full flex items-center justify-center">
+           DP 
+          </div>
+        </div>
+        <div>
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>
