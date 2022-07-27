@@ -1,7 +1,5 @@
 class ConversationsController < ApplicationController
   def show
-    #show the specific conversation
-
     @conversation = current_user.conversations
     @conversation_messages = Message.where(conversation: params[:conversation_id])
   end
@@ -17,6 +15,3 @@ class ConversationsController < ApplicationController
     redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
   end
 end
-
-
-# User.first.conversations.first.members.where(user: User.second)
