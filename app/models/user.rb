@@ -19,7 +19,8 @@ class User < ApplicationRecord
   end
 
   def existing_conversation_with(other_user)
-    existing_conversation = conversations.map { |conversation| conversation.members.where(user: other_user).first }.compact
-    return nil if existing_conversation.blank?
+    # ang nangyayari dito kinukuha mo dapat yung conversation hindi yung member object.
+    # if group chat is implemented, implement a condition that will only find if there are 3 or more members.
+    conversations.map { |conversation| conversation.members.find_by(user: other_user)&.conversation }.compact.first
   end
 end

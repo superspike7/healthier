@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
 =======
@@ -14,6 +15,9 @@ Rails.application.routes.draw do
 <<<<<<< HEAD
 >>>>>>> add messages controller
 =======
+=======
+  resources :conversations, only: %i[index show create]
+>>>>>>> fix logic for initiating of conversation and sending of message
   resources :conversation_messages, only: %i[create]
 >>>>>>> replace messages controller with conversation_messages controller
 
