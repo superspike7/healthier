@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
 =======
@@ -18,6 +19,9 @@ Rails.application.routes.draw do
 =======
   resources :conversations, only: %i[index show create]
 >>>>>>> fix logic for initiating of conversation and sending of message
+=======
+  resources :conversations, only: %i[index show create], path: 'direct'
+>>>>>>> add realtime update for creation of messages using turbostream
   resources :conversation_messages, only: %i[create]
 >>>>>>> replace messages controller with conversation_messages controller
 
