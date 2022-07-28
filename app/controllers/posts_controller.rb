@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:edit, :update, :destroy]
   def index
     @posts = Post.all
   end
@@ -21,10 +22,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post deleted'
+    else
+      render :edit
+    end
   end
 
   private
+
+  def set_post
+    @post = current_user.posts.find_by(id: params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:body, images: [])
