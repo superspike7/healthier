@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   def index
+    @posts = Post.all
   end
 
   def show
+    @post = current_user.posts.find(params[:id])
   end
 
   def new
@@ -25,6 +27,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body)
+    params.require(:post).permit(:body, images: [])
   end
 end
