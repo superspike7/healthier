@@ -1,0 +1,77 @@
+<div
+  class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+>
+  <div class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col">
+    <div class="flex justify-between items-center px-7 pt-7">
+      <h1 class="font-bold text-2xl">Add Daily Intake</h1>
+      <button class="px-3 py-2 bg-red-300 font-bold text-xl rounded-lg">
+        X
+      </button>
+    </div>
+    <div>
+      <form>
+        <div>
+          <div class="py-10 px-7 flex flex-col gap-6">
+            <div class="grid grid-cols-6 text-xl items-center">
+              <label for="date" class="col-span-2 text-gray-700">Date</label>
+              <input
+                type="date"
+                name="date"
+                class="col-span-4 p-1 px-2 rounded-xl border border-gray-400 text-center text-gray-800"
+              />
+            </div>
+            <div class="grid grid-cols-6 text-xl items-center">
+              <label for="calories" class="col-span-2 text-gray-700"
+                >Calories</label
+              >
+              <input
+                type="text"
+                name="calories"
+                class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+              />
+            </div>
+            <div class="grid grid-cols-6 text-xl items-center">
+              <label for="Carbohydrates" class="col-span-2 text-gray-700"
+                >Carbohydrates</label
+              >
+              <input
+                type="text"
+                name="Carbohydrates"
+                class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+              />
+            </div>
+            <div class="grid grid-cols-6 text-xl items-center">
+              <label for="calories" class="col-span-2 text-gray-700"
+                >Fats</label
+              >
+              <input
+                type="text"
+                name="calories"
+                class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+              />
+            </div>
+            <div class="grid grid-cols-6 text-xl items-center">
+              <label for="calories" class="col-span-2 text-gray-700"
+                >Protein</label
+              >
+              <input
+                type="text"
+                name="calories"
+                class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+              />
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
+          >
+            <button class="px-4 py-2 bg-green-500 text-white rounded-xl">
+              Add New Intake
+            </button>
+            <button>Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
