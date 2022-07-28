@@ -1,0 +1,27 @@
+<%= turbo_frame_tag "modal", target: :_top do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+        data-turbo-modal-target="modal"
+        data-action="click@window->turbo-modal#outsideClose"
+      >
+        <div
+          class="bg-green-500 rounded-t-xl p-8 flex flex-col justify-center gap-8 items-center"
+        >
+          <div class="flex flex-col text-xl text-gray-50 text-center">
+            <h3 class="font-bold">Edit Conversation Name</h3>
+          </div>
+        </div>
+        <div class="p-8 gap-8">
+          <%= form_with model: @conversation, url: direct_conversation_path, class: 'flex flex-col' do |f| %>
+            <%= f.text_field :name, class: 'text-center' %>
+            <%= f.submit 'Apply' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
