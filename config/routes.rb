@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :daily_intakes, only: [:new, :show]
+  resources :exercises, only: [:new, :show]
 
   root 'dashboard#index'
 end
