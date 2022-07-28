@@ -1,6 +1,5 @@
 class ConversationMessagesController < ApplicationController
   def create
-    # pass the conversation id and user id
-    # create the message with the given params
+    current_user.messages.create(conversation_id: params[:conversation], content: params[:content])
   end
 end
