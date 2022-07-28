@@ -4,6 +4,7 @@ class DirectConversationsController < ApplicationController
   end
 
   def show
+    # pag inaccess na to ni user, all messages will be marked as 'read'
     @conversation_id = params[:id]
     @conversation = current_user.conversations.find(@conversation_id)
     @conversation_messages = current_user.messages.where(conversation: @conversation_id)
