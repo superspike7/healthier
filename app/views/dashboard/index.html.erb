@@ -308,16 +308,19 @@
                     class: "bg-green-500 text-white font-bold text-lg p-2 rounded-md" %>
     </div>
     <ul class="flex flex-col mt-10 flex-1 overflow-y-auto gap-5">
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
+      
+      <%= link_to exercise_path(1), data: {turbo_frame: 'modal'} do %>
+        <li class="flex px-2 justify-between items-center align-middle cursor-pointer hover:bg-green-200">
+          <div class="h-10 w-10 bg-green-300 rounded-md">
+            
+          </div>
+          <p class="font-bold text-xl">Jogging</p>
+          <p class="font-medium text-lg underline">Cardio</p>
+          <p class="font-light text-xl">10km</p>
+          <p class="font-light text-xl">30mins</p>
+          <p class="font-light text-xl">1 day ago</p>
+        </li>
+      <% end %>
       
       <li class="flex px-2 justify-between items-center align-middle">
         <div class="h-10 w-10 bg-green-300 rounded-md">
