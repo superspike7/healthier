@@ -6,24 +6,10 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
-=======
-  resources :conversations, only: %i[show create]
-<<<<<<< HEAD
->>>>>>> add messages controller
-=======
-=======
-  resources :conversations, only: %i[index show create]
->>>>>>> fix logic for initiating of conversation and sending of message
-=======
-  resources :conversations, only: %i[index show create], path: 'direct'
->>>>>>> add realtime update for creation of messages using turbostream
+  resources :direct_conversations, only: %i[index show create], path: 'direct'
   resources :conversation_messages, only: %i[create]
->>>>>>> replace messages controller with conversation_messages controller
 
   root 'dashboard#index'
 end
