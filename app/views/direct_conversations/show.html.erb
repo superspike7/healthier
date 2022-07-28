@@ -1,10 +1,14 @@
 <%= turbo_stream_from 'messages' %>
 
+<p> Conversation: <%= @conversation_name %> </p>
+
 <div id='messages' class='bg-slate-200'>
   <%= render partial: 'conversation_messages/message', collection: @conversation_messages %>
 </div>
 
-<%= form_with model: @message, url: conversation_messages_path(conversation: @conversation_id) do |f| %>
+<%= form_with model: @message, url: conversation_messages_path(conversation: @conversation.id) do |f| %>
   <%= f.text_area :content %>
   <%= f.submit %>
 <% end %>
+
+<%= link_to 'Edit name', edit_direct_conversation_path(@conversation) %>
