@@ -5,7 +5,8 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation_id = params[:id]
-    @conversation_messages = Message.where(conversation: @conversation_id).includes(:user)
+    @conversation = current_user.conversations.find(@conversation_id)
+    @conversation_messages = current_user.messages.where(conversation: @conversation_id)
     @message = current_user.messages.build(conversation_id: @conversation_id)
   end
 
