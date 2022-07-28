@@ -1,0 +1,2 @@
+class GroupConversationsController < ApplicationController
+end

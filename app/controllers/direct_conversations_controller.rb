@@ -1,4 +1,4 @@
-class ConversationsController < ApplicationController
+class DirectConversationsController < ApplicationController
   def index
     @users = User.all
   end
@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
     other_user = User.find(params[:other_user])
     conversation = current_user.existing_conversation_with(other_user) ||
                    Conversation.create_direct!(current_user, other_user)
-    redirect_to conversation_url(conversation)
+    redirect_to direct_conversation_url(conversation)
   rescue ActiveRecord::Rollback
     redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
   end

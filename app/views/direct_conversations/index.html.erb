@@ -1,0 +1,3 @@
+<% @users.each do |user| %>
+  <%= button_to user.username, direct_conversations_path(other_user: user.id) %>
+<% end %>
