@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
 
+  resources :daily_intakes, only: [:new, :show]
+
   root 'dashboard#index'
 end
