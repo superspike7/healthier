@@ -31,30 +31,33 @@
     <div class="grid grid-cols-4 auto-rows-min overflow-y-auto h-full gap-5 p-2">
       
       <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
+      <%= link_to daily_intake_path(1), data: {turbo_frame: 'modal'} do %>
+        <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7 hover:-translate-y-6
+                    cursor-pointer transition-transform hover:bg-green-50">
+          <div
+            class="bg-green-200 rounded-full h-32 flex items-center justify-center"
+          >
+            Image of a salad
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between items-center">
+              <p class="font-bold text-xl">Fruit Salad</p>
+              <p class="text-md font-light">1h ago</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <p class="font-semi text-lg">Calories:</p>
+              <p class="text-md font-light">69</p>
+            </div>
+            <p class="font-semi text-lg">Nutrients:</p>
+            <div class="flex gap-1 text-white flex-wrap">
+              <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
+              <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
+              <span class="px-2 bg-red-400 rounded-xl">Iron</span>
+              <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
+            </div>
+          </div>
         </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
+      <% end %>
       
       <!-- food card -->
       <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
