@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
   resources :direct_conversations, only: %i[index show create], path: 'direct'
-  resources :group_conversations, only: %i[index show create new], path: 'group'
   resources :conversation_messages, only: %i[create]
 
   root 'dashboard#index'

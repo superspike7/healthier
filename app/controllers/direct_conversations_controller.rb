@@ -7,7 +7,7 @@ class DirectConversationsController < ApplicationController
     # pag inaccess na to ni user, all messages will be marked as 'read'
     @conversation_id = params[:id]
     @conversation = current_user.conversations.find(@conversation_id)
-    @conversation_messages = current_user.messages.where(conversation: @conversation_id)
+    @conversation_messages = current_user.messages.where(conversation: @conversation_id).includes(:user)
     @message = current_user.messages.build(conversation_id: @conversation_id)
   end
 
@@ -19,5 +19,9 @@ class DirectConversationsController < ApplicationController
     redirect_to direct_conversation_url(conversation)
   rescue ActiveRecord::Rollback
     redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
+  end
+
+  def update
+    # update the conversation name
   end
 end
