@@ -1,2 +1,41 @@
-<h1>Exercises#show</h1>
-<p>Find me in app/views/exercises/show.html.erb</p>
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+        data-turbo-modal-target="modal"
+        data-action="click@window->turbo-modal#outsideClose"
+      >
+        <div
+          class="bg-green-500 rounded-t-xl p-8 flex flex-col justify-center gap-8 items-center"
+        >
+          <div
+            class="h-40 w-40 bg-green-200 rounded-full grid place-items-center"
+          >
+            Exercise Icon
+          </div>
+          <div class="flex flex-col text-xl text-gray-50 text-center">
+            <h3 class="font-bold">Jogging</h3>
+            <p class="font-light">Timed Exercise</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 p-8 gap-8">
+          <div class="flex flex-col text-center">
+            <p class="font-bold text-2xl">30mins</p>
+            <p class="text-xl text-green-500">Time</p>
+          </div>
+          <div class="flex flex-col text-center">
+            <p class="font-bold text-2xl">6km</p>
+            <p class="text-xl text-green-500">Distance</p>
+          </div>
+          <div class="flex flex-col text-center">
+            <p class="font-bold text-2xl">420cal</p>
+            <p class="text-xl text-green-500">Calories burned</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
