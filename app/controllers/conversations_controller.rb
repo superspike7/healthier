@@ -5,12 +5,11 @@ class ConversationsController < ApplicationController
 
   def show
     @conversation_id = params[:id]
-    @conversation_messages = Message.where(conversation: @conversation_id)
+    @conversation_messages = Message.where(conversation: @conversation_id).includes(:user)
     @message = current_user.messages.build(conversation_id: @conversation_id)
   end
 
   def create
-    # link to access the conversation.
     # ?other_user=1
     other_user = User.find(params[:other_user])
     conversation = current_user.existing_conversation_with(other_user) ||

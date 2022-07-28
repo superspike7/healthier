@@ -1,8 +1,7 @@
-<div class='bg-slate-200'>
-<% @conversation_messages.each do |message| %>
-  <%= message.user.username %>
-  <%= message.content %>
-<% end %>
+<%= turbo_stream_from 'messages' %>
+
+<div id='messages' class='bg-slate-200'>
+  <%= render partial: 'conversation_messages/message', collection: @conversation_messages %>
 </div>
 
 <%= form_with model: @message, url: conversation_messages_path(conversation: @conversation_id) do |f| %>
