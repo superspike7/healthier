@@ -1,0 +1,11 @@
+<div class='bg-slate-200'>
+<% @conversation_messages.each do |message| %>
+  <%= message.user.username %>
+  <%= message.content %>
+<% end %>
+</div>
+
+<%= form_with model: @message, url: conversation_messages_path(conversation: @conversation_id) do |f| %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
