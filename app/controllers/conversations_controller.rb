@@ -7,7 +7,7 @@ class ConversationsController < ApplicationController
   def create
     # link to access the conversation.
     # ?other_user=1
-    other_user = User.find(id: params[:other_user])
+    other_user = User.find(params[:other_user])
     conversation = current_user.existing_conversation_with(other_user:) ||
                    Conversation.create_direct!(current_user, other_user)
     redirect_to conversation_url(conversation)
