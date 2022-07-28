@@ -1,2 +1,86 @@
-<h1>Exercises#new</h1>
-<p>Find me in app/views/exercises/new.html.erb</p>
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+        data-turbo-modal-target="modal"
+        data-action="click@window->turbo-modal#outsideClose"
+      >
+        <div class="px-7 pt-7">
+          <h1 class="font-bold text-2xl">Add Exercise</h1>
+        </div>
+        <div>
+          <form>
+            <div>
+              <div class="py-10 px-7 flex flex-col gap-6">
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label for="date" class="col-span-2 text-gray-700"
+                    >Exercise Type</label
+                  >
+                  <select
+                    name="date"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400 text-center text-gray-800"
+                  >
+                    <option value="timed">Timed Exercise</option>
+                    <option value="repitition">Repitition Exercise</option>
+                  </select>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label for="calories" class="col-span-2 text-gray-700"
+                    >Name</label
+                  >
+                  <input
+                    type="text"
+                    name="calories"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+                  />
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label for="Carbohydrates" class="col-span-2 text-gray-700"
+                    >Description</label
+                  >
+                  <input
+                    type="text"
+                    name="Carbohydrates"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+                  />
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label for="calories" class="col-span-2 text-gray-700"
+                    >Sets(dyanmic input)</label
+                  >
+                  <input
+                    type="text"
+                    name="calories"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+                  />
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label for="calories" class="col-span-2 text-gray-700"
+                    >Time(dynamic input)</label
+                  >
+                  <input
+                    type="text"
+                    name="calories"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+                  />
+                </div>
+              </div>
+
+              <div
+                class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
+              >
+                <button class="px-4 py-2 bg-green-500 text-white rounded-xl">
+                  Add New Intake
+                </button>
+                <button data-action="turbo-modal#hideModal">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
