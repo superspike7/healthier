@@ -1,5 +1,28 @@
 <div>
     <h1><b>Edit Post</b></h1>
   
-    <%= render "form", post: @post %>
+    <%= form_with(model: @post) do |form| %>
+
+        <div>
+            <%= form.label :post %>
+            <%= form.text_area :body%>
+        </div>
+        <div>
+            <%= form.label :attach_image%>
+            <%= form.file_field :images, multiple: true %>
+        </div>
+
+        <div>
+            <%= form.submit%>
+        </div>
+
+    <% end %>
+    <% if @post.images.attached?%>
+        <% @post.images.each do |image|%>
+            <p><%= image_tag image, width: "200px"%></p>
+            <%= button_to "Remove", destroy_attachment_path(image), method: :delete%>
+        <%end%>
+    <%end%>
+
+
 </div>
