@@ -7,7 +7,7 @@ class DirectConversationsController < ApplicationController
 
   def show
     @conversation_name = @conversation.show_conversation_name(current_user)
-    @conversation_messages = current_user.messages.where(conversation: params[:id]).includes(:user)
+    @conversation_messages = @conversation.show_messages
     @message = current_user.messages.build(conversation_id: params[:id])
   end
 

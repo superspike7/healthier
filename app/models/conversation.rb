@@ -1,7 +1,10 @@
 class Conversation < ApplicationRecord
   has_many :members
+  has_many :messages
 
   validates :name, length: { maximum: 48 }
+
+  scope :show_messages, -> { messages.includes(:user) }
 
   def self.create_direct!(user, another_user)
     users = user == another_user ? { user: } : [{ user: }, { user: another_user }]
