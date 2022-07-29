@@ -11,4 +11,10 @@ class Conversation < ApplicationRecord
       created_conversation
     end
   end
+
+  def show_conversation_name(user)
+    return members.first_username if members_count == 1
+
+    name || members.other_username(user)
+  end
 end

@@ -6,9 +6,7 @@ class DirectConversationsController < ApplicationController
   end
 
   def show
-    # pag inaccess na to ni user, all messages will be marked as 'read'
-    @conversation_name = @conversation.name || @conversation.members.where.not(user: current_user).first&.user&.username || 
-                         current_user.username
+    @conversation_name = @conversation.show_conversation_name(current_user)
     @conversation_messages = current_user.messages.where(conversation: params[:id]).includes(:user)
     @message = current_user.messages.build(conversation_id: params[:id])
   end
@@ -25,7 +23,6 @@ class DirectConversationsController < ApplicationController
   def edit; end
 
   def update
-    # update the conversation name
     if @conversation.update(direct_conversation_params)
       redirect_to direct_conversation_url(@conversation)
     else
