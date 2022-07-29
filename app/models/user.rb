@@ -3,9 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  has_many :members
-  has_many :conversations, through: :members
-  has_many :messages
+  has_many :members, dependent: :destroy
+  has_many :conversations, through: :members, dependent: :destroy
+  has_many :messages, dependent: :destroy
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 
