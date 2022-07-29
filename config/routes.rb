@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
   resources :posts
-
+  resources :destroy_attachments, only: [:destroy]
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
   resources :direct_conversations, only: %i[create edit index show update], path: 'direct'
