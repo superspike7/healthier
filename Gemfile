@@ -82,3 +82,8 @@ group :development do
   # n+1 query checker
   gem 'bullet'
 end
+
+group :test do
+  # rspec progress bar formatter
+  gem 'fuubar'
+end
