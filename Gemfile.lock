@@ -102,6 +102,9 @@ GEM
     faraday-net_http (2.0.3)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
+    fuubar (2.5.1)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -231,6 +234,7 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.11.0)
+    ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
@@ -280,6 +284,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   figaro
+  fuubar
   jbuilder
   letter_opener
   omniauth-google-oauth2
