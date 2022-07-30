@@ -91,6 +91,11 @@ GEM
     digest (3.1.0)
     dry-cli (0.7.0)
     erubi (1.10.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faraday (2.3.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
@@ -273,6 +278,7 @@ DEPENDENCIES
   bullet
   debug
   devise
+  factory_bot_rails
   figaro
   jbuilder
   letter_opener
