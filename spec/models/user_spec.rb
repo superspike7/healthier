@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
   let(:other_user) { create(:other_user) }
+  let(:conversation) { create(:conversation) }
 
   describe '#existing_conversation_with' do
     context 'when current user is passed as an argument' do
       context 'and when there is an existing conversation to self' do
-        let(:creation_of_own_conversation) { create(:conversation).members.create(user:) }
+        let(:creation_of_own_conversation) { conversation.members.create(user:) }
         it 'returns conversation to self' do
           own_conversation = creation_of_own_conversation.conversation
           conversation = user.existing_conversation_with(user)
@@ -24,7 +25,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when other user is passed as an argument' do
-      let(:creation_of_conversation_members) { create(:conversation).members.create([{ user: }, { user: other_user }]) }
+      let(:creation_of_conversation_members) { conversation.members.create([{ user: }, { user: other_user }]) }
       it 'returns conversation of the current user with other user' do
         conversation_with_other_user = creation_of_conversation_members.first.conversation
         conversation = user.existing_conversation_with(other_user)
