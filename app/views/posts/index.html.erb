@@ -75,6 +75,9 @@
         <% if comment.post_id == post.id%>
             <h4><%= comment.user.username%></h4>
             <h4><%= comment.body%></h4>
+            <% if comment.user_id == current_user%>
+                <%= button_to 'Delete comment', comment_path(comment), method: :delete%>
+            <%end%>
         <%end%>
     <%end%>
     <%= render "comments/form", post_id: post.id, comment: @comment  %>
