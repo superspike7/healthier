@@ -1,13 +1,14 @@
 class DirectConversationsController < ApplicationController
   def index
     @users = User.all
+    @conversations = current_user.conversations
   end
 
   def show
-    @conversation_id = params[:id]
-    @conversation = current_user.conversations.find(@conversation_id)
-    @conversation_messages = current_user.messages.where(conversation: @conversation_id).includes(:user)
-    @message = current_user.messages.build(conversation_id: @conversation_id)
+    @conversation_name = @conversation.show_conversation_name(current_user)
+    @conversation_messages = @conversation.messages.includes(:user)
+    @message = current_user.messages.build(conversation_id: params[:id])
+    @conversation.notifications_as_conversation.mark_as_read!
   end
 
   def create

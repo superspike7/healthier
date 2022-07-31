@@ -1,3 +1,14 @@
+<%= turbo_stream_from 'message_notifications' %>
+
+<p class='text-xl font-bold'> Users to Chat </p>
+
 <% @users.each do |user| %>
   <%= button_to user.username, direct_conversations_path(other_user: user.id) %>
+<% end %>
+
+<p class='text-xl font-bold'> Existing Conversations </p>
+
+<% @conversations.each do |conversation| %>
+  <%= link_to conversation.show_conversation_name(current_user), direct_conversation_path(conversation) %>
+  <%= render partial: 'direct_conversations/notification', locals: { unread: conversation.notifications_as_conversation.where(recipient_id: current_user).unread } %>
 <% end %>
