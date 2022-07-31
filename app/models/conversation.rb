@@ -2,6 +2,8 @@ class Conversation < ApplicationRecord
   has_many :members
   has_many :messages
 
+  has_noticed_notifications model_name: 'Notification'
+
   validates :name, length: { maximum: 48 }
 
   validates :name, length: { maximum: 48 }

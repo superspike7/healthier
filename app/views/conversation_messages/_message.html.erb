@@ -1,4 +1,4 @@
-<div id="message_<%= message.id %>">
+<div id="<%= dom_id(message) %>">
   <%= message.user.username %>
   <%= message.content %>
 </div>
