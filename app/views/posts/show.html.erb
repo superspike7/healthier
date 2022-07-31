@@ -7,7 +7,14 @@
         <p><%= image_tag image, width: "200px"%></p>
     <%end%>
 <%end%>
-
+<div>
+    <h1>
+        <% @comments.each do |comment|%>
+            <h4><%= comment.user.username%></h4>
+            <h4><%= comment.body%></h4>
+        <%end%>
+    </h1>
+</div>
 <div>
     <%= link_to ' Edit', edit_post_path(@post)%>
     <%= link_to ' Back', posts_path %>
