@@ -1,14 +1,16 @@
 class DirectConversationsController < ApplicationController
+  before_action :set_direct_conversation, only: %i[show edit update]
+  before_action :set_logged_in_user, only: %i[index show]
+
   def index
     @users = User.all
     @conversations = current_user.conversations
   end
 
   def show
-    @conversation_name = @conversation.show_conversation_name(current_user)
     @conversation_messages = @conversation.messages.includes(:user)
     @message = current_user.messages.build(conversation_id: params[:id])
-    @conversation.notifications_as_conversation.mark_as_read!
+    @conversation.mark_as_read(current_user)
   end
 
   def create
@@ -23,5 +25,9 @@ class DirectConversationsController < ApplicationController
 
   def update
     # update the conversation name
+  end
+
+  def set_logged_in_user
+    @logged_in_user = current_user
   end
 end

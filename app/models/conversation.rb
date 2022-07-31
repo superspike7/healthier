@@ -1,12 +1,17 @@
 class Conversation < ApplicationRecord
   has_many :members
   has_many :messages
-
   has_noticed_notifications model_name: 'Notification'
 
   validates :name, length: { maximum: 48 }
 
+<<<<<<< HEAD
   validates :name, length: { maximum: 48 }
+=======
+  after_update_commit -> { broadcast_replace_to 'name', partial: 'direct_conversations/name' }
+
+  broadcasts_to ->(_conversation) { 'conversations' }, inserts_by: :append, partial: 'direct_conversations/conversation'
+>>>>>>> fix logic of unread count message notification
 
   def self.create_direct!(user, another_user)
     users = user == another_user ? { user: } : [{ user: }, { user: another_user }]
@@ -18,8 +23,12 @@ class Conversation < ApplicationRecord
   end
 
   def show_conversation_name(user)
-    return name || members.first_username if members_count == 1
+    return name if name.present?
 
-    name || members.other_username(user)
+    members_count == 1 ? members.first_username : members.other_username(user)
+  end
+
+  def mark_as_read(user)
+    notifications_as_conversation.where(recipient: user).mark_as_read!
   end
 end
