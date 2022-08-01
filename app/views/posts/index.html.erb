@@ -51,6 +51,18 @@
                <p>69</p>
              </div>
            </div>
+           <div class="flex">
+            <% @comments.each do |comment|%>
+            <% if comment.post_id == post.id%>
+                <h4><%= comment.user.username%></h4>
+                <h4><%= comment.body%></h4>
+                <% if comment.user_id == current_user.id%>
+                    <%= button_to 'Delete comment', comment_path(comment), method: :delete%>
+                <%end%>
+            <%end%>
+        <%end%>
+        <%= render "comments/form", post_id: post.id, comment: @comment  %>
+           </div>
         </div>
       </div>
       
@@ -61,33 +73,6 @@
   <div class="col-start-8 col-end-10 row-end-2">
   </div>
 </div>
-<%= button_to ' Sign out', destroy_user_session_path, method: :delete%>
-<% @posts.each do |post|%>
-    <p><h1><%= post.user.username%></h1><%= post.body%></p>
-    <% if post.images.attached?%>
-        <% post.images.each do |image|%>
-            <p><%= image_tag image, width: "200px"%></p>
-        <%end%>
-    <%end%>
-
-    <h3>Comment</h3>
-    <% @comments.each do |comment|%>
-        <% if comment.post_id == post.id%>
-            <h4><%= comment.user.username%></h4>
-            <h4><%= comment.body%></h4>
-            <% if comment.user_id == current_user.id%>
-                <%= button_to 'Delete comment', comment_path(comment), method: :delete%>
-            <%end%>
-        <%end%>
-    <%end%>
-    <%= render "comments/form", post_id: post.id, comment: @comment  %>
-
-    <%if current_user%>
-        <div>
-            <%= link_to ' Edit', edit_post_path(post)%>
-            <%= button_to ' Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' }%>
-        </div>
-    <%end%>
 
 
 <%end%>
