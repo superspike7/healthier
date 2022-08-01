@@ -34,4 +34,8 @@ class User < ApplicationRecord
       conversations.map { |conversation| conversation.members.find_by(user: other_user)&.conversation }.compact.first
     end
   end
+
+  def total_unread_messages
+    notifications.where(type: MessageNotification.name).unread.count
+  end
 end

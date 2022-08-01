@@ -4,4 +4,8 @@ class Member < ApplicationRecord
 
   scope :other_username, ->(user) { where.not(user:).first_username }
   scope :first_username, -> { first&.user&.username }
+
+  # broadcasts_to ->(_convo_members) { [conversation, :members] }, inserts_by: :append, partial: 'direct_conversations/conversation',
+  #                                                                target: dom_id(converastion, :members),
+  #                                                                locals: { member: self }
 end
