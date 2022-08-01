@@ -1,4 +1,3 @@
-<%= button_to ' Sign out', destroy_user_session_path, method: :delete%>
 <% @posts.each do |post|%>
     <p><h1><%= post.user.username%></h1><%= post.body%></p>
     <% if post.images.attached?%>
@@ -15,3 +14,79 @@
     <%end%>
 <%end%>
 
+<div class="h-full w-full grid grid-cols-9 grid-rows-[92vh]">
+  
+  <div class="col-start-3 col-end-7 overflow-y-auto 
+              flex flex-col gap-1 z-10 border-x-2 border-green-200">
+    
+    <div class="flex p-4 gap-4 bg-white border-b-2 border-green-200">
+      <div>
+        <div class="bg-green-200 h-16 w-16 rounded-full">
+        </div>
+      </div>
+      
+      <div class="flex-1 flex flex-col justify-center">
+         <textarea placeholder="What's going on?" class="resize-none p-2 font-semibold min-h-max" ></textarea>
+         <div class="flex justify-between py-4 border-t border-gray-200">
+          <%= vite_image_tag 'icons/image.svg', class: 'h-8 w-8' %> 
+          <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md" >Post</button> 
+         </div>
+      </div>
+    </div>
+    
+    <!-- post card -->
+    <div class="flex p-4 gap-4 bg-white border-b-2 border-green-200">
+      <div class="flex gap-3">
+        <div class="bg-green-200 h-10 w-10 rounded-full">
+        </div>
+      </div>
+      
+      <div class="flex-1 flex flex-col justify-center">
+        <h5 class="font-medium text-lg">Elton James</h5>
+         <p class="resize-none p-2 min-h-max" >Check out my progress! 💪</p>
+         <div class="rounded-xl h-60 w-full bg-blue-200">
+           
+         </div>
+         <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <%= vite_image_tag 'icons/comment.svg', class: 'h-8 w-8' %>
+             <p>420</p>
+           </div>
+           <div class="flex gap-2 items-center">
+             <%= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
+             <p>69</p>
+           </div>
+         </div>
+      </div>
+    </div>
+    
+    <div class="flex p-4 gap-4 bg-white border-b-2 border-green-200">
+      <div class="flex gap-3">
+        <div class="bg-green-200 h-10 w-10 rounded-full">
+        </div>
+      </div>
+      
+      <div class="flex-1 flex flex-col justify-center">
+        <h5 class="font-medium text-lg">Elton James</h5>
+         <p class="resize-none p-2 min-h-max" >Check out my progress! 💪</p>
+         <div class="rounded-xl h-60 w-full bg-blue-200">
+           
+         </div>
+         <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <%= vite_image_tag 'icons/comment.svg', class: 'h-8 w-8' %>
+             <p>420</p>
+           </div>
+           <div class="flex gap-2 items-center">
+             <%= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
+             <p>69</p>
+           </div>
+         </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="col-start-8 col-end-10 bg-red-200 row-end-2">
+  </div>
+</div>
