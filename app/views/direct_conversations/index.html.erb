@@ -1,3 +1,8 @@
+<div id='notifications'>
+  <%= turbo_stream_from 'notification_count' %>
+  <%= render partial: 'direct_conversations/notification', locals: { notifications: @notifications } %>
+</div>
+
 <p class='text-xl font-bold'> Users to Chat </p>
 
 <% @users.each do |user| %>

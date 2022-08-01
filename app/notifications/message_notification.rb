@@ -9,12 +9,12 @@ class MessageNotification < Noticed::Base
   deliver_by :database
 
   # Add required params
-  param :message
+  param :conversation
 
   # Define helper methods to make rendering easier.
-  # def message
-  #   params[:message].content
-  # end
+  def conversation
+    params[:conversation]
+  end
 
   # def url
   #   conversation_path(params[:message].conversation)
