@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   def index
+    @new_post = current_user.posts.build
     @posts = Post.all.with_attachments_and_user.show_latest
   end
 
@@ -9,14 +10,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = current_user.posts.build
+    @new_post = current_user.posts.build
   end
 
   def create
     @post = current_user.posts.build(post_params)
 
     if @post.save
-      redirect_to @post, notice: 'Post successful'
+      redirect_to posts_path, notice: 'Post successful'
     else
       render :new
     end
