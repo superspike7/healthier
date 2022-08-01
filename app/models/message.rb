@@ -13,7 +13,7 @@ class Message < ApplicationRecord
     members.each do |member|
       next if member.user.eql?(user)
 
-      MessageNotification.with(message: self, conversation:).deliver_later(member.user)
+      MessageNotification.with(conversation:).deliver_later(member.user)
     end
   end
 

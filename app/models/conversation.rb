@@ -5,13 +5,13 @@ class Conversation < ApplicationRecord
 
   validates :name, length: { maximum: 48 }
 
-<<<<<<< HEAD
-  validates :name, length: { maximum: 48 }
-=======
+
   after_update_commit -> { broadcast_replace_to 'name', partial: 'direct_conversations/name' }
 
+
+  after_update_commit -> { broadcast_replace_to 'conversation_name', partial: 'direct_conversations/name' }
+
   broadcasts_to ->(_conversation) { 'conversations' }, inserts_by: :append, partial: 'direct_conversations/conversation'
->>>>>>> fix logic of unread count message notification
 
   def self.create_direct!(user, another_user)
     users = user == another_user ? { user: } : [{ user: }, { user: another_user }]
@@ -30,5 +30,9 @@ class Conversation < ApplicationRecord
 
   def mark_as_read(user)
     notifications_as_conversation.where(recipient: user).mark_as_read!
+  end
+
+  def unread_notifications_count(user)
+    notifications_as_conversation.where(recipient_id: user).unread.count
   end
 end
