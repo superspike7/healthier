@@ -1,0 +1,24 @@
+<%= form_with model: userreport do |form| %>
+
+    <%= form.label "Please select a reason:"%>
+
+      <%= form.text_field :reporter_id, value: current_user.id %>
+
+      <%= form.radio_button :reason, 'BUY', :checked => true %> 
+      <%= form.label 'Fake account'%>
+      
+      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.label 'Fake name' %>
+
+      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.label 'Pretending to be someone' %>
+
+      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.label 'Posting inappropriate things' %>
+
+      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.label 'Suspicious or spam' %>
+
+      <%= form.submit "SUBMIT REPORT" %>
+
+<% end %>

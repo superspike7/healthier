@@ -1,17 +1,17 @@
 class DirectConversationsController < ApplicationController
-  before_action :set_direct_conversation, only: %i[show edit update]
-
   def index
     @users = User.all
   end
 
   def show
-    @conversation_name = @conversation.show_conversation_name(current_user)
-    @conversation_messages = @conversation.messages.includes(:user)
-    @message = current_user.messages.build(conversation_id: params[:id])
+    @conversation_id = params[:id]
+    @conversation = current_user.conversations.find(@conversation_id)
+    @conversation_messages = current_user.messages.where(conversation: @conversation_id).includes(:user)
+    @message = current_user.messages.build(conversation_id: @conversation_id)
   end
 
   def create
+    # ?other_user=1
     other_user = User.find(params[:other_user])
     conversation = current_user.existing_conversation_with(other_user) ||
                    Conversation.create_direct!(current_user, other_user)
@@ -20,23 +20,7 @@ class DirectConversationsController < ApplicationController
     redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
   end
 
-  def edit; end
-
   def update
-    if @conversation.update(direct_conversation_params)
-      redirect_to direct_conversation_url(@conversation)
-    else
-      render :edit
-    end
-  end
-
-  private
-
-  def direct_conversation_params
-    params.require(:conversation).permit(:name)
-  end
-
-  def set_direct_conversation
-    @conversation = current_user.conversations.find(params[:id])
+    # update the conversation name
   end
 end

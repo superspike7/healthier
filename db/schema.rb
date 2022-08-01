@@ -107,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_29_081532) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  add_foreign_key "user_reports", "users", column: "reported_id"
+  add_foreign_key "user_reports", "users", column: "reporter_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"

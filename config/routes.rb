@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users, controllers: { sessions: 'users/sessions' }
   devise_scope :user do
     get '/auth/google/callback', to: 'users/omniauth_callbacks#google_oauth2',
@@ -12,12 +13,11 @@ Rails.application.routes.draw do
   resources :direct_conversations, only: %i[create edit index show update], path: 'direct'
   resources :conversation_messages, only: :create
 
-  resources :daily_intakes, only: [:new, :show]
-  resources :exercises, only: [:new, :show]
-
   root 'dashboard#index'
 
   namespace :admin do
     resources :user
   end
+
+  resources :userreports
 end

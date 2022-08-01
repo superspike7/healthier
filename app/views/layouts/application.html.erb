@@ -45,13 +45,7 @@
           </p>
           <div class="h-10 w-10 bg-green-500 text-center text-white rounded-full flex items-center justify-center">
            DP 
-          </div>
-
-          <% if user_signed_in? %>
-            Hi, <%= current_user.username %> |
-            <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class:"nav-link bi-box-arrow-right" %>
-          <% end %>
-          
+          </div>          
         </div>
         <div class="max-h-full max-w-full flex-1">
           <%= yield %>
