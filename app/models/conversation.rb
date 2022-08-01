@@ -8,6 +8,7 @@ class Conversation < ApplicationRecord
 
   after_update_commit -> { broadcast_replace_to 'name', partial: 'direct_conversations/name' }
 
+  scope :recent, -> { order(updated_at: :desc) }
 
   after_update_commit -> { broadcast_replace_to 'conversation_name', partial: 'direct_conversations/name' }
 

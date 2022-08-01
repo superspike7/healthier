@@ -34,8 +34,4 @@ class User < ApplicationRecord
       conversations.map { |conversation| conversation.members.find_by(user: other_user)&.conversation }.compact.first
     end
   end
-
-  def recent_conversations
-    messages.includes(:conversation).order(created_at: :desc).uniq(&:conversation_id).map(&:conversation)
-  end
 end

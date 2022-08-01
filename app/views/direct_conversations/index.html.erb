@@ -13,5 +13,5 @@
 
 <div id='conversations'>
   <%= turbo_stream_from 'conversations' %>
-  <%= render partial: 'direct_conversations/conversation', collection: @conversations %>
+  <%= render partial: 'direct_conversations/conversation', collection: @conversations, locals: { current_user: current_user } %>
 </div>
