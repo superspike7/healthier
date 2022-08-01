@@ -3,12 +3,12 @@ class PostsController < ApplicationController
   def index
     @new_post = current_user.posts.build
     @posts = Post.all.with_attachments_and_user.show_latest
-    @comments = Comment.includes(:user)
+    @comments = Comment.include_user_only.comment_desc
   end
 
   def show
     @post = current_user.posts.find(params[:id])
-    @comments = Comment.where(post_id: params[:id]).includes(:user)
+    @comments = Comment.where(post_id: params[:id]).include_user_only.comment_desc
   end
 
   def new
