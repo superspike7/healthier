@@ -4,7 +4,7 @@ class DirectConversationsController < ApplicationController
 
   def index
     @users = User.all
-    @conversations = current_user.recent_conversations
+    @conversations = current_user.conversations.recent
     @notifications = current_user.notifications
   end
 
