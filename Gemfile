@@ -77,7 +77,7 @@ group :development do
   # gem "spring"
 
   # preview email in browser
-  gem 'letter_opener'
+  # gem 'letter_opener'
 
   # n+1 query checker
   gem 'bullet'
