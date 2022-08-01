@@ -1,11 +1,10 @@
 class DirectConversationsController < ApplicationController
   before_action :set_direct_conversation, only: %i[show edit update]
-  before_action :set_logged_in_user, only: %i[index show]
 
   def index
     @users = User.all
-    @conversations = current_user.conversations.recent
-    @notifications = current_user.notifications
+    @conversations = current_user.conversations
+    @unread_messages_count = current_user.total_unread_messages
   end
 
   def show
@@ -26,9 +25,5 @@ class DirectConversationsController < ApplicationController
 
   def update
     # update the conversation name
-  end
-
-  def set_logged_in_user
-    @logged_in_user = current_user
   end
 end

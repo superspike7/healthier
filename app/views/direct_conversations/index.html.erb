@@ -1,6 +1,6 @@
-<div id='notifications'>
-  <%= turbo_stream_from 'notification_count' %>
-  <%= render partial: 'direct_conversations/notification', locals: { notifications: @notifications } %>
+<div id='unread_count'>
+  <%= turbo_stream_from 'unread_message_notifications' %>
+  <%= render 'direct_conversations/notification', unread_count: @unread_messages_count %>
 </div>
 
 <p class='text-xl font-bold'> Users to Chat </p>
@@ -13,5 +13,7 @@
 
 <div id='conversations'>
   <%= turbo_stream_from 'conversations' %>
-  <%= render partial: 'direct_conversations/conversation', collection: @conversations, locals: { current_user: current_user } %>
+  <% @conversations.each do |conversation| %>
+    <%= render 'direct_conversations/conversation', user: Current.user, conversation: conversation %>
+  <% end %>
 </div>
