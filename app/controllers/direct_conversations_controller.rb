@@ -13,16 +13,11 @@ class DirectConversationsController < ApplicationController
   end
 
   def create
-    # ?other_user=1
     other_user = User.find(params[:other_user])
     conversation = current_user.existing_conversation_with(other_user) ||
                    Conversation.create_direct!(current_user, other_user)
     redirect_to direct_conversation_url(conversation)
   rescue ActiveRecord::Rollback
     redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
-  end
-
-  def update
-    # update the conversation name
   end
 end
