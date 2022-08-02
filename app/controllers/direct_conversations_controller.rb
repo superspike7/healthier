@@ -4,7 +4,6 @@ class DirectConversationsController < ApplicationController
   def index
     @users = User.all
     @conversations = current_user.conversations
-    @unread_messages_count = current_user.total_unread_messages
   end
 
   def show

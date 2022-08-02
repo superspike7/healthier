@@ -16,13 +16,13 @@ class Conversation < ApplicationRecord
   end
 
   after_update_commit do
-    broadcast_replace_later_to 'conversation_name', partial: 'direct_conversations/name',
-                                                    locals: { conversation: self, user: Current.user }
-    broadcast_replace_later_to 'conversations', partial: 'direct_conversations/conversation',
-                                                locals: { conversation: self, user: Current.user }
-    # broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
-    #                                                           target: 'unread_count',
-    #                                                           locals: { unread_count: Current.user.total_unread_messages }
+    broadcast_update_later_to 'conversations', partial: 'direct_conversations/conversation',
+                                               locals: { conversation: self,
+                                                         target: "conversations_#{Current.user.id}",
+                                                         user: Current.user }
+    broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
+                                                              target: "unread_count_#{Current.user.id}",
+                                                              locals: { user: Current.user }
   end
 
   after_destroy_commit do
@@ -39,8 +39,6 @@ class Conversation < ApplicationRecord
   end
 
   def show_conversation_name(user)
-    return name if name.present?
-
     members_count == 1 ? members.first_username : members.other_username(user)
   end
 
