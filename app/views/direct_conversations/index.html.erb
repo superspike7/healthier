@@ -9,7 +9,6 @@
 
 <% @users.each do |user| %>
   <%= button_to user.username, direct_conversations_path(other_user: user.id) %>
-  <%# kailangan ko makuha yung user.id nung cinoconvo mo%>
 <% end %>
 
 <p class='text-xl font-bold'> Existing Conversations </p>

@@ -17,9 +17,9 @@ class Conversation < ApplicationRecord
   end
 
   after_update_commit do
-    broadcast_replace_later_to 'conversations', partial: 'direct_conversations/conversation',
-                                                target: "conversation_#{conversation_current_member_user_id}",
-                                                locals: { conversation: self, user: Current.user }
+    broadcast_update_later_to 'conversations', partial: 'direct_conversations/conversation',
+                                               target: "conversation_#{conversation_current_member_user_id}",
+                                               locals: { conversation: self, user: Current.user }
     broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
                                                               target: "unread_count_#{other_member_user_id}",
                                                               locals: { user: other_member }
@@ -34,6 +34,7 @@ class Conversation < ApplicationRecord
     ActiveRecord::Base.transaction do
       created_conversation = create!
       created_conversation.members.create!(users)
+      # add creation of notification here that the conversation has been created
       created_conversation
     end
   end
@@ -65,6 +66,8 @@ class Conversation < ApplicationRecord
   end
 
   def conversation_current_member_user_id
+    return if Current.user.nil?
+
     user_id = members.current_user(Current.user).id
     "#{id}#{user_id}"
   end

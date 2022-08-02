@@ -1,6 +1,5 @@
-<%# unless conversation.messages.count.zero? %>
 <div class='bg-slate-100 mb-2' id="conversation_<%=conversation.conversation_other_member_user_id%>">
   <%= link_to conversation.show_conversation_name(user), direct_conversation_path(conversation) %>
   <p>Unread Count: <%= conversation.unread_notifications_count(user) %></p>
 </div>
-<%# end %>
+

@@ -6,7 +6,7 @@ RSpec.describe Member, type: :model do
 
   describe '.first_username' do
     it 'returns the username of the first member in a member collection' do
-      expect(Member.first_username).to eq(first_member.user.username)
+      expect(Member.first_member.username).to eq(first_member.user.username)
     end
   end
 
