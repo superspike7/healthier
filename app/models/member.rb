@@ -11,4 +11,5 @@ class Member < ApplicationRecord
   # broadcasts_to ->(_convo_members) { [conversation, :members] }, inserts_by: :append, partial: 'direct_conversations/conversation',
   #                                                                target: dom_id(converastion, :members),
   #                                                                locals: { member: self }
+
 end

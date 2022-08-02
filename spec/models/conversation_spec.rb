@@ -24,31 +24,20 @@ RSpec.describe Conversation, type: :model do
   end
   
   describe '#show_conversation_name' do
-    context 'when conversation has a name' do
-      it 'returns the conversation name' do
-        conversation = member_of_conversation_with_name.conversation
-        user_member = member_of_conversation_with_name.user
-        expect(conversation.show_conversation_name(user_member)).to eq(conversation.name)
+    context 'and when current user is passed as an argument' do
+      it 'returns the username of the current user' do
+        conversation = member_of_conversation.conversation
+        current_user = member_of_conversation.user
+        expect(conversation.show_conversation_name(current_user)).to eq(current_user.username)
       end
     end
 
-    context 'when conversation does not have a name' do
-      context 'and when current user is passed as an argument' do
-        it 'returns the username of the current user' do
-          conversation = member_of_conversation.conversation
-          current_user = member_of_conversation.user
-          expect(conversation.show_conversation_name(current_user)).to eq(current_user.username)
-        end
-      end
-
-      context 'and when other user is passed as an argument' do
-        let!(:another_member_of_conversation) { create(:other_member, conversation:) }
-        it 'returns the username of the other user' do
-          conversation = member_of_conversation.conversation
-          other_user = another_member_of_conversation.user
-          current_user = member_of_conversation.user
-          expect(conversation.show_conversation_name(other_user)).to eq(current_user.username)
-        end
+    context 'and when other user is passed as an argument' do
+      let!(:another_member_of_conversation) { create(:other_member, conversation:) }
+      it 'returns the username of the other user' do
+        conversation = member_of_conversation.conversation
+        other_user = another_member_of_conversation.user
+        expect(conversation.show_conversation_name(other_user)).to eq(other_user.username)
       end
     end
   end

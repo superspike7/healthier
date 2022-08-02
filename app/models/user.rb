@@ -36,6 +36,7 @@ class User < ApplicationRecord
   end
 
   def total_unread_messages
-    notifications.where(type: MessageNotification.name).unread.count
+    notification_count = notifications.where(type: MessageNotification.name).unread.count
+    notification_count.zero? ? nil : notification_count
   end
 end
