@@ -5,9 +5,6 @@ class Conversation < ApplicationRecord
 
   validates :name, length: { maximum: 48 }
 
-
-  after_update_commit -> { broadcast_replace_to 'name', partial: 'direct_conversations/name' }
-
   scope :recent, -> { order(updated_at: :desc) }
 
   after_create_commit do
