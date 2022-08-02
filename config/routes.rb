@@ -6,8 +6,9 @@ Rails.application.routes.draw do
                                  as: 'user_google_oauth2_omniauth_callback'
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
-  resources :posts
-  resources :comments
+  resources :posts do
+    resources :comments
+  end
   resources :destroy_attachments, only: [:destroy]
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]

@@ -1,15 +1,11 @@
 class CommentsController < ApplicationController
-    def new
-        @comment = Comment.new
-    end
-
     def create
-        @comment = Comment.new(comment_params)
+        @comment = current_user.comments.build(comment_params)
 
         if @comment.save
             redirect_back_or_to root_path
         else
-            redirect_back_or_to root_path
+            flash[:notice] = @comment.errors.full_messages.to_sentence
         end
     end
 
@@ -22,6 +18,6 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:body,:user_id,:post_id)
+        params.permit(:body).merge(post_id: params[:post_id])
     end
 end

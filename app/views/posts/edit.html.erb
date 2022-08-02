@@ -18,7 +18,7 @@
 
     <% end %>
     <% if @post.images.attached?%>
-        <% @post.images.each do |image|%>
+        <% @post.images.includes([:blob]).each do |image|%>
             <p><%= image_tag image, width: "200px"%></p>
             <%= button_to "Remove", destroy_attachment_path(image), method: :delete%>
         <%end%>
