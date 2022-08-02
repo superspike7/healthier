@@ -1,7 +1,7 @@
 <%= turbo_stream_from 'unread_message_notifications' %>
 <%= turbo_stream_from 'conversations' %>
 
-<div id="unread_count_<%= current_user.id%>">
+<div id="unread_count_<%=current_user.id%>">
   <%= render 'direct_conversations/notification', user: current_user %>
 </div>
 
@@ -9,11 +9,12 @@
 
 <% @users.each do |user| %>
   <%= button_to user.username, direct_conversations_path(other_user: user.id) %>
+  <%# kailangan ko makuha yung user.id nung cinoconvo mo%>
 <% end %>
 
 <p class='text-xl font-bold'> Existing Conversations </p>
 
-<div id="conversations_<%=current_user.id%>">
+<div id="conversations">
   <% @conversations.each do |conversation| %>
     <%= render 'direct_conversations/conversation', user: Current.user, conversation: conversation %>
   <% end %>
