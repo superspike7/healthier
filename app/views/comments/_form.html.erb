@@ -1,11 +1,5 @@
-<%= form_with scope: "comment", url: "/comments" do |form| %>
+<%= form_with url: post_comments_path(post) do |form| %>
 
-<div>
-    <%= form.hidden_field :post_id, value: post_id%>
-</div>
-<div>
-    <%= form.hidden_field :user_id, value: current_user.id %>
-</div>
 
 <div>
     <%= form.text_area :body%>

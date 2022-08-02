@@ -1,18 +1,18 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   def index
-    @new_post = current_user.posts.build
     @posts = Post.all.with_attachments_and_user.show_latest
     @comments = Comment.include_user_only.comment_desc
   end
 
   def show
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
     @comments = Comment.where(post_id: params[:id]).include_user_only.comment_desc
   end
 
   def new
     @new_post = current_user.posts.build
+    @comment = current_user.comments.build
   end
 
   def create
