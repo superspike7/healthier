@@ -18,6 +18,6 @@ class Message < ApplicationRecord
   end
 
   def broadcast_to_user
-    broadcast_append_later_to 'messages', partial: 'conversation_messages/message'
+    broadcast_append_later_to 'messages', partial: 'conversation_messages/message', target: "messages_#{conversation.id}"
   end
 end

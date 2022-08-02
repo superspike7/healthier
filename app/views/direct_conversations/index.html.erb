@@ -1,6 +1,8 @@
-<div id='unread_count'>
-  <%= turbo_stream_from 'unread_message_notifications' %>
-  <%= render 'direct_conversations/notification', unread_count: @unread_messages_count %>
+<%= turbo_stream_from 'unread_message_notifications' %>
+<%= turbo_stream_from 'conversations' %>
+
+<div id="unread_count_<%= current_user.id%>">
+  <%= render 'direct_conversations/notification', user: current_user %>
 </div>
 
 <p class='text-xl font-bold'> Users to Chat </p>
@@ -11,8 +13,7 @@
 
 <p class='text-xl font-bold'> Existing Conversations </p>
 
-<div id='conversations'>
-  <%= turbo_stream_from 'conversations' %>
+<div id="conversations_<%=current_user.id%>">
   <% @conversations.each do |conversation| %>
     <%= render 'direct_conversations/conversation', user: Current.user, conversation: conversation %>
   <% end %>

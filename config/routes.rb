@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :destroy_attachments, only: [:destroy]
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]
-  resources :direct_conversations, only: %i[create edit index show update], path: 'direct'
+  resources :direct_conversations, only: %i[create index show update], path: 'direct'
   resources :conversation_messages, only: :create
   resources :notifications, only: :index
 
