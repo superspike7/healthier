@@ -11,15 +11,13 @@ class Conversation < ApplicationRecord
   scope :recent, -> { order(updated_at: :desc) }
 
   after_create_commit do
-    broadcast_prepend_later_to 'conversations', partial: 'direct_conversations/conversation', 
+    broadcast_prepend_later_to 'conversations', partial: 'direct_conversations/conversation',
                                                 locals: { conversation: self, user: Current.user }
   end
 
   after_update_commit do
     broadcast_update_later_to 'conversations', partial: 'direct_conversations/conversation',
-                                               locals: { conversation: self,
-                                                         target: "conversations_#{Current.user.id}",
-                                                         user: Current.user }
+                                               locals: { conversation: self, user: Current.user }
     broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
                                                               target: "unread_count_#{Current.user.id}",
                                                               locals: { user: Current.user }
@@ -39,7 +37,9 @@ class Conversation < ApplicationRecord
   end
 
   def show_conversation_name(user)
-    members_count == 1 ? members.first_username : members.other_username(user)
+    return members.first_username if members_count == 1
+
+    user == Current.user ? members.other_username(user) : members.current_user_username(user)
   end
 
   def mark_as_read(user)
