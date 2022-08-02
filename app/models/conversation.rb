@@ -12,19 +12,21 @@ class Conversation < ApplicationRecord
 
   after_create_commit do
     broadcast_prepend_later_to 'conversations', partial: 'direct_conversations/conversation',
+                                                target: "conversation_#{conversation_current_member_user_id}",
                                                 locals: { conversation: self, user: Current.user }
   end
 
   after_update_commit do
-    broadcast_update_later_to 'conversations', partial: 'direct_conversations/conversation',
-                                               locals: { conversation: self, user: Current.user }
+    broadcast_replace_later_to 'conversations', partial: 'direct_conversations/conversation',
+                                                target: "conversation_#{conversation_current_member_user_id}",
+                                                locals: { conversation: self, user: Current.user }
     broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
-                                                              target: "unread_count_#{Current.user.id}",
-                                                              locals: { user: Current.user }
+                                                              target: "unread_count_#{other_member_user_id}",
+                                                              locals: { user: other_member }
   end
 
   after_destroy_commit do
-    broadcast_remove_to 'conversations'
+    broadcast_remove_to "conversation_#{conversation_current_member_user_id}"
   end
 
   def self.create_direct!(user, another_user)
@@ -37,7 +39,7 @@ class Conversation < ApplicationRecord
   end
 
   def show_conversation_name(user)
-    return members.first_username if members_count == 1
+    return members.first_member.username if members_count == 1
 
     user == Current.user ? members.other_username(user) : members.current_user_username(user)
   end
@@ -55,7 +57,23 @@ class Conversation < ApplicationRecord
     end
   end
 
-  def member?(current_user)
-    members.where(user: current_user).present?
+  # below are methods for turbostream target uniqueness
+
+  def conversation_other_member_user_id
+    user_id = members_count == 1 ? members.current_user(Current.user).id : members.other_user(Current.user).id
+    "#{id}#{user_id}"
+  end
+
+  def conversation_current_member_user_id
+    user_id = members.current_user(Current.user).id
+    "#{id}#{user_id}"
+  end
+
+  def other_member_user_id
+    members_count == 1 ? nil : members.other_user(Current.user).id
+  end
+
+  def other_member
+    members_count == 1 ? nil : members.other_user(Current.user)
   end
 end
