@@ -17,11 +17,13 @@ class ConversationNotification < Noticed::Base
     # whatever the user image implementation
   end
 
-  def message
+  def title
     "#{params[:user].username} created a conversation with you."
   end
 
   def url
     direct_conversation_path(params[:conversation])
   end
+
+  def body; end
 end
