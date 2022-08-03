@@ -22,7 +22,6 @@
          <% end %>
       </div>
     </div>
-    
     <% @posts.each do |post| %>
       
       <div class="flex p-4 gap-4 bg-white border-b-2 border-green-200">
@@ -48,7 +47,13 @@
              </div>
              <div class="flex gap-2 items-center">
                <%= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
-               <p>69</p>
+               <% like = current_user.likes.find_by(post: post) %>
+               <%  if like.nil? %>
+                <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post%>
+               <% else %>
+                <%= button_to "Unlike", like_path(like), method: :delete%>
+               <%end%>
+               <p><%= @like.where(post: post).count%></p>
              </div>
            </div>
            <div class="flex">
