@@ -6,9 +6,9 @@ class Notification < ApplicationRecord
   scope :unread_messages, -> { where(type: MessageNotification.name).unread }
   scope :all_except_message_notifications, -> { where.not(type: MessageNotification.name) }
 
-  # after_create_commit -> { broadcast_append_later_to 'notifications', partial: 'direct_conversations/notification', locals: { notifications: self.class } }
-
-  # def broadcast_notification
-  #   broadcast_action_later_to 'notification_count', 
-  # end
+  after_create_commit do
+    broadcast_update_later_to 'notification_count', partial: 'notifications/unread_count',
+                                                    target: "unread_count_#{recipient_id}",
+                                                    locals: { user: recipient }
+  end
 end

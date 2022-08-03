@@ -237,8 +237,12 @@
     </div>
   </div>
 </div>
+<%= turbo_stream_from 'notification_count' %>
+
 <h1>Notifications</h1>
 
+<%= render 'notifications/unread_count', user: current_user %>
+
 <% @notifications.each do |notification| %>
-  <%= link_to notification.to_notification.message, notification.to_notification.url %>
+  <%= link_to notification.to_notification.message, notification.to_notification.url, class: 'flex flex-col' %>
 <% end %>
