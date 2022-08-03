@@ -1,4 +1,9 @@
-<div id="<%= dom_id(message) %>">
-  <%= message.user.username %>
-  <%= message.content %>
+<div class="flex flex-col <%= message.user == user ? "col-start-2 col-end-5" : "col-start-1 col-end-4" %>" id="<%= dom_id(message)%>">
+  <div class="flex-1 p-4 rounded-t-full <%= message.user == user ? "bg-green-600 text-white rounded-bl-full" : "bg-gray-200 text-gray-900 rounded-t-full rounded-br-full" %>">
+    <%= message.content %>
+  </div>
+  <div class="font-sm text-gray-600 flex gap-2 <%= "justify-end" if message.user == user %>">
+    <p><%= message.created_at.strftime("%b. %d, %Y, %I:%M%p") %> </p>
+    <span>seen</span>
+  </div>
 </div>
