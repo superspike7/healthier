@@ -15,8 +15,4 @@ class MessageNotification < Noticed::Base
   def conversation
     params[:conversation]
   end
-
-  # def url
-  #   conversation_path(params[:message].conversation)
-  # end
 end
