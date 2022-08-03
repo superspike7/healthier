@@ -3,8 +3,6 @@ class Conversation < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_noticed_notifications model_name: 'Notification'
 
-  validates :name, length: { maximum: 48 }
-
   scope :recent, -> { order(updated_at: :desc) }
 
   after_create_commit do
