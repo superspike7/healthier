@@ -1,3 +1,13 @@
+<%= turbo_stream_from 'notification_count' %>
+<%= render 'notifications/unread_count', user: current_user %>
+
+<% @notifications.each do |notification| %>
+  <%= link_to notification.to_notification.title, notification.to_notification.url, class: 'flex flex-col' %>
+  <%= notification.to_notification.body %>
+<% end %>
+
+
+
 <div class="w-full h-full grid grid-cols-5 grid-rows-1 max-h-max">
   <div class="col-start-2 col-end-4 flex flex-col border-x border-gray-400 overflow-y-auto">
     <div class="p-4 border-b border-gray-300">
@@ -237,12 +247,6 @@
     </div>
   </div>
 </div>
-<%= turbo_stream_from 'notification_count' %>
 
 <h1>Notifications</h1>
 
-<%= render 'notifications/unread_count', user: current_user %>
-
-<% @notifications.each do |notification| %>
-  <%= link_to notification.to_notification.message, notification.to_notification.url, class: 'flex flex-col' %>
-<% end %>

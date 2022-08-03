@@ -9,14 +9,19 @@ class CommentNotification < Noticed::Base
   # Add required params
   param :post
   param :user
+  param :comment
 
   # Define helper methods to make rendering easier.
   def user_image
     # whatever the user image implementation
   end
 
-  def message
+  def title
     "#{params[:user].username} commented on your post."
+  end
+
+  def body
+    params[:comment].body
   end
 
   def url

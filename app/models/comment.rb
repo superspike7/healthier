@@ -11,6 +11,6 @@ class Comment < ApplicationRecord
     return false unless save
     return if sender == receiver
 
-    CommentNotification.with(user: sender, post:).deliver_later(receiver)
+    CommentNotification.with(user: sender, post:, comment: self).deliver_later(receiver)
   end
 end

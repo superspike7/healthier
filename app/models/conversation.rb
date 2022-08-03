@@ -16,7 +16,7 @@ class Conversation < ApplicationRecord
                                                target: "conversation_#{conversation_current_member_user_id}",
                                                locals: { conversation: self, user: Current.user }
     broadcast_update_later_to 'unread_message_notifications', partial: 'direct_conversations/notification',
-                                                              target: "unread_count_#{other_member_user_id}",
+                                                              target: "unread_message_#{other_member_user_id}",
                                                               locals: { user: other_member }
   end
 
