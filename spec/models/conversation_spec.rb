@@ -5,7 +5,6 @@ RSpec.describe Conversation, type: :model do
   let(:another_user) { create(:other_user) }
   let(:conversation) { create(:conversation) }
   let(:member_of_conversation) { create(:member, conversation:) }
-  let(:member_of_conversation_with_name) { create(:member, conversation: create(:conversation_with_name)) }
 
   describe '::create_direct!' do
     context 'when one user is involved in the creation' do
@@ -24,7 +23,7 @@ RSpec.describe Conversation, type: :model do
   end
   
   describe '#show_conversation_name' do
-    context 'and when current user is passed as an argument' do
+    context 'when current user is passed as an argument' do
       it 'returns the username of the current user' do
         conversation = member_of_conversation.conversation
         current_user = member_of_conversation.user
@@ -32,7 +31,7 @@ RSpec.describe Conversation, type: :model do
       end
     end
 
-    context 'and when other user is passed as an argument' do
+    context 'when other user is passed as an argument' do
       let!(:another_member_of_conversation) { create(:other_member, conversation:) }
       it 'returns the username of the other user' do
         conversation = member_of_conversation.conversation
