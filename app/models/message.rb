@@ -2,8 +2,6 @@ class Message < ApplicationRecord
   belongs_to :conversation, touch: true
   belongs_to :user
 
-  has_noticed_notifications
-
   after_create_commit :notify_recipient, :broadcast_to_user
 
   private
@@ -18,6 +16,8 @@ class Message < ApplicationRecord
   end
 
   def broadcast_to_user
-    broadcast_append_later_to 'messages', partial: 'conversation_messages/message', target: "messages_#{conversation.id}"
+    broadcast_append_later_to 'messages', partial: 'conversation_messages/message',
+                                          target: "messages_#{conversation.id}",
+                                          locals: { user: Current.user, message: self }
   end
 end
