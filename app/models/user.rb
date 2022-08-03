@@ -1,11 +1,10 @@
 class User < ApplicationRecord
-  has_many :posts
-  has_many :comments
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reporter_id'
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reported_id'
 
   has_many :posts
   has_many :comments
+  has_many :likes
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
