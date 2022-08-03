@@ -49,5 +49,7 @@ Rails.application.routes.draw do
     resources :users, only: :show, param: :username
   end
 
-  resources :userreports
+  resources :profile do
+    resources :userreports
+  end
 end

@@ -1,0 +1,2 @@
+module ReportUserHelper
+end
