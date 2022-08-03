@@ -1,8 +1,8 @@
-<%= form_with url:  profile_userreports_path(params[:profile_id]) do |form| %>
+<%= form_with url: profile_report_user_index_path(params[:profile_id]) do |form| %>
 
     <%= form.label "Please select a reason:"%>
 
-      <%= form.text_field :reporter_id, value: current_user.id %>
+      <%= form.text_field :report_type, value: "USER" %>
 
       <%= form.radio_button :reason, 'Fake account', :checked => true %> 
       <%= form.label 'Fake account'%>
