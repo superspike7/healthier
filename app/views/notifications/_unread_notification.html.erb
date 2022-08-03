@@ -1,0 +1,12 @@
+<%= link_to notification.to_notification.url, class:"flex px-8 py-4 border-b border-gray-300 hover:bg-gray-100 gap-4 bg-green-100" do %>
+  <div>
+    <span class="p-2 bg-green-200 rounded-full">Icon</span>
+  </div>
+  <div class="flex-1">
+    <p class="font-light">
+      <strong class="font-bold"><%= notification.to_notification.username %></strong> 
+      <%= notification.to_notification.title %>
+    </p>
+    <p class="font-light"><%= notification.to_notification.body %></p>
+  </div>
+<% end %>

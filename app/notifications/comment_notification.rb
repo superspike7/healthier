@@ -16,8 +16,12 @@ class CommentNotification < Noticed::Base
     # whatever the user image implementation
   end
 
+  def username
+    params[:user].username
+  end
+
   def title
-    "#{params[:user].username} commented on your post."
+    'commented on your post'
   end
 
   def body

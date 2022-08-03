@@ -17,8 +17,12 @@ class ConversationNotification < Noticed::Base
     # whatever the user image implementation
   end
 
+  def username
+    params[:user].username
+  end
+
   def title
-    "#{params[:user].username} created a conversation with you."
+    'created a conversation with you'
   end
 
   def url

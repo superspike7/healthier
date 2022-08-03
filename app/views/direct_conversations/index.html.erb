@@ -1,9 +1,4 @@
-<%= turbo_stream_from 'unread_message_notifications' %>
 <%= turbo_stream_from 'conversations' %>
-
-<div id="unread_message_<%=current_user.id%>">
-  <%= render 'direct_conversations/notification', user: current_user %>
-</div>
 
 <p class='text-xl font-bold'> Users to Chat </p>
 

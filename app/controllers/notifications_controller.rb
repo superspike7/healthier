@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
 
   def index
     @unread_notifications = current_user.notifications.includes(:recipient).unread_notifications_except_message
-    @notifications = current_user.notifications.includes(:recipient).all_except_message_notifications
+    @read_notifications = current_user.notifications.includes(:recipient).read_notifications_except_message
   end
 
   private
