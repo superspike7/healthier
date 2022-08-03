@@ -118,14 +118,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_020538) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "user_reports", force: :cascade do |t|
-    t.bigint "reporter_id", null: false
+  create_table "userreports", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.bigint "reported_id", null: false
     t.text "reason"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["reported_id"], name: "index_user_reports_on_reported_id"
-    t.index ["reporter_id"], name: "index_user_reports_on_reporter_id"
+    t.index ["reported_id"], name: "index_userreports_on_reported_id"
+    t.index ["user_id"], name: "index_userreports_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -160,8 +160,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_020538) do
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
+<<<<<<< HEAD
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "user_reports", "users", column: "reported_id"
   add_foreign_key "user_reports", "users", column: "reporter_id"
+=======
+  add_foreign_key "userreports", "users"
+  add_foreign_key "userreports", "users", column: "reported_id"
+>>>>>>> add user functionality to report other user
 end

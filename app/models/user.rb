@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :posts
   has_many :comments
+  has_many :userreports, class_name: 'Userreport', foreign_key: 'user_id'
   has_many :likes
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

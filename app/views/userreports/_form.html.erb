@@ -1,22 +1,22 @@
-<%= form_with model: userreport do |form| %>
+<%= form_with url:  profile_userreports_path(params[:profile_id]) do |form| %>
 
     <%= form.label "Please select a reason:"%>
 
       <%= form.text_field :reporter_id, value: current_user.id %>
 
-      <%= form.radio_button :reason, 'BUY', :checked => true %> 
+      <%= form.radio_button :reason, 'Fake account', :checked => true %> 
       <%= form.label 'Fake account'%>
       
-      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.radio_button :reason, 'Fake name' %>
       <%= form.label 'Fake name' %>
 
-      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.radio_button :reason, 'Pretending to be someone' %>
       <%= form.label 'Pretending to be someone' %>
 
-      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.radio_button :reason, 'Posting inappropriate things' %>
       <%= form.label 'Posting inappropriate things' %>
 
-      <%= form.radio_button :reason, 'SELL' %>
+      <%= form.radio_button :reason, 'Suspicious or spam' %>
       <%= form.label 'Suspicious or spam' %>
 
       <%= form.submit "SUBMIT REPORT" %>

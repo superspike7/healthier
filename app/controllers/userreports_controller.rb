@@ -5,12 +5,12 @@ class UserreportsController < ApplicationController
     end
 
     def new
-        @userreport = UserReport.new
+        @userreport = current_user.userreports.build
     end
 
     def create
-        @userreport = UserReport.new(userreport_params)
-
+        @userreport = current_user.userreports.build(userreport_params)
+        binding.break
         if @userreport.save
             redirect_to root_path, notice: 'Report User Successfully.'
         else
@@ -22,11 +22,12 @@ class UserreportsController < ApplicationController
     end
 
     private
+    
     def set_userreport
-        @userreport = UserReport.find(params[:id])
+        @userreport = current_user.userreports.find(params[:id])
     end
 
     def userreport_params
-        params.require(:user_report).permit(:reported_id, :reporter_id, :reason)
+        params.permit(:reason).merge(reported_id: params[:profile_id])
     end
 end
