@@ -26,12 +26,14 @@ class Conversation < ApplicationRecord
     broadcast_remove_to "conversation_#{conversation_current_member_user_id}"
   end
 
-  def self.create_direct!(user, another_user)
-    users = user == another_user ? { user: } : [{ user: }, { user: another_user }]
+  def self.create_direct!(current_user, other_user)
+    users = current_user == other_user ? { user: current_user } : [{ user: current_user }, { user: other_user }]
     ActiveRecord::Base.transaction do
       created_conversation = create!
       created_conversation.members.create!(users)
-      # add creation of notification here that the conversation has been created
+      if users.count == 2
+        ConversationNotification.with(conversation: created_conversation, user: current_user).deliver_later(other_user)
+      end
       created_conversation
     end
   end

@@ -1,12 +1,11 @@
 class DirectConversationsController < ApplicationController
-  before_action :set_direct_conversation, only: %i[show edit update]
-
   def index
     @users = User.all
     @conversations = current_user.conversations
   end
 
   def show
+    @conversation = current_user.conversations.find(params[:id])
     @conversation_messages = @conversation.messages.includes(:user)
     @message = current_user.messages.build(conversation_id: params[:id])
     @conversation.mark_as_read(current_user)

@@ -237,3 +237,8 @@
     </div>
   </div>
 </div>
+<h1>Notifications</h1>
+
+<% @notifications.each do |notification| %>
+  <%= link_to notification.to_notification.message, notification.to_notification.url %>
+<% end %>
