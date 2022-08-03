@@ -1,20 +1,10 @@
+<%= turbo_stream_from 'messages' %>
 
-<%# <%= turbo_stream_from 'messages' %> %>
-<%#%>
-<%# <p> Conversation: <%= @conversation_name %> </p> %>
-<%#%>
-<%# <div id='messages' class='bg-slate-200'> %>
-<%#   <%= render partial: 'conversation_messages/message', collection: @conversation_messages %> %>
-<%# </div> %>
-<%#%>
-<%= form_with model: @message, url: conversation_messages_path(conversation: @conversation.id) do |f| %>
- <%= f.text_area :content %>
- <%= f.submit %>
-<% end %>
-<%#%>
-<%# <%= link_to 'Edit name', edit_direct_conversation_path(@conversation) %> %>
+<p> Conversation: <%= @conversation.show_conversation_name(current_user) %> </p> 
 
-
+<div id='messages' class='bg-slate-200'>
+<%render partial: 'conversation_messages/message', collection: @conversation_messages %> 
+</div> 
 
 <div class="w-full h-full grid grid-cols-4 grid-rows-1">
   <div class="flex flex-col gap-4 border-r border-gray-400">
@@ -84,7 +74,7 @@
     </div>
     
     <div class="flex-1 flex flex-col justify-end overflow-y-scroll px-4 gap-2">
-      <!-- My Message -->
+      <!-- Other Message -->
       <div class="grid w-full grid-cols-4">
         <div class="flex flex-col col-start-1 col-end-4">
           <div class="flex-1 p-4 bg-gray-200 text-gray-900 rounded-t-full rounded-br-full">
@@ -110,8 +100,10 @@
 
     <div class="flex gap-4 p-4 items-center">
       <p>icon</p>
-      <input type="text" placeholder="Start a new Message" class="flex-1 border border-gray-800 p-3 rounded-full" >
-      <p>send icon</p>
+      <%= form_with model: @message, url: conversation_messages_path(conversation: @conversation.id), class: 'w-full flex gap-4' do |f| %>
+        <%= f.text_field :content, placeholder: 'Start a new message', class: 'flex-1 border border-gray-800 p-3 rounded-full' %>
+        <%= f.submit 'send icon' %>
+      <% end %>
     </div>
   </div>
   
