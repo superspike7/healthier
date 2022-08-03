@@ -3,6 +3,7 @@ class Notification < ApplicationRecord
   belongs_to :recipient, polymorphic: true
 
   scope :unread_notifications_except_message, -> { all_except_message_notifications.unread }
+  scope :read_notifications_except_message, -> { all_except_message_notifications.read }
   scope :unread_messages, -> { where(type: MessageNotification.name).unread }
   scope :all_except_message_notifications, -> { where.not(type: MessageNotification.name) }
 

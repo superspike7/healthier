@@ -40,7 +40,10 @@
           <% end %>
           <%= link_to notifications_path do %>
             <li class="cursor-pointer hover:bg-green-100 p-4 relative">
-              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2">2</span>
+              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2">
+                <%= turbo_stream_from 'notification_count' %>
+                <%= render 'notifications/unread_count', user: current_user %>
+              </span>
               <%= vite_image_tag 'icons/bell.svg', class: 'h-8' %>
             </li>
           <% end %>
