@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   resources :likes, only: [:create, :destroy]
+  resources :follows, only: [:create, :destroy]
   resources :destroy_attachments, only: [:destroy]
   resources :daily_intakes, only: [:new, :show]
   resources :exercises, only: [:new, :show]

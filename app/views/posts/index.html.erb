@@ -31,7 +31,15 @@
         </div>
         
         <div class="flex-1 flex flex-col justify-center">
-          <h5 class="font-medium text-lg"><%= post.user.username %></h5>
+          <h5 class="font-medium text-lg"><%= post.user.username %>
+            <% follow = current_user.relationships.find_by(followed_id: post.user.id) %>
+            <%  if current_user.id != post.user.id%>
+              <% if follow.nil? %>
+                <%= button_to "Follow", follows_path, params: { relationship: { followed_id: post.user.id } }, method: :post%>
+              <%else%>
+                <%= button_to "Unfollow", follow_path(post.user.id), method: :delete%>
+              <%end%>
+            <%end%></h5> 
            <p class="p-2 min-h-max" ><%= post.body %></p>
            <% if post.images.attached?%>
              <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">

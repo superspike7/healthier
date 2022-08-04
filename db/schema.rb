@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_03_064331) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_04_020538) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_064331) do
   end
 
   create_table "conversations", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "members_count"
@@ -109,6 +110,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_064331) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "followed_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["user_id", "followed_id"], name: "index_relationships_on_user_id_and_followed_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
   create_table "user_reports", force: :cascade do |t|
     t.bigint "reporter_id", null: false
     t.bigint "reported_id", null: false
@@ -151,6 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_03_064331) do
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "user_reports", "users", column: "reported_id"
   add_foreign_key "user_reports", "users", column: "reporter_id"
 end

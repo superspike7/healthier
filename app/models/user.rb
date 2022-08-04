@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reporter_id'
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reported_id'
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'user_id'
 
   has_many :posts
   has_many :comments
