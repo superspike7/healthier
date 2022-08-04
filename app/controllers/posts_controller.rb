@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all.with_attachments_and_user.show_latest
     @comments = Comment.include_user_only.comment_desc
-    @like = Like.include_user_only
   end
 
   def show
