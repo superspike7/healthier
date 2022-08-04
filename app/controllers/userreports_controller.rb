@@ -2,6 +2,7 @@ class UserreportsController < ApplicationController
     before_action :set_userreport, only: [:show, :edit, :update, :destroy]
 
     def index
+        @userreports = Userreport.all
     end
 
     def new
@@ -10,7 +11,6 @@ class UserreportsController < ApplicationController
 
     def create
         @userreport = current_user.userreports.build(userreport_params)
-        binding.break
         if @userreport.save
             redirect_to root_path, notice: 'Report User Successfully.'
         else
