@@ -44,4 +44,20 @@ class User < ApplicationRecord
     unread_notifications_count = notifications.unread_notifications_except_message.count
     unread_notifications_count.zero? ? nil : unread_notifications_count
   end
+
+  def like_post(post_id)
+    like = likes.create(post_id:)
+    post = Post.find(post_id)
+
+    return if post.user == self
+
+    LikeNotification.with(like:, post:, user: self).deliver_later(post.user)
+  end
+
+  def unlike_post(like_id)
+    like = likes.find(like_id)
+    like.destroy
+    like.notifications_as_like.destroy_all
+  end
+
 end
