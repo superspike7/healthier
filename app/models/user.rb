@@ -1,8 +1,10 @@
 class User < ApplicationRecord
+  has_one_attached :avatar
+
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reporter_id'
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reported_id'
   has_many :relationships, class_name: 'Relationship', foreign_key: 'user_id'
-
+  has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :posts
   has_many :comments
   has_many :likes
@@ -16,6 +18,7 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
+
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, email: auth.info.email).first_or_create do |user|
