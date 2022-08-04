@@ -1,11 +1,9 @@
 module ApplicationHelper
-  def user_avatar(user)
-    width = '64'
-    height = '64'
+  def user_avatar(user, options = {})
     if user.avatar.attached?
-      image_tag(user.avatar, width:, height:)
+      image_tag(user.avatar, options)
     else
-      image_tag('default_profile.png', width:, height:)
+      image_tag('default_profile.png', options)
     end
   end
 end

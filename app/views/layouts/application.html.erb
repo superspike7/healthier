@@ -62,20 +62,19 @@
       
       <div class="flex-1 flex flex-col max-h-screen">
         <!-- header bar -->
-        <div class="flex justify-between p-1 py-4 border-b border-gray-300">
+        <div class="flex justify-between px-8 py-4 border-b border-gray-300">
           <div class="flex-1">
           </div>
-          <p class="p-2">
-          <% if user_signed_in? %>
-            <%= current_user.username %>
+          <%= link_to edit_user_registration_path do %>
+            <p class="p-2 cursor-pointer hover:underline font-medium text-xl">
+              <%= current_user.username %>
+            </p>
           <% end %>
-          </p>
-          <div class="h-10 w-10 bg-green-500 text-center text-white rounded-full flex items-center justify-center">
-           <%= user_avatar(current_user) %>
+          <div class="">
+           <%= user_avatar current_user, class: 'h-10 w-10 rounded-full' %>
           </div>          
         </div>
         <div class="max-h-full max-w-full flex-1 overflow-hidden">
-          <%= link_to "edit account", edit_user_registration_path %>
           <%= yield %>
         </div>
       </div>
