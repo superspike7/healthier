@@ -66,10 +66,16 @@
           <% end %>
           </p>
           <div class="h-10 w-10 bg-green-500 text-center text-white rounded-full flex items-center justify-center">
-           DP 
+           <% if current_user.avatar.attached? %>
+            <%= image_tag(current_user.avatar)%>
+           <% else %>
+           <%= image_tag("default_profile.png")%>
+           <% end %>
           </div>          
         </div>
         <div class="max-h-full max-w-full flex-1 overflow-hidden">
+          <%= link_to "edit account", edit_user_registration_path %>
+          <%= button_to "log out", destroy_user_session_path, method: :delete %>
           <%= yield %>
         </div>
       </div>
