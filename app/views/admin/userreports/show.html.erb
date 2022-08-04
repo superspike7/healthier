@@ -1,0 +1,6 @@
+<h3>REPORT BY: <%= @userreport.user_id%><h3>
+<h3>REPORTED USER: <%= @userreport.reported_id%><h3>
+<h3>REASON: <%= @userreport.reason%><h3>
+
+<%= button_to ' Delete', admin_userreport_path(@userreport), method: :delete, data: {confirm: 'Are you sure?'}%>
+<%= link_to 'Back', admin_userreports_path %>
