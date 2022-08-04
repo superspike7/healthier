@@ -22,12 +22,12 @@
         <ul class="flex-1 flex flex-col">
           <%= link_to root_path do %>
             <li class="cursor-pointer hover:bg-green-100 p-4">
-              <%= vite_image_tag 'icons/home.svg', class: 'h-8' %>
+              <%= embedded_svg 'icons/home.svg', class: 'h-8' %>
             </li>
           <% end %>
           <%= link_to posts_path do %>
             <li class="cursor-pointer hover:bg-green-100 p-4">
-              <%= vite_image_tag 'icons/explore.svg', class: 'h-8' %>
+              <%= embedded_svg 'icons/explore.svg', class: 'h-8' %>
             </li>
           <% end %>
           <%= link_to direct_conversations_path do %>
@@ -36,7 +36,7 @@
               <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2" id="unread_message_<%=current_user.id%>">
                 <%= render 'direct_conversations/notification', user: current_user %>
               </span>
-              <%= vite_image_tag 'icons/chat.svg', class: 'h-8' %>
+              <%= embedded_svg 'icons/chat.svg', class: 'h-8' %>
             </li>
           <% end %>
           <%= link_to notifications_path do %>
@@ -45,18 +45,18 @@
                 <%= turbo_stream_from 'notification_count' %>
                 <%= render 'notifications/unread_count', user: current_user %>
               </span>
-              <%= vite_image_tag 'icons/bell.svg', class: 'h-8' %>
+              <%= embedded_svg 'icons/bell.svg', class: 'h-8' %>
             </li>
           <% end %>
           <li class="cursor-pointer hover:bg-green-100 p-4">
-            <%= vite_image_tag 'icons/settings.svg', class: 'h-8' %>
+            <%= embedded_svg 'icons/settings.svg', class: 'h-8' %>
           </li>
           <li class="p-2">
-            <button class="bg-blue-500 rounded-full p-2"><%= vite_image_tag 'icons/plus.svg', class: 'h-8' %></button>
+            <button class="bg-blue-500 rounded-full p-2"><%= embedded_svg 'icons/plus.svg', class: 'h-8' %></button>
           </li>
         </ul>
         <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false } do %>
-            <%= vite_image_tag 'icons/logout.svg', class: 'h-8' %>
+            <%= embedded_svg 'icons/logout.svg', class: 'h-8' %>
           <% end %>
       </div>
       
