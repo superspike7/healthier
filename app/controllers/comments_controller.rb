@@ -4,7 +4,8 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
 
     if @comment.add(sender: current_user, receiver: post.user)
-      redirect_back_or_to root_path
+      post.mark_post_activities_as_read(current_user)
+      redirect_to post_path(post)
     else
       flash[:notice] = @comment.errors.full_messages.to_sentence
     end
@@ -12,7 +13,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
+    @comment.destroy_including_notifications
     redirect_back_or_to root_path
   end
 
