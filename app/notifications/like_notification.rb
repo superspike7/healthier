@@ -19,7 +19,7 @@ class LikeNotification < Noticed::Base
   end
 
   def title
-    'commented on your post'
+    'liked your post'
   end
 
   def body; end
