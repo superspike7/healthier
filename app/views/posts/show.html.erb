@@ -1,29 +1,23 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<%= turbo_stream_from 'comments' %>
+
 <strong><%= @post.user.username%></strong>
 <p><%= @post.body%></p>
 <% if @post.images.attached?%>
-    <% @post.images.includes([:blob]).each do |image|%>
-        <p><%= image_tag image, width: "200px"%></p>
-    <%end%>
+  <% @post.images.includes([:blob]).each do |image|%>
+    <p><%= image_tag image, width: "200px"%></p>
+  <%end%>
 <%end%>
 <div>
-    <%= render partial: "comments/form", locals: {post: @post}%>
+  <%= render partial: "comments/form", locals: {post: @post}%>
+</div>
+<div id="<%= dom_id(@post) %>">
+  <% @comments.each do |comment|%>
+    <%= render 'posts/comment', comment:, user: current_user, post: @post %>
+  <%end%>
 </div>
 <div>
-    <h1>
-        <% @comments.each do |comment|%>
-            <h4><%= comment.user.username%></h4>
-            <h4><%= comment.body%></h4>
-            <% if comment.user_id == current_user.id%>
-                <%= button_to 'Delete comment', post_comment_path(comment), method: :delete%>
-            <%end%>
-        <%end%>
-    </h1>
-</div>
-<div>
-    <% if @post.user_id == current_user.id%>
-        <%= link_to ' Edit', edit_post_path(@post)%>
-        <%= link_to ' Back', posts_path %>
-    <%end%>
+  <% if @post.user_id == current_user.id%>
+    <%= link_to ' Edit', edit_post_path(@post)%>
+    <%= link_to ' Back', posts_path %>
+  <%end%>
 </div>

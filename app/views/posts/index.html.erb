@@ -1,3 +1,4 @@
+<%= turbo_stream_from 'comments' %>
 <div class="h-full w-full grid grid-cols-9 grid-rows-1">
   
   <div class="col-start-3 col-end-7 overflow-y-auto 
@@ -64,18 +65,12 @@
                <p><%= @like.where(post: post).count%></p>
              </div>
            </div>
-           <div class="flex">
+           <div class="flex flex-col" id="<%= dom_id(post) %>">
             <% @comments.each do |comment|%>
-              <% if comment.post_id == post.id%>
-                  <h4><%= comment.user.username%></h4>
-                  <h4><%= comment.body%></h4>
-                  <% if comment.user_id == current_user.id%>
-                      <%= button_to 'Delete comment', post_comment_path(post.id, comment), method: :delete%>
-                  <%end%>
-              <%end%>
-          <%end%>
-          <%= render partial: "comments/form", locals: {post: post}%>
+              <%= render 'posts/comment', comment:, user: current_user, post: %>
+            <%end%>
            </div>
+           <%= render partial: "comments/form", locals: {post: post}%>
         </div>
       </div>
       

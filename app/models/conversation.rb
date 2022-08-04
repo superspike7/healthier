@@ -21,7 +21,7 @@ class Conversation < ApplicationRecord
   end
 
   after_destroy_commit do
-    broadcast_remove_to "conversation_#{conversation_current_member_user_id}"
+    broadcast_remove_to 'conversations', target: "conversation_#{conversation_current_member_user_id}"
   end
 
   def self.create_direct!(current_user, other_user)
