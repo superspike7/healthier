@@ -1,0 +1,25 @@
+<table>
+<thead>
+  <tr>
+    <th>REPORTER</th>
+    <th>REPORTED</th>
+    <th>REASON</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <% @userrepports.each do |userrepports|%>
+    <tr>
+    <td><%= userrepports.user_id%></td>
+      <td><%= userrepports.reported_id%></td>
+      <td><%= userrepports.reason%></td>
+      <td class="center">
+        
+      </td>
+    </tr>
+  <%end%>
+</tbody>
+<tfoot>
+  
+</tfoot>
+</table>

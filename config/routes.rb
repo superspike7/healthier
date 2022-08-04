@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :reports
     resources :users
+    resources :userreports
   end
 
   resources :profile do
