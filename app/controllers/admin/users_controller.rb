@@ -1,5 +1,4 @@
-class Admin::UsersController < ApplicationController
-    layout 'admin'
+class Admin::UsersController < AdminController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
