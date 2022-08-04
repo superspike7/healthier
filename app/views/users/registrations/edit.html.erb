@@ -4,11 +4,7 @@
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <% if resource.avatar.attached? %>
-    <%= image_tag(resource.avatar, width: "150px", height: "150px")%>
-    <% else %>
-    <%= image_tag("default_profile.png", width: "150px", height: "150px")%>
-    <% end %>
+    <%= user_avatar(resource) %>
   </div>
 
   <div class="field">

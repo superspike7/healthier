@@ -1,8 +1,3 @@
-# To deliver this notification:
-#
-# LikeNotification.with(post: @post).deliver_later(current_user)
-# LikeNotification.with(post: @post).deliver(current_user)
-
 class LikeNotification < Noticed::Base
   deliver_by :database
 
@@ -10,8 +5,8 @@ class LikeNotification < Noticed::Base
   param :user
   param :like
 
-  def user_image
-    # whatever the user image implementation
+  def user
+    params[:user]
   end
 
   def username
