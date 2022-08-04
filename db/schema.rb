@@ -53,7 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_04_020538) do
   end
 
   create_table "conversations", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "members_count"
