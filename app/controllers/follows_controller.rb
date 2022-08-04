@@ -2,11 +2,13 @@ class FollowsController < ApplicationController
 
     def create
         @follow = current_user.relationships.new(follow_params)
-        if !@follow.save
+        if @follow.save
+            redirect_back_or_to root_path
+        else     
+            redirect_back_or_to root_path
             flash[:notice] = @follow.errors.full_messages.to_sentence
         end
 
-        redirect_back_or_to root_path
     end
 
     def destroy
