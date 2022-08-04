@@ -12,4 +12,10 @@ class Notification < ApplicationRecord
                                                     target: "unread_count_#{recipient_id}",
                                                     locals: { user: recipient }
   end
+
+  after_destroy_commit do
+    broadcast_update_to 'notification_count', partial: 'notifications/unread_count',
+                                              target: "unread_count_#{recipient_id}",
+                                              locals: { user: recipient }
+  end
 end
