@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Healthier</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= vite_client_tag %>
+    <%= vite_javascript_tag 'application' %>
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <%= turbo_frame_tag 'modal' %>
+    <div class="h-screen w-screen flex">
+      <!-- side navigation bar -->
+      <div class="h-full w-24 bg-gray-800 flex flex-col justify-between gap-16 items-center py-5">
+        <div class="h-14 w-14 bg-gray-500 text-center text-white rounded-full flex items-center justify-center">
+          LOGO
+        </div>
+        <ul class="flex-1 flex flex-col">
+          <%= link_to root_path do %>
+            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full">
+              <%= embedded_svg 'icons/home.svg', class: 'h-8 stroke-white' %>
+            </li>
+          <% end %>
+          <%= link_to posts_path do %>
+            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full">
+              <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-white' %>
+            </li>
+          <% end %>
+          <%= link_to direct_conversations_path do %>
+            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full relative">
+              <%= turbo_stream_from 'unread_message_notifications' %>
+              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2" id="unread_message_<%=current_user.id%>">
+                <%= render 'direct_conversations/notification', user: current_user %>
+              </span>
+              <%= embedded_svg 'icons/chat.svg', class: 'h-8 stroke-white' %>
+            </li>
+          <% end %>
+          <%= link_to notifications_path do %>
+            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full relative">
+              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2">
+                <%= turbo_stream_from 'notification_count' %>
+                <%= render 'notifications/unread_count', user: current_user %>
+              </span>
+              <%= embedded_svg 'icons/bell.svg', class: 'h-8 stroke-white' %>
+            </li>
+          <% end %>
+          <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full">
+            <%= embedded_svg 'icons/settings.svg', class: 'h-8 stroke-white' %>
+          </li>
+        </ul>
+        <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'hover:bg-green-600 p-4 rounded-full' do %>
+            <%= embedded_svg 'icons/logout.svg', class: 'h-8 stroke-white' %>
+          <% end %>
+      </div>
+      
+      <div class="flex-1 flex flex-col max-h-screen">
+        <!-- header bar -->
+        <div class="flex justify-between px-8 py-4 border-b border-gray-300 items-center">
+          <div class="flex-1">
+          </div>
+          <%= link_to edit_user_registration_path, class: 'flex flex-col' do %>
+            <p class="px-2 cursor-pointer hover:underline font-medium text-xl">
+              <%= current_user.username %>
+            </p>
+            <p class="text-end px-2 font-semibold text-sm">Admin</p>
+          <% end %>
+          <div class="h-12 w-12 rounded-full">
+           <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: 'object-cover rounded-full' %>
+           <% else %>
+           <%= image_tag "default_profile.png", class: 'object-cover rounded-full' %>
+           <% end %>
+          </div>          
+        </div>
+        <div class="max-h-full max-w-full flex-1 overflow-hidden">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
