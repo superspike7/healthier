@@ -14,15 +14,19 @@ module GoogleCalendar
     private
 
     def create_calendar
-      oauth2_client = Signet::OAuth2::Client.new(client_options)
-      google_calendar_service = Google::Apis::CalendarV3::CalendarService.new
-      google_calendar_service.authorization = oauth2_client
-      calendar = Google::Apis::CalendarV3::Calendar.new(summary: CALENDAR_NAME)
+      authorize_google_client
+      calendar = Google::Apis::CalendarV3::Calendar.new(summary: CALENDAR_NAME, time_zone: 'Manila')
       google_calendar_service.insert_calendar(calendar)
     rescue Google::Apis::AuthorizationError
       response = oauth2_client.refresh!
       @user.update_access_token(response)
       retry
+    end
+
+    def authorize_google_client
+      @oauth2_client = Signet::OAuth2::Client.new(client_options)
+      @google_calendar_service = Google::Apis::CalendarV3::CalendarService.new
+      @google_calendar_service.authorization = @oauth2_client
     end
 
     def client_options
