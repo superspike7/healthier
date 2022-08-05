@@ -3,7 +3,7 @@
 SCOPE = lambda do |env|
   request = Rack::Request.new(env)
   scope = %w[email profile]
-  scope << 'calendar.events' if request.params['origin'] != 'login'
+  scope << 'calendar' if request.params['origin'] != 'login'
   env['omniauth.strategy'].options[:scope] = scope.join(',')
 end
 
