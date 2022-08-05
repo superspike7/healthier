@@ -1,0 +1,12 @@
+<% @foods.each do |food|%>
+  <div class='flex flex-col'>
+    <%= link_to food.name, food_path(food), class: 'text-xl font-bold'%>
+    <p> Description: <%= food.description %> </p>
+    <p> Calories: <%= food.calories %> </p>
+    <p> <%= food.carbohydrates %> </p>
+    <p> <%= food.fats %> </p>
+    <p> <%= food.protein %> </p>
+    <%= button_to "Delete #{food.name}", food_path(food), method: :delete %>
+    <%= link_to "Edit #{food.name}", edit_food_path(food) %>
+  </div>
+<% end %>
