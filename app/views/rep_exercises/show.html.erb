@@ -1,0 +1,9 @@
+<h1>RepExercises#show</h1>
+<p>Find me in app/views/rep_exercises/show.html.erb</p>
+
+
+<p><b>Exercse name:</b> <%= @rep_exercise.name%></p>
+<p><b>Description:</b> <%= @rep_exercise.description%></p>
+<p><b>Repetition:</b> <%= @rep_exercise.repetition%></p>
+<p><b>Set:</b> <%= @rep_exercise.set%></p>
+<%= link_to "Update", edit_rep_exercise_path(@rep_exercise)%>
