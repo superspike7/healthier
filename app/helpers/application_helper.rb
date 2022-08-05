@@ -5,6 +5,7 @@ module ApplicationHelper
     else
       image_tag('default_profile.png', options)
     end
+  end
 
   def embedded_svg(filename, options = {})
     assets = Rails.application.assets
