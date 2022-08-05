@@ -2,7 +2,7 @@ class Admin::UsersController < AdminController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
-        @users = User.all
+      @users = User.all.includes([:avatar_attachment])
     end
 
     def show
