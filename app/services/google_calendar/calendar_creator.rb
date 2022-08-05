@@ -20,8 +20,8 @@ module GoogleCalendar
       calendar = Google::Apis::CalendarV3::Calendar.new(summary: CALENDAR_NAME)
       google_calendar_service.insert_calendar(calendar)
     rescue Google::Apis::AuthorizationError
-      response = client.refresh!
-      # assign new access token to the user
+      response = oauth2_client.refresh!
+      @user.update_access_token(response)
       retry
     end
 
@@ -30,7 +30,8 @@ module GoogleCalendar
         access_token: @user.access_token,
         refresh_token: @user.refresh_token,
         client_id: Figaro.env.google_client_id,
-        client_secret: Figaro.env.google_client_secret
+        client_secret: Figaro.env.google_client_secret,
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
       }
     end
   end
