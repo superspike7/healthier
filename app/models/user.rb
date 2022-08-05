@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :foods, dependent: :destroy
+  has_many :meals, dependent: :destroy
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 

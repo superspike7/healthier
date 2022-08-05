@@ -9,10 +9,10 @@
         data-action="click@window->turbo-modal#outsideClose"
       >
         <div class="px-7 pt-7">
-          <h1 class="font-bold text-2xl">Add Food</h1>
+          <h1 class="font-bold text-2xl">Add Meal</h1>
         </div>
         <div>
-          <%= form_with model: @new_food, data: { turbo_frame: '_top' } do |f| %>
+          <%= form_with model: @meal, data: { turbo_frame: '_top' } do |f| %>
             <div>
               <div class="py-10 px-7 flex flex-col gap-6">
                 <div class="grid grid-cols-6 text-xl items-center">
@@ -23,28 +23,12 @@
                   <%= f.label :description, class: "col-span-2 text-gray-700" %>
                   <%= f.text_field :description, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
                 </div>
-                <div class="grid grid-cols-6 text-xl items-center">
-                  <%= f.label :calories, "Calories (g)", class: "col-span-2 text-gray-700" %>
-                  <%= f.number_field :calories, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
-                </div>
-                <div class="grid grid-cols-6 text-xl items-center">
-                  <%= f.label :carbohydrates, "Carbohydrates (g)", class: "col-span-2 text-gray-700" %>
-                  <%= f.number_field :carbohydrates, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
-                </div>
-                <div class="grid grid-cols-6 text-xl items-center">
-                  <%= f.label :fats, "Fats (g)", class: "col-span-2 text-gray-700" %>
-                  <%= f.number_field :fats, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
-                </div>
-                <div class="grid grid-cols-6 text-xl items-center">
-                  <%= f.label :protein, "Protein (g)", class: "col-span-2 text-gray-700" %>
-                  <%= f.number_field :protein, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
-                </div>
               </div>
 
               <div
                 class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
               >
-                <%= f.submit 'Add Food', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
+                <%= f.submit 'Update Meal', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
                 <button data-action="turbo-modal#hideModal">Cancel</button>
               </div>
             </div>

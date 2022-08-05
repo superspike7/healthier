@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :conversation_messages, only: :create
   resources :notifications, only: :index
   resources :foods
+  resources :meals
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
 
   root 'dashboard#index'
