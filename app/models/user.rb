@@ -33,8 +33,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.access_token = auth.credentials.token
       user.refresh_token = auth.credentials.refresh_token
-      user.expires_at = auth.credentials.expires_at
-
+      
       user.skip_confirmation!
     end
   end
@@ -42,7 +41,6 @@ class User < ApplicationRecord
   def permit_google_calendar(auth)
     update(access_token: auth.credentials.token,
            refresh_token: auth.credentials.refresh_token,
-           expires_at: auth.credentials.expires_at,
            permit_calendar: true)
   end
 
