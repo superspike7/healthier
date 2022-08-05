@@ -1,0 +1,10 @@
+<h1>RepExercises#index</h1>
+<p>Find me in app/views/rep_exercises/index.html.erb</p>
+
+<% @rep_exercises.each do |exercise|%>
+    <p><b>Exercse name:</b> <%= exercise.name%></p>
+    <p><b>Description:</b> <%= exercise.description%></p>
+    <p><b>Repetition:</b> <%= exercise.repetition%></p>
+    <p><b>Set:</b> <%= exercise.set%></p>
+    <%= link_to "Update", edit_rep_exercise_path(exercise)%>
+<%end%>
