@@ -23,7 +23,8 @@ module GoogleCalendar
         access_token: @user.access_token,
         refresh_token: @user.refresh_token,
         client_id: Figaro.env.google_client_id,
-        client_secret: Figaro.env.google_client_secret
+        client_secret: Figaro.env.google_client_secret,
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
       }
     end
   end

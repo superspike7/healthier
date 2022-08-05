@@ -3,8 +3,11 @@ module GoogleCalendar
   class EventCreator < ApplicationService
     CALENDAR_NAME = 'Healthier'.freeze
 
-    def initialize(user)
+    def initialize(user, start, deadline, event_name)
       @user = user
+      @start = start # Time.current.to_datetime.rfc3339
+      @deadline = deadline #1.day.from_now.to_datetime.rfc3339
+      @event_name = event_name
     end
 
     def call
@@ -15,14 +18,18 @@ module GoogleCalendar
 
     def create_event
       authorize_google_client
-      calendar = calendar_id
-
-
-    rescue Google::Apis::AuthorizationError
-      response = client.refresh!
-      # assign new access token to the user
-
-      retry
+      calendar_id = find_healthier_calendar_id
+      event = Google::Apis::CalendarV3::Event.new(
+        summary: @event_name,
+        start: Google::Apis::CalendarV3::EventDateTime.new(
+          date_time: @start,
+          time_zone: 'Manila'
+        ),
+        end: Google::Apis::CalendarV3::EventDateTime.new(
+          date_time: @deadline,
+          time_zone: 'Manila'
+      ))
+      @google_calendar_service.insert_event(calendar_id, event)
     end
 
     def client_options
@@ -30,7 +37,8 @@ module GoogleCalendar
         access_token: User.first.access_token,
         refresh_token: User.first.refresh_token,
         client_id: Figaro.env.google_client_id,
-        client_secret: Figaro.env.google_client_secret
+        client_secret: Figaro.env.google_client_secret,
+        token_credential_uri: 'https://accounts.google.com/o/oauth2/token'
       }
     end
 
@@ -40,11 +48,10 @@ module GoogleCalendar
       @google_calendar_service.authorization = oauth2_client
     end
 
-    def calendar_id
+    def find_healthier_calendar_id
       result = @google_calendar_service.list_calendar_lists
-      # get calendar id
       result.items.each do |e|
-        return e.summary if e.summary == CALENDAR_NAME
+        break e.id if e.summary == CALENDAR_NAME
       end
     end
   end

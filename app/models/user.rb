@@ -46,6 +46,10 @@ class User < ApplicationRecord
            permit_calendar: true)
   end
 
+  def update_access_token(client)
+    update(access_token: client[:access_token])
+  end
+
   def existing_conversation_with(other_user)
     if self == other_user
       self_conversation = conversations.where(members_count: 1)
