@@ -32,6 +32,11 @@ class RepExercisesController < ApplicationController
 
   end
 
+  def destroy
+    @rep_exercise.destroy
+    redirect_back_or_to rep_exercises_path
+  end
+
   private
 
   def set_rep_exercise

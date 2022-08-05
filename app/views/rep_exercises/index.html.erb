@@ -7,4 +7,7 @@
     <p><b>Repetition:</b> <%= exercise.repetition%></p>
     <p><b>Set:</b> <%= exercise.set%></p>
     <%= link_to "Update", edit_rep_exercise_path(exercise)%>
+    <%= button_to "Delete", rep_exercise_path(exercise), method: :delete %>
 <%end%>
+
+<%= link_to "Add Repetition exercise", new_rep_exercise_path%>
