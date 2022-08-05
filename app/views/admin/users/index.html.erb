@@ -1,31 +1,88 @@
-<table>
-<thead>
-  <tr>
-    <th>USERNAME</th>
-    <th>EMAIL ADDRESS</th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
-  <% @users.each do |user|%>
-    <tr>
-    <td><%= user.username%></td>
-      <td><%= user.email%></td>
-      <td class="center">
-        <%= link_to ' Show', admin_user_path(user)%>
-        <%= link_to ' Edit', edit_admin_user_path(user)%>
-        <%= button_to ' Delete', admin_user_path(user), method: :delete, data: {confirm: 'Are you sure?'}%>
-      </td>
-    </tr>
-  <%end%>
-</tbody>
-<tfoot>
-  
-</tfoot>
-</table>
+<div class="w-full h-full p-8 bg-gray-300">
+  <h1 class="text-2xl font-bold mb-5">Users</h1>
+  <div class="w-full h-full grid grid-cols-3 grid-rows-4 gap-8">
+    <div class="bg-gray-50 rounded-xl">Total Users</div>
 
-<% if user_signed_in? %>
-  Hi, <%= current_user.username %> 
-  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %> 
-  <%= link_to ' Report',  new_userreport_path %>
-<% end %>
+    <div class="bg-gray-50 rounded-xl">Top Gainers</div>
+
+    <div class="bg-gray-50 rounded-xl">Worst Gainers</div>
+
+    <div class="bg-gray-50 col-span-3 row-span-3 overflow-y-auto rounded-xl pb-5">
+      <table class="min-w-max w-full table-auto">
+        <thead>
+          <tr
+            class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+          >
+            <th class="py-3 px-6 text-left">Username</th>
+
+            <th class="py-3 px-6 text-left">Email</th>
+
+            <th class="py-3 px-6 text-left">Recent Exercise</th>
+
+            <th class="py-3 px-6 text-left">Recent Intake</th>
+
+            <th class="py-3 px-6 text-center">Status</th>
+
+            <th class="py-3 px-6 text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="text-gray-600 text-sm font-light">
+          <% @users.each do |user| %>
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="mr-2">
+                  <div class="h-6 w-6 bg-green-300 rounded-full"></div>
+                </div>
+
+                <span class="font-medium"><%= user.username %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-left">
+              <div class="flex items-center">
+                <span><%= user.email %>
+                </span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <div class="flex items-center">
+                <span>7km Jogging 1hr (sample lang to)</span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <div class="flex items-center">
+                <span>1pc Banana (sample lang to)</span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span
+                class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs"
+                >Active</span
+              >
+            </td>
+
+            <td class="py-3 px-6 text-center flex justify-center">
+              <%= link_to admin_user_path(user), class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+                <%= embedded_svg 'icons/eye.svg' %>
+              <% end %>
+              <%= link_to edit_admin_user_path(user), class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+                 <%= embedded_svg 'icons/edit.svg' %>
+              <% end %>
+              <%= button_to admin_user_path(user), 
+                            class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
+                            method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
+                 <%= embedded_svg 'icons/delete.svg' %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
