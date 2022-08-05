@@ -1,5 +1,4 @@
 class ReportUserController < ApplicationController
-    before_action :set_report, only: [:show, :edit, :update, :destroy]
 
     def new
         @report = current_user.reports.build
@@ -14,14 +13,7 @@ class ReportUserController < ApplicationController
         end
     end
 
-    def destroy
-    end
-
     private
-    
-    def set_report
-        @report = current_user.reports.find(params[:id])
-    end
 
     def report_params
         params.permit(:reason, :report_type).merge(reported_id: params[:profile_id])

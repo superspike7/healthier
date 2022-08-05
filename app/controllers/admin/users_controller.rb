@@ -35,6 +35,7 @@ class Admin::UsersController < AdminController
     end
 
     def destroy
+        UserreportMailer.with(reported_user: @user).violating_community_standard.deliver_now
         @user.destroy
         redirect_to admin_users_path, notice: "Deleted #{@user.email}"
     end

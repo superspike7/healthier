@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments
+    resources :report_post
   end
   resources :likes, only: [:create, :destroy]
   resources :follows, only: [:create, :destroy]
@@ -50,6 +51,6 @@ Rails.application.routes.draw do
   end
 
   resources :profile do
-    resources :userreports
+    resources :report_user
   end
 end
