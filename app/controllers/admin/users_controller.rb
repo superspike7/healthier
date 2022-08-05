@@ -3,6 +3,7 @@ class Admin::UsersController < AdminController
 
     def index
       @users = User.all.includes([:avatar_attachment])
+      @newest_user = @users.last
     end
 
     def show
