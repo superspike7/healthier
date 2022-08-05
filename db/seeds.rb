@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 5.times do |n|
-  User.create!(username: "example12#{n}", email: "example#{n}@example.com", password: 'abc123',
+  random_number = rand.to_s[2..4]
+  User.create!(username: "example#{random_number}", email: "example#{random_number}@example.com", password: 'abc123',
                password_confirmation: 'abc123', confirmed_at: Time.now.utc)
 end
