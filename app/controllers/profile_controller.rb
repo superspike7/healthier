@@ -9,7 +9,7 @@ class ProfileController < ApplicationController
 
   def update
     current_user.update(profile_params)
-    redirect_to profile_url
+    redirect_to profile_url, notice: 'Successfully edited your profile.'
   end
 
   private
