@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :direct_conversations, only: %i[create index show update], path: 'direct'
   resources :conversation_messages, only: :create
   resources :notifications, only: :index
+  resources :foods
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
 
   root 'dashboard#index'
