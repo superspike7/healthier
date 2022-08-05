@@ -245,8 +245,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.string "provider"
     t.string "access_token"
     t.string "refresh_token"
-    t.datetime "expires_at"
-    t.boolean "permit_calendar"
+    t.boolean "permit_calendar", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "email"], name: "index_users_on_provider_and_email"
