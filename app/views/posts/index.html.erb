@@ -59,18 +59,22 @@
            <%= link_to post_path(post) do %>
              <%= embedded_svg 'icons/eye.svg', class: 'h-8 w-8 hover:stroke-blue-500 cursor-pointer' %>
            <% end %>
-           <div class="flex gap-2 items-center">
-             <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
-             <p>420</p>
-           </div>
-           <div class="flex gap-2 items-center">
-             <% like = current_user.likes.find_by(post: post) %>
-             <% if like.nil? %>
-              <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
-             <% else %>
-              <%= button_to "Unlike", like_path(like), method: :delete %>
-             <% end %>
-              <%= render 'posts/like', user: current_user, post: %>
+
+           <div class="flex gap-10 font-light text-lg mt-4">
+             <div class="flex gap-2 items-center">
+               <%= vite_image_tag 'icons/comment.svg', class: 'h-8 w-8' %>
+               <p>420</p>
+             </div>
+             <div class="flex gap-2 items-center">
+               <% like = current_user.likes.find_by(post: post) %>
+               <% if like.nil? %>
+                <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
+               <% else %>
+                <%= button_to "Unlike", like_path(like), method: :delete %>
+               <% end %>
+                <%= render 'posts/like', user: current_user, post: %>
+                <%= link_to ' Report Post', new_post_report_post_path(post)%>
+             </div>
            </div>
          </div>
         </div>

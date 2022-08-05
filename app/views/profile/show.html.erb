@@ -1,2 +1,4 @@
 <p>Username: <%= current_user.username %> </p>
 <p>Avatar: <%= user_avatar(current_user) %> </p>
+
+<%= link_to ' Report User',   new_profile_report_user_path(@user)%>

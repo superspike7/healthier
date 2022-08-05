@@ -13,7 +13,7 @@
           <div>
             <%= image_tag 'default_profile.png', class: 'w-14 h-14 rounded-full' %>
           </div>
-          <p class="text-4xl font-bold"><%= @reports.first[:target] %></p>
+          <p class="text-4xl font-bold"><%= @reports.first.reported.username %></p>
         </div>
       </div>
     </div>
@@ -30,22 +30,20 @@
           >
             <th class="py-3 px-6 text-left">Reporter</th>
 
-            <th class="py-3 px-6 text-left">Type</th>
+            <th class="py-3 px-6 text-left">Reported User</th>
 
-            <th class="py-3 px-6 text-left">Target</th>
+            <th class="py-3 px-6 text-left">Reported Post</th>
 
             <th class="py-3 px-6 text-left">Reason/s</th>
 
-            <th class="py-3 px-6 text-left">Description</th>
-
-            <th class="py-3 px-6 text-center">Status</th>
+            <th class="py-3 px-6 text-left">Type</th>
 
             <th class="py-3 px-6 text-center">Actions</th>
           </tr>
         </thead>
 
         <tbody class="text-gray-600 text-sm font-light">
-          <% @reports.each do |report| %>
+          <% @reports.includes(:user).each do |report| %>
           <tr class="border-b border-gray-200 hover:bg-gray-100">
             <td class="py-3 px-6 text-left whitespace-nowrap">
               <div class="flex items-center">
@@ -53,50 +51,43 @@
                   <%= image_tag 'default_profile.png', class: 'w-6 h-6 rounded-full' %>
                 </div>
 
-                <span class="font-medium"><%= report[:reporter] %></span>
+                <span class="font-medium"><%= report.user.username %></span>
               </div>
             </td>
 
             <td class="py-3 px-6 text-left">
               <div class="flex items-center">
-                <span class="font-bold"><%= report[:type] %></span>
+                <span class="font-bold"><%= report.reported.username %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-left">
+              <div class="flex items-center">
+                <% if report.post != nil%>
+                  <span class="font-bold"><%= report.post.body %></span>
+                <%end%>
               </div>
             </td>
 
             <td class="py-3 px-6 text-center">
               <div class="flex items-center">
-                <span><%= report[:target] %></span>
+                <span><%= report.reason %></span>
               </div>
             </td>
 
             <td class="py-3 px-6 text-center">
-              <div class="flex items-center justify-start gap-2">
-                <% report[:reasons].each do |reason| %>
-                  <span class="font-bold underline"><%= reason %></span>
-                <% end %>
-              </div>
-            </td>
-
-            <td class="py-3 px-6 text-center">
-              <div class="flex items-center">
-                <span><%= report[:description] %></span>
-              </div>
-            </td>
-
-            <td class="py-3 px-6 text-center">
-              <span
-                class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs"
-                ><%= report[:status] %></span
-              >
-            </td>
+            <div class="flex items-center">
+              <span><%= report.report_type %></span>
+            </div>
+          </td>
 
             <td class="py-3 px-6 text-center flex justify-center">
-              <%= link_to admin_report_path(1),
+              <%= link_to admin_report_path(report),
                           data: { turbo_frame: 'modal' },
                           class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
                 <%= embedded_svg 'icons/eye.svg' %>
               <% end %>
-              <%= button_to admin_report_path(1), 
+              <%= button_to admin_report_path(report), 
                             class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
                             method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
                  <%= embedded_svg 'icons/delete.svg' %>
