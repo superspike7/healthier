@@ -1,0 +1,9 @@
+class GoogleOauthCalendarController < ApplicationController
+  def create
+    current_user.permit_google_calendar(request.env['omniauth.auth'])
+    redirect_to exercise_schedules_url, notice: 'Successfully integrated your Google Calendar.'
+  end
+
+  def failure
+  end
+end

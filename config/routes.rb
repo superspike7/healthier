@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+  get '/auth/google/callback', to: 'google_oauth_calendar#create', constraints: lambda { |req| !(req.env['omniauth.origin'] =~ /login/) }
+  get '/auth/failure', to: 'google_oauth_calendar#failure', constraints: lambda { |req| !(req.env['omniauth.origin'] =~ /login/) }
+
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_scope :user do
     get '/auth/google/callback', to: 'users/omniauth_callbacks#google_oauth2',
                                  as: 'user_google_oauth2_omniauth_callback'
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
-  
+
   resources :posts do
     resources :comments
   end
@@ -30,8 +33,7 @@ Rails.application.routes.draw do
     resources :category_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
     resources :category_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
   end
-
-
+  resources :exercise_schedules, path: 'schedules'
 
   scope '/daily' do
     resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'
