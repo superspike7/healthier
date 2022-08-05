@@ -31,9 +31,19 @@ class User < ApplicationRecord
     where(provider: auth.provider, email: auth.info.email).first_or_create do |user|
       user.username = auth.info.email.split('@')[0]
       user.password = Devise.friendly_token[0, 20]
+      user.access_token = auth.credentials.token
+      user.refresh_token = auth.credentials.refresh_token
+      user.expires_at = auth.credentials.expires_at
 
       user.skip_confirmation!
     end
+  end
+
+  def permit_google_calendar(auth)
+    update(access_token: auth.credentials.token,
+           refresh_token: auth.credentials.refresh_token,
+           expires_at: auth.credentials.expires_at,
+           permit_calendar: true)
   end
 
   def existing_conversation_with(other_user)
