@@ -8,35 +8,46 @@
         data-turbo-modal-target="modal"
         data-action="click@window->turbo-modal#outsideClose"
       >
-        <div
-          class="bg-green-500 rounded-t-xl p-8 flex flex-col justify-center gap-8 items-center"
-        >
-          <div
-            class="h-40 w-40 bg-green-200 rounded-full grid place-items-center"
-          >
-            Image
+        <div class="p-8 flex flex-col gap-6">
+          <div class="text-xl flex flex-col gap-2">
+            <p class="font-light">Reporter:</p>
+            <div class="flex gap-2 px-4">
+              <%= user_avatar User.first, class: 'h-8 w-8 rounded-full' %>
+              <h3 class="font-bold">Reynard</h3>
+            </div>
           </div>
-          <div class="flex flex-col text-xl text-gray-50 text-center">
-            <h3 class="font-bold">Fruit Salad</h3>
-            <p class="font-light">tasty desert full of fruits</p>
+          <div class="text-xl flex flex-col gap-2">
+            <p class="font-light">Reported:</p>
+            <div class="flex gap-2 px-4">
+              <%= user_avatar User.first, class: 'h-8 w-8 rounded-full' %>
+              <h3 class="font-bold">Vinz</h3>
+            </div>
           </div>
-        </div>
-        <div class="grid grid-cols-2 grid-rows-2 p-8 gap-8">
-          <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
-            <p class="text-xl text-green-500">Fats</p>
+          <div class="text-xl flex flex-col gap-2">
+            <p class="font-light">Reason:</p>
+            <div class="flex gap-2 px-4">
+              <h3 class="font-bold underline">Sobrang Gwapo</h3>
+            </div>
           </div>
-          <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
-            <p class="text-xl text-green-500">Carbohydrates</p>
+          <div class="text-xl flex flex-col gap-2">
+            <p class="font-light">Description:</p>
+            <div class="flex gap-2 px-4">
+              <h3 class="font-medium">
+                loooooong sentences of description 
+                loooooong sentences of description 
+                loooooong sentences of description 
+              </h3>
+            </div>
           </div>
-          <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
-            <p class="text-xl text-green-500">Protein</p>
+          <div class="text-xl flex flex-col gap-2">
+            <p class="font-light">Status:</p>
+            <div class="flex gap-2 px-4">
+              <h3 class="p-2 px-3 rounded-full bg-gray-300 text-gray-600">Pending</h3>
+            </div>
           </div>
-          <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
-            <p class="text-xl text-green-500">Calories</p>
+          <div class="text-xl flex gap-2 justify-end px-2">
+            <button class="font-bold py-2 px-3 rounded-full bg-red-500 text-red-50">Reject</button>
+            <button class="font-bold py-2 px-3 rounded-full bg-green-500 text-green-50">Approve</button>
           </div>
         </div>
       </div>
