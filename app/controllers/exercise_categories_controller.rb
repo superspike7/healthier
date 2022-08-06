@@ -32,6 +32,11 @@ class ExerciseCategoriesController < ApplicationController
 
   end
 
+  def destroy
+    @exercise_category.destroy
+    redirect_to exercise_categories_path
+  end
+
   private
 
   def set_exercise_category
