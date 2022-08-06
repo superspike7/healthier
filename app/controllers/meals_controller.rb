@@ -5,9 +5,7 @@ class MealsController < ApplicationController
     @meals = current_user.meals
   end
 
-  def show
-    @nutrients = @meal.total_macronutrients
-  end
+  def show; end
 
   def new
     @new_meal = current_user.meals.build
