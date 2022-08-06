@@ -1,0 +1,50 @@
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+        data-turbo-modal-target="modal"
+        data-action="click@window->turbo-modal#outsideClose"
+      >
+        <h2 class="font-bold text-2xl px-7 pt-4">Report User</h2>
+        <div class="px-7 pt-3 flex gap-4 items-center">
+          <%= user_avatar @user, class: 'h-12 w-12 rounded-full' %>
+          <h1 class="font-bold text-2xl"><%= @user.username %></h1>
+        </div>
+        <div>
+          <form>
+            <div>
+              <div class="py-10 px-7 flex flex-col gap-6">
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <label class="col-span-2 text-gray-700">Reason/s</label>
+                  <input
+                    type="text"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400"
+                    multiple
+                  />
+                </div>
+                <div class="grid grid-cols-6 text-xl items-start">
+                  <label class="col-span-2 text-gray-700">Description</label>
+                  <textarea
+                    rows="4"
+                    class="col-span-4 p-1 px-2 rounded-xl border border-gray-400 resize-none"
+                  ></textarea>
+                </div>
+              </div>
+              <div
+                class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
+              >
+                <button class="px-4 py-2 bg-red-500 text-white rounded-xl">
+                  Report User
+                </button>
+                <button data-action="turbo-modal#hideModal">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
