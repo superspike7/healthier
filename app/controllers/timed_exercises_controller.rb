@@ -17,7 +17,7 @@ class TimedExercisesController < ApplicationController
       flash[:notice] = @timed_exercise.errors.full_messages.to_sentence
     end
 
-    redirect_back_or_to timed_exercises_path
+    redirect_to timed_exercises_path
   end
 
   def edit
@@ -30,6 +30,11 @@ class TimedExercisesController < ApplicationController
       render :edit
     end
 
+  end
+
+  def destroy
+    @timed_exercise.destroy
+    redirect_to timed_exercises_path
   end
 
   private
