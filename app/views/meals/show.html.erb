@@ -12,3 +12,10 @@
     <%= button_to 'Delete food', meal_food_path(@meal, food), method: :delete %>
   <% end %>
 </div>
+
+<div class= 'bg-slate-300'>
+  <p> Total Calories: <%= "#{@nutrients.calories}g" %> </p>
+  <p> Total Carbohydrates: <%= "#{@nutrients.carbohydrates}g" %> </p>
+  <p> Total Fats: <%= "#{@nutrients.fats}g" %> </p>
+  <p> Total Protein: <%= "#{@nutrients.protein}g" %> </p>
+</div>
