@@ -1,0 +1,13 @@
+<h1>Timed Exercises</h1>
+
+<% @timed_exercises.each do |exercise|%>
+    <p><b>Exercse name:</b> <%= exercise.name%></p>
+    <p><b>Description:</b> <%= exercise.description%></p>
+    <p><b>Hour:</b> <%= exercise.hour%></p>
+    <p><b>Minutes:</b> <%= exercise.minutes%></p>
+    <%= link_to "Update", edit_timed_exercise_path(exercise)%>
+    <%= button_to "Delete", timed_exercise_path(exercise), method: :delete %>
+<%end%>
+
+<%= link_to "Add Repetition exercise", new_rep_exercise_path%>
+

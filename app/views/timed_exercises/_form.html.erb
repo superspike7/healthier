@@ -1,0 +1,27 @@
+<%= form_with(model: timed_exercise) do |form| %>
+
+<div>
+    <%= form.label :name %>
+    <%= form.text_field :name%>
+</div>
+
+<div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+</div>
+
+<div>
+    <%= form.label :hour %>
+    <%= form.number_field :hour, min:0 %>
+</div>
+
+<div>
+    <%= form.label :minutes %>
+    <%= form.number_field :minutes, min:0, max:59 %>
+</div>
+
+<div>
+    <%= form.submit%>
+</div>
+
+<% end %>
