@@ -23,10 +23,19 @@ class ExerciseCategoriesController < ApplicationController
   def edit
   end
 
+  def update
+    if @exercise_category.update(exercise_category_params)
+      redirect_to @exercise_category
+    else
+      render :edit
+    end
+
+  end
+
   private
 
   def set_exercise_category
-    @exercise_category = current_user.timed_exercises.find_by(id: params[:id])
+    @exercise_category = current_user.exercise_categories.find_by(id: params[:id])
   end
 
   def exercise_category_params
