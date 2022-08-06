@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_scope :user do
     get '/auth/google/callback', to: 'users/omniauth_callbacks#google_oauth2',
@@ -26,6 +25,7 @@ Rails.application.routes.draw do
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
   resources :rep_exercises
   resources :timed_exercises
+  resources :exercise_categories
 
   scope '/daily' do
     resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'

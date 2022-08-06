@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :daily_intakes, dependent: :destroy
   has_many :rep_exercises
   has_many :timed_exercises
+  has_many :exercise_categories
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 
