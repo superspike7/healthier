@@ -6,6 +6,12 @@ class Meal < ApplicationRecord
   validates :description, length: { maximum: 24 }
 
   def total_macronutrients
+    Struct.new(:calories, :carbohydrates, :fats, :protein).new(
+      foods.sum(:calories),
+      foods.sum(:carbohydrates),
+      foods.sum(:fats),
+      foods.sum(:protein)
+    )
   end
 
   def add_food(food)
