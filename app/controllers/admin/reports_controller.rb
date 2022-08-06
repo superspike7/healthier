@@ -30,6 +30,10 @@ class Admin::ReportsController < AdminController
   end
 
   def show; end
-  def new; end
+
+  def new
+    @user = User.find_by_username(params[:username])
+  end
+
   def destroy; end
 end
