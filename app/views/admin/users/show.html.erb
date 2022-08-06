@@ -9,9 +9,11 @@
       <button class="p-2 border border-gray-200 hover:bg-green-400 rounded-full">
         <%= embedded_svg 'icons/chat.svg', class: 'h-7' %>
       </button>
-      <button class="p-2 border border-gray-200 hover:bg-red-400 rounded-full">
+        <%= link_to new_admin_report_path(@user.username),
+                    data: { turbo_frame: 'modal' },
+                    class: 'p-2 border border-gray-200 hover:bg-red-400 rounded-full' do %>
         <%= embedded_svg 'icons/report.svg', class: 'h-7' %>
-      </button>
+      <% end %>
       <button
         class="font-bold text-lg border border-gray-200 p-1 px-2 rounded-full hover:bg-gray-50"
       >
@@ -30,6 +32,7 @@
     </div>
     <div class="w-full h-40 grid place-items-center">
       <p>(bio? followers? following? links? favorites?)</p>
+
     </div>
     <div class="w-full flex-1">
       <div class="w-full grid grid-cols-4 justify-items-center border-b border-gray-200 text-center">
