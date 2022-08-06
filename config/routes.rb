@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   namespace :admin do
-    resources :reports
+    resources :reports, path_names: {new: 'new/:username' }
     resources :users, except: :show
     resources :users, only: :show, param: :username
   end
