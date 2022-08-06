@@ -178,6 +178,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_025525) do
     t.index ["user_id"], name: "index_rep_exercises_on_user_id"
   end
 
+  create_table "timed_exercises", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.integer "hour"
+    t.integer "minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_timed_exercises_on_user_id"
+  end
+
   create_table "user_reports", force: :cascade do |t|
     t.bigint "reporter_id", null: false
     t.bigint "reported_id", null: false
@@ -228,6 +239,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_025525) do
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
   add_foreign_key "rep_exercises", "users"
+  add_foreign_key "timed_exercises", "users"
   add_foreign_key "user_reports", "users", column: "reported_id"
   add_foreign_key "user_reports", "users", column: "reporter_id"
 end
