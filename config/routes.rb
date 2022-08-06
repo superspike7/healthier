@@ -44,7 +44,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :reports
-    resources :users
+    resources :users, except: :show
+    resources :users, only: :show, param: :username
   end
 
   resources :userreports
