@@ -17,25 +17,24 @@
             Image
           </div>
           <div class="flex flex-col text-xl text-gray-50 text-center">
-            <h3 class="font-bold">Fruit Salad</h3>
-            <p class="font-light">tasty desert full of fruits</p>
+            <h3 class="font-bold"><%= @daily_intake.created_at.strftime("%b. %d, %Y") %></h3>
           </div>
         </div>
         <div class="grid grid-cols-2 grid-rows-2 p-8 gap-8">
           <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
+            <p class="font-bold text-2xl"><%= "#{@daily_intake.total_fats}g" %></p>
             <p class="text-xl text-green-500">Fats</p>
           </div>
           <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
+            <p class="font-bold text-2xl"><%= "#{@daily_intake.total_carbohydrates}g" %></p>
             <p class="text-xl text-green-500">Carbohydrates</p>
           </div>
           <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
+            <p class="font-bold text-2xl"><%= "#{@daily_intake.total_protein}g" %></p>
             <p class="text-xl text-green-500">Protein</p>
           </div>
           <div class="flex flex-col text-center">
-            <p class="font-bold text-2xl">69%</p>
+            <p class="font-bold text-2xl"><%= "#{@daily_intake.total_calories}g" %></p>
             <p class="text-xl text-green-500">Calories</p>
           </div>
         </div>

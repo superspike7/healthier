@@ -7,6 +7,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def restrict_google_user
-    raise ActionController::RoutingError, 'Not Found' unless current_user.provider.nil?
+    unless current_user.provider.nil?
+      flash[:notice] = 'Google Accounts cannot edit their email and password.'
+      redirect_back_or_to root_url
+    end
   end
 end
