@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_05_223004) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_05_231727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_05_223004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_foods_on_user_id"
+  end
+
+  create_table "foods_meals", id: false, force: :cascade do |t|
+    t.bigint "food_id"
+    t.bigint "meal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["food_id", "meal_id"], name: "index_foods_meals_on_food_id_and_meal_id", unique: true
+    t.index ["food_id"], name: "index_foods_meals_on_food_id"
+    t.index ["meal_id"], name: "index_foods_meals_on_meal_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -165,9 +175,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_05_223004) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "provider"
-    t.string "access_token"
-    t.string "refresh_token"
-    t.boolean "permit_calendar", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "email"], name: "index_users_on_provider_and_email"
