@@ -96,11 +96,6 @@
                           class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
                 <%= embedded_svg 'icons/eye.svg' %>
               <% end %>
-              <%= link_to edit_admin_report_path(1),
-                          data: { turbo_frame: 'modal' },
-                          class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
-                 <%= embedded_svg 'icons/edit.svg' %>
-              <% end %>
               <%= button_to admin_report_path(1), 
                             class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
                             method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
