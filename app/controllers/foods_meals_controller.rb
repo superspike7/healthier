@@ -4,6 +4,7 @@ class FoodsMealsController < ApplicationController
   def new
     @new_food_meal = @meal.foods.build
     @foods = current_user.foods.all_except(@meal.foods)
+    redirect_back_or_to root_url, notice: 'No food to add anymore.' if @foods.count.zero?
   end
 
   def create

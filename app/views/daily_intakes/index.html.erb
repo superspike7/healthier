@@ -1,0 +1,4 @@
+<h1> List of your Daily Intakes </h1>
+<% @daily_intakes.each do |daily_intake| %>
+  <%= link_to daily_intake.created_at.strftime("%b. %d, %Y") %>
+<% end %>

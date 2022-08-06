@@ -5,9 +5,9 @@ class User < ApplicationRecord
   has_many :reporter_user_reports, class_name: 'User', foreign_key: 'reported_id'
   has_many :relationships, class_name: 'Relationship', foreign_key: 'user_id'
   has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id'
-  has_many :posts
-  has_many :comments
-  has_many :likes
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable
@@ -18,9 +18,11 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :foods, dependent: :destroy
   has_many :meals, dependent: :destroy
+  has_many :daily_intakes, dependent: :destroy
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 
+  after_create :create_daily_intake
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, email: auth.info.email).first_or_create do |user|
@@ -65,4 +67,9 @@ class User < ApplicationRecord
     like.notifications_as_like.destroy_all
   end
 
+  private
+
+  def create_daily_intake
+    daily_intakes.create
+  end
 end

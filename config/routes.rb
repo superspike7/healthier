@@ -22,7 +22,13 @@ Rails.application.routes.draw do
   resources :meals do
     resources :foods_meals, only: [:create, :destroy, :new], path: 'food', as: 'foods'
   end
+  resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
+
+  scope '/daily' do
+    resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'
+    resources :daily_intake_meals, only: [:create, :new], path: 'meal'
+  end
 
   root 'dashboard#index'
 
