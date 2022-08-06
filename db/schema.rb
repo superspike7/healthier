@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   end
 
   create_table "conversations", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "members_count"
@@ -157,12 +158,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   create_table "messages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
-    t.integer "receiver_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
