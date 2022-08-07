@@ -1,6 +1,0 @@
-<h1>Exercise Category</h1>
-
-<p><b>Category:</b> <%= @exercise_category.name%></p>
-<p><b>Description:</b> <%= @exercise_category.description%></p>
-<%= link_to "Update", edit_exercise_category_path(@exercise_category)%>
-<%= button_to "Delete", exercise_category_path(@exercise_category), method: :delete %>

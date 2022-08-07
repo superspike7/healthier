@@ -1,0 +1,19 @@
+<div>
+  <h1><b>New Exercise Category</b></h1>
+  <%= form_with model: @new_category, scope: :category, url: categories_path do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name%>
+    </div>
+
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+
+    <div>
+      <%= form.submit%>
+    </div>
+  <% end %>
+</div>
