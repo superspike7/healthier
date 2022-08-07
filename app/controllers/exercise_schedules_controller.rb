@@ -6,12 +6,8 @@ class ExerciseSchedulesController < ApplicationController
   def show; end
 
   def new
-    # setup permissions
   end
 
   def create
-  end
-
-  def destroy
   end
 end
