@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :category_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
     resources :category_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
   end
-  resources :exercise_schedules, path: 'schedules'
+  resources :exercise_schedules, only: [:create, :edit, :new, :show], path: 'schedules'
 
   scope '/daily' do
     resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'

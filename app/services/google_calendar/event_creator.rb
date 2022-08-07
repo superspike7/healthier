@@ -31,5 +31,9 @@ module GoogleCalendar
         end: Google::Apis::CalendarV3::EventDateTime.new(date_time: @deadline, time_zone: 'Asia/Manila')
       )
     end
+
+    def time_to_rfc3339
+      # Time.new()
+    end
   end
 end
