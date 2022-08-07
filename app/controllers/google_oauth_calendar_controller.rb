@@ -5,5 +5,7 @@ class GoogleOauthCalendarController < ApplicationController
   end
 
   def failure
+    flash[:alert] = 'Something went wrong. Try again later.'
+    redirect_back_or_to root_url
   end
 end
