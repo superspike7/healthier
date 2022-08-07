@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
   resources :rep_exercises
   resources :timed_exercises
-  resources :exercise_categories
+  resources :exercise_categories do
+    resources :rep_exercises
+  end
 
   scope '/daily' do
     resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'
