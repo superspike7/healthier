@@ -5,4 +5,6 @@ class RepetitionExercise < ApplicationRecord
   validates :name, presence: true
   validates :repetition, presence: true
   validates :set, presence: true
+
+  scope :all_except, ->(repetition_exercise) { where.not(id: repetition_exercise) }
 end

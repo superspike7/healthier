@@ -5,4 +5,6 @@ class TimedExercise < ApplicationRecord
   validates :name, presence: true
   validates :hour, presence: true
   validates :minutes, presence: true
+
+  scope :all_except, ->(timed_exercise) { where.not(id: timed_exercise) }
 end

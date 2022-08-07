@@ -8,6 +8,6 @@ class CreateCategoriesTimedExercises < ActiveRecord::Migration[7.0]
     end
 
     add_index :categories_timed_exercises, [:timed_exercise_id, :category_id], unique: true,
-                                                                                         name: 'categories_time_exercises'
+                                                                               name: 'categories_time_exercises'
   end
 end
