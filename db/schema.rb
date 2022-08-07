@@ -9,7 +9,8 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema[7.0].define(version: 2022_08_06_025525) do
+
+ActiveRecord::Schema[7.0].define(version: 2022_08_06_040634) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -171,6 +172,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_025525) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["user_id", "followed_id"], name: "index_relationships_on_user_id_and_followed_id", unique: true
     t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
+  create_table "rep_categ", force: :cascade do |t|
+    t.bigint "rep_exercise_id"
+    t.bigint "exercise_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_category_id"], name: "index_rep_categ_on_exercise_category_id"
+    t.index ["rep_exercise_id", "exercise_category_id"], name: "index_rep_categ_on_rep_exercise_id_and_exercise_category_id", unique: true
+    t.index ["rep_exercise_id"], name: "index_rep_categ_on_rep_exercise_id"
   end
 
   create_table "rep_exercises", force: :cascade do |t|
