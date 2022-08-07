@@ -17,7 +17,7 @@
            <%= form.text_area :body, class: 'resize-none p-2 font-semibold w-full focus:h-32', placeholder: "What's going on?" %>
            <div class="flex justify-between py-4 border-t border-gray-200">
            <label class="relative h-8 w-8">
-             <%= embedded_svg'icons/image.svg', class: 'w-full h-full cursor-pointer z-10' %>
+             <%= embedded_svg 'icons/image.svg', class: 'w-full h-full cursor-pointer z-10' %>
              <%= form.file_field :images, multiple: true, class:"absolute top-0 right-0 opacity-0 cursor-pointer min-h-full min-w-full" %>
            </label>
             <%= form.submit 'Post', class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
@@ -33,7 +33,12 @@
           </div>
         </div>
         
-        <div class="flex-1 flex flex-col justify-center">
+        <div class="flex-1 flex flex-col justify-center relative">
+          <%= link_to new_post_report_path(post.id),
+                      data: { turbo_frame: 'modal' },
+                      class: 'absolute top-0 right-0 cursor-pointer p-2 hover:bg-red-200 rounded-full' do %>
+            <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-1' %>
+          <% end %>
           <h5 class="font-medium text-lg"><%= post.user.username %>
             <% follow = current_user.relationships.find_by(followed_id: post.user.id) %>
             <%  if current_user.id != post.user.id%>
@@ -42,37 +47,38 @@
               <%else%>
                 <%= button_to "Unfollow", follow_path(post.user.id), method: :delete%>
               <%end%>
-            <%end%></h5> 
-           <p class="p-2 min-h-max" ><%= post.body %></p>
-           <% if post.images.attached?%>
-             <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">
-                <% post.images.each do |image|%>
-                  <p><%= image_tag image, class: "w-full h-full object-cover" %></p>
-                <% end %>
-             </div>
-           <% end %>
-           <div class="flex gap-10 font-light text-lg mt-4">
-             <div class="flex gap-2 items-center">
-               <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
-               <p>420</p>
-             </div>
-             <div class="flex gap-2 items-center">
-               <%#= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
-               <% like = current_user.likes.find_by(post: post) %>
-               <% if like.nil? %>
-                <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
-               <% else %>
-                <%= button_to "Unlike", like_path(like), method: :delete %>
-               <% end %>
-                <%= render 'posts/like', user: current_user, post: %>
-             </div>
-           </div>
-           <div class="flex flex-col" id="<%= dom_id(post) %>">
-            <% @comments.each do |comment|%>
-              <%= render 'posts/comment', comment:, user: current_user, post: %>
             <%end%>
+          </h5> 
+         <p class="p-2 min-h-max" ><%= post.body %></p>
+         <% if post.images.attached?%>
+           <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">
+              <% post.images.each do |image|%>
+                <p><%= image_tag image, class: "w-full h-full object-cover" %></p>
+              <% end %>
            </div>
-           <%= render partial: "comments/form", locals: {post: post}%>
+         <% end %>
+         <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
+             <p>420</p>
+           </div>
+           <div class="flex gap-2 items-center">
+             <%#= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
+             <% like = current_user.likes.find_by(post: post) %>
+             <% if like.nil? %>
+              <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
+             <% else %>
+              <%= button_to "Unlike", like_path(like), method: :delete %>
+             <% end %>
+              <%= render 'posts/like', user: current_user, post: %>
+           </div>
+         </div>
+         <div class="flex flex-col" id="<%= dom_id(post) %>">
+          <% @comments.each do |comment|%>
+            <%= render 'posts/comment', comment:, user: current_user, post: %>
+          <%end%>
+         </div>
+         <%= render partial: "comments/form", locals: {post: post}%>
         </div>
       </div>
       
