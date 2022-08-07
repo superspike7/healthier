@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :foods_meals, only: [:create, :destroy, :new], path: 'food', as: 'foods'
   end
   resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
+  resources :post_reports, only: :new, path_names: { new: 'new/:post_id' }
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
   resources :repetition_exercises, path: 'repetitions'
   resources :timed_exercises, path: 'timed'
