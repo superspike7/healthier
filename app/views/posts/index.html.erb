@@ -17,7 +17,7 @@
            <%= form.text_area :body, class: 'resize-none p-2 font-semibold w-full focus:h-32', placeholder: "What's going on?" %>
            <div class="flex justify-between py-4 border-t border-gray-200">
            <label class="relative h-8 w-8">
-             <%= vite_image_tag 'icons/image.svg', class: 'w-full h-full cursor-pointer z-10' %>
+             <%= embedded_svg'icons/image.svg', class: 'w-full h-full cursor-pointer z-10' %>
              <%= form.file_field :images, multiple: true, class:"absolute top-0 right-0 opacity-0 cursor-pointer min-h-full min-w-full" %>
            </label>
             <%= form.submit 'Post', class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
@@ -53,7 +53,7 @@
            <% end %>
            <div class="flex gap-10 font-light text-lg mt-4">
              <div class="flex gap-2 items-center">
-               <%= vite_image_tag 'icons/comment.svg', class: 'h-8 w-8' %>
+               <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
                <p>420</p>
              </div>
              <div class="flex gap-2 items-center">
