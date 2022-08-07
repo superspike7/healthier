@@ -4,3 +4,15 @@
 <p><b>Description:</b> <%= @category.description%></p>
 <%= link_to "Update", edit_category_path(@category)%>
 <%= button_to "Delete", category_path(@category), method: :delete %>
+
+<p class='font-bold'> Timed Exercises </p>
+<% @category.timed_exercises.each do |timed_exercise| %>
+  <p><%= timed_exercise.name %></p>
+  <%= button_to 'Delete exercise', category_timed_exercise_path(@category, timed_exercise), method: :delete %>
+<% end %>
+
+<p class='font-bold'> Repetition Exercises </p>
+<% @category.repetition_exercises.each do |repetition_exercise| %>
+  <p><%= repetition_exercise.name %></p>
+  <%= button_to 'Delete exercise', category_repetition_exercise_path(@category, repetition_exercise), method: :delete %>
+<% end %>

@@ -7,4 +7,12 @@ class Category < ApplicationRecord
     repetition_exercises << RepetitionExercise.find(exercises[:repetition])
     timed_exercises << TimedExercise.find(exercises[:timed])
   end
+
+  def remove_timed_exercise(timed_exercise)
+    timed_exercises.destroy(timed_exercise)
+  end
+
+  def remove_repetition_exercise(repetition_exercise)
+    repetition_exercises.destroy(repetition_exercise)
+  end
 end
