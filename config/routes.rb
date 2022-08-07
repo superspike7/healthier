@@ -27,7 +27,11 @@ Rails.application.routes.draw do
   resources :timed_exercises, path: 'timed'
   resources :categories do
     resources :category_exercises, only: [:create, :new], path: 'exercise', as: 'exercises'
+    resources :category_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
+    resources :category_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
   end
+
+
 
   scope '/daily' do
     resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'

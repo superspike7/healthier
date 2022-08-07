@@ -8,8 +8,7 @@ class FoodsMealsController < ApplicationController
   end
 
   def create
-    foods = current_user.foods.find(food_meal_params[:id])
-    @meal.add_food(foods)
+    @meal.add_food(food_meal_params)
     redirect_back_or_to root_url, notice: "Successfully added foods in #{@meal.name} meal."
   end
 
