@@ -1,11 +1,10 @@
 class TimedExercisesController < ApplicationController
-  before_action :set_timed_exercise
+  before_action :set_timed_exercise, only: %i[show edit update destroy]
   def index
     @timed_exercises = current_user.timed_exercises
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @timed_exercise = current_user.timed_exercises.build
@@ -13,34 +12,32 @@ class TimedExercisesController < ApplicationController
 
   def create
     @timed_exercise = current_user.timed_exercises.build(timed_exercise_params)
-    unless @timed_exercise.save
-      flash[:notice] = @timed_exercise.errors.full_messages.to_sentence
+    if @timed_exercise.save
+      redirect_to timed_exercises_path, notice: "Successfully created #{@timed_exercise.name}"
+    else
+      render :new
     end
-
-    redirect_to timed_exercises_path
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @timed_exercise.update(timed_exercise_params)
-      redirect_to @timed_exercise
+      redirect_to @timed_exercise, notice: "Successfully updated #{@timed_exercise.name}"
     else
       render :edit
     end
-
   end
 
   def destroy
     @timed_exercise.destroy
-    redirect_to timed_exercises_path
+    redirect_to timed_exercises_path, notice: "Successfully deleted #{@timed_exercise.name}"
   end
 
   private
 
   def set_timed_exercise
-    @timed_exercise = current_user.timed_exercises.find_by(id: params[:id])
+    @timed_exercise = current_user.timed_exercises.find(params[:id])
   end
 
   def timed_exercise_params

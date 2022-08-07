@@ -1,6 +1,6 @@
-class CreateRepExercises < ActiveRecord::Migration[7.0]
+class CreateRepetitionExercises < ActiveRecord::Migration[7.0]
   def change
-    create_table :rep_exercises do |t|
+    create_table :repetition_exercises do |t|
       t.references :user, null: false, foreign_key: true
       t.string :name
       t.text :description
