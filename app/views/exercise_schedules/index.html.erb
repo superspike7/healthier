@@ -1,4 +1,12 @@
-<% unless @user.permit_calendar? %>
+<% unless @current_user.permit_calendar? %>
 <%= button_to "Use Google Calendar", '/auth/google', data: {turbo: false},
                 class: "w-full rounded-full border border-gray-700 text-gray-700 text-xl text-center py-2 uppercase font-medium" %>
+<% end %>
+
+<% @schedules.each do |schedule| %>
+  <div>
+    <p>Name: <%= schedule.name %>
+    <p>Start: <%= schedule.start.date_time.strftime("%b. %d, %Y %I:%M %p") %>
+    <p>End: <%= schedule.end.date_time.strftime("%b. %d, %Y %I:%M %p") %>
+  </div>
 <% end %>
