@@ -21,9 +21,14 @@
     <div class="bg-gray-50 rounded-xl">New Users (open for suggestion)</div>
 
     <div class="bg-gray-50 rounded-xl flex items-stretch">
-      <%= link_to "Add new Food", new_food_path,
+      <%= link_to new_food_path,
                   data: { turbo_frame: 'modal' },
-                  class: 'bg-green-300 p-3 rounded-xl text-center text-3xl font-bold flex-1' %>
+                  class: 'bg-green-300 p-3 rounded-xl flex-1 hover:bg-green-200
+                  flex items-center justify-center flex-col gap-2' do %>
+
+        <p class="font-bold text-center text-3xl">New Timed Exercise</p>
+        <%= embedded_svg 'icons/plus.svg', class: 'h-12 w-12 stroke-black' %>
+      <% end %>
     </div>
 
     <div class="bg-gray-50 col-span-3 row-span-3 overflow-y-auto rounded-xl">
