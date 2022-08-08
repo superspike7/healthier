@@ -1,0 +1,100 @@
+<%= turbo_frame_tag "dashboard_tab" do %>
+  <div class="flex items-center">
+    <%= link_to 'Timed Exercises', timed_exercises_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+    <%= link_to 'Rep Exercises', repetition_exercises_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+    <p class="text-xl border-b-2 border-b-gray-900 px-6 cursor-pointer">Foods</p>
+    <%= link_to 'Meals', meals_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+  </div>
+  <div class="flex-1 overflow-hidden">
+    <div class="bg-gray-50 col-span-3 row-span-3 rounded-xl max-h-full h-full flex flex-col">
+      <div class="flex w-full p-2 justify-between px-4 items-center">
+        <h2 class="text-2xl font-semibold">Foods</h2>
+        <%= link_to '+ Food',
+                    new_food_path,
+                    data: { turbo_frame: 'modal'},
+                    class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
+      </div>
+      <div class="overflow-y-auto flex-1">
+        <table class="min-w-max w-full table-auto">
+          <thead>
+            <tr
+            class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+          >
+            <th class="py-3 px-6 text-left">Name</th>
+
+            <th class="py-3 px-6 text-left">Description</th>
+
+            <th class="py-3 px-6 text-center">Calories</th>
+
+            <th class="py-3 px-6 text-center">carbohydrates</th>
+
+            <th class="py-3 px-6 text-center">Fats</th>
+
+            <th class="py-3 px-6 text-center">Proteins</th>
+
+            <th class="py-3 px-6 text-center">Actions</th>
+          </tr>
+          </thead>
+
+          <tbody class="text-gray-600 text-sm font-light">
+          <% foods.each do |food| %>
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="mr-2">
+                  <%= image_tag 'default_profile.png', class: 'w-6 h-6 rounded-full' %>
+                </div>
+
+                <span class="font-medium"><%= food.name %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <div class="flex items-center">
+                <span><%= food.description %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-cyan-200 text-cyan-800 py-1 px-3 rounded-full text-xs">
+                <%= food.calories %>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">
+                <%= food.carbohydrates%>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-red-200 text-red-800 py-1 px-3 rounded-full text-xs">
+                <%= food.fats %>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-purple-200 text-purple-800 py-1 px-3 rounded-full text-xs">
+                <%= food.protein %>
+              </span>
+            </td>
+            <td class="py-3 px-6 text-center flex justify-center">
+              <%= link_to edit_food_path(food),
+                          data: { turbo_frame: 'modal' },
+                          class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+                <%= embedded_svg 'icons/edit.svg' %>
+              <% end %>
+              <%= button_to food_path(food), 
+                            class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
+                            method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
+                 <%= embedded_svg 'icons/delete.svg' %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
