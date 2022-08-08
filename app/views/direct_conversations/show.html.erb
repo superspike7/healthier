@@ -12,19 +12,39 @@
     </div>
     <div class="flex flex-col overflow-y-auto">
 
-      <% @users.each do |user| %>
-        <%= button_to direct_conversations_path(other_user: user.id), class: 'w-full' do %>
-        <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 <%= message_status(user.id) %>">
-          <%= user_avatar user, class: 'h-12 w-12 bg-green-200 rounded-full' %>
-          <div class="flex flex-col">
-            <div class="flex gap-2">
-              <h4 class="font-bold"><%= user.username %></h4>
+      <div class="py-4 border-y-2 border-gray-400">
+        <h3 class="font-bold text-xl px-4">Recent Conversations:</h3>
+        <% @conversations.each do |conversation| %>
+          <%= link_to direct_conversation_path(conversation), class: 'w-full' do %>
+          <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 <%= message_status(conversation.id) %>">
+            <%= user_avatar conversation.members.other_user(current_user), class: 'h-12 w-12 bg-green-200 rounded-full' %>
+            <div class="flex flex-col">
+              <div class="flex gap-2">
+                <h4 class="font-bold"><%= conversation.members.other_username(current_user) %></h4>
+              </div>
+                <p class="font-light underline">Start a new Conversation</p>
             </div>
-              <p class="font-light underline">Start a new Conversation</p>
           </div>
-        </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+
+      <div class="py-4">
+        <h3 class="font-bold text-xl px-4">New Conversations:</h3>
+        <% @new_conversations.each do |user| %>
+          <%= button_to direct_conversations_path(other_user: user.id), class: 'w-full' do %>
+          <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4">
+            <%= user_avatar user, class: 'h-12 w-12 bg-green-200 rounded-full' %>
+            <div class="flex flex-col">
+              <div class="flex gap-2">
+                <h4 class="font-bold"><%= user.username %></h4>
+              </div>
+                <p class="font-light underline">Start a new Conversation</p>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
 
     </div>
   </div>
