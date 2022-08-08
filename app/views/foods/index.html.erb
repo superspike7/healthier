@@ -1,12 +1,111 @@
-<% @foods.each do |food|%>
-  <div class='flex flex-col'>
-    <%= link_to food.name, food_path(food), class: 'text-xl font-bold'%>
-    <p> Description: <%= food.description %> </p>
-    <p> Calories: <%= food.calories %> </p>
-    <p> <%= food.carbohydrates %> </p>
-    <p> <%= food.fats %> </p>
-    <p> <%= food.protein %> </p>
-    <%= button_to "Delete #{food.name}", food_path(food), method: :delete %>
-    <%= link_to "Edit #{food.name}", edit_food_path(food) %>
+<div class="w-full h-full p-8 bg-gray-300">
+  <div class="w-full h-full grid grid-cols-3 grid-rows-4 gap-8">
+    <div class="bg-gray-50 rounded-xl p-4 flex items-baseline justify-between">
+      <div class="flex flex-col gap-2">
+        <p class="text-2xl font-semibold text-gray-600">Total Foods</p>
+        <div class="flex justify-between">
+          <p class="text-5xl font-bold"><%= @foods.count %></p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <p class="text-2xl font-semibold text-gray-600">Recent Added Food</p>
+        <div class="flex gap-2 items-center">
+          <div class="h-16 w-44 bg-green-300 grid place-items-center">
+            image
+          </div>
+          <p class="text-4xl font-bold"><%= @foods.last.name %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl">New Users (open for suggestion)</div>
+
+    <div class="bg-gray-50 rounded-xl flex items-stretch">
+      <%= link_to "Add new Food", new_food_path,
+                  data: { turbo_frame: 'modal' },
+                  class: 'bg-green-300 p-3 rounded-xl text-center text-3xl font-bold flex-1' %>
+    </div>
+
+    <div class="bg-gray-50 col-span-3 row-span-3 overflow-y-auto rounded-xl">
+      <table class="min-w-max w-full table-auto">
+        <thead>
+          <tr
+            class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+          >
+            <th class="py-3 px-6 text-left">Name</th>
+
+            <th class="py-3 px-6 text-left">Description</th>
+
+            <th class="py-3 px-6 text-center">Calories</th>
+
+            <th class="py-3 px-6 text-center">carbohydrates</th>
+
+            <th class="py-3 px-6 text-center">Fats</th>
+
+            <th class="py-3 px-6 text-center">Proteins</th>
+
+            <th class="py-3 px-6 text-center">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody class="text-gray-600 text-sm font-light">
+          <% @foods.each do |food| %>
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6 text-left whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="mr-2">
+                  <%= image_tag 'default_profile.png', class: 'w-6 h-6 rounded-full' %>
+                </div>
+
+                <span class="font-medium"><%= food.name %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <div class="flex items-center">
+                <span><%= food.description %></span>
+              </div>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-cyan-200 text-cyan-800 py-1 px-3 rounded-full text-xs">
+                <%= food.calories %>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-blue-200 text-blue-800 py-1 px-3 rounded-full text-xs">
+                <%= food.carbohydrates%>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-red-200 text-red-800 py-1 px-3 rounded-full text-xs">
+                <%= food.fats %>
+              </span>
+            </td>
+
+            <td class="py-3 px-6 text-center">
+              <span class="bg-purple-200 text-purple-800 py-1 px-3 rounded-full text-xs">
+                <%= food.protein %>
+              </span>
+            </td>
+            <td class="py-3 px-6 text-center flex justify-center">
+              <%= link_to edit_food_path(food),
+                          data: { turbo_frame: 'modal' },
+                          class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+                <%= embedded_svg 'icons/edit.svg' %>
+              <% end %>
+              <%= button_to food_path(food), 
+                            class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
+                            method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
+                 <%= embedded_svg 'icons/delete.svg' %>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-<% end %>
+</div>
