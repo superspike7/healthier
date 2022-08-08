@@ -34,7 +34,7 @@ class Admin::ReportsController < AdminController
   # def edit; end
   # def destroy; end
   def index
-      @reports = Report.includes([:reported, :post]).order("created_at DESC")
+      @reports = Report.includes([:reported]).order("created_at DESC")
   end
 
   def show
