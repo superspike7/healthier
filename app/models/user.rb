@@ -5,9 +5,9 @@ class User < ApplicationRecord
   has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id'
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :reports
-  # has_many :reports, class_name: 'Report', foreign_key: 'user_id', dependent: :destroy
-  # has_many :post_reports, class_name: 'Report', foreign_key: 'post_id', dependent: :destroy
+  # has_many :reports
+  has_many :reports, class_name: 'Report', foreign_key: 'user_id', dependent: :destroy
+  has_many :post_reports, class_name: 'Report', foreign_key: 'post_id', dependent: :destroy
   has_many :reported, class_name: 'Report', foreign_key: 'reported_id', dependent: :destroy
   has_many :likes, dependent: :destroy
   devise :database_authenticatable, :registerable,
