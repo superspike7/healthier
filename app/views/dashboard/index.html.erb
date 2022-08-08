@@ -4,462 +4,54 @@
   <!-- daily goals -->
   <div class="bg-green-200 p-2 rounded-lg col-span-4 row-span-1">
     <div class="flex gap-5 items-center">
-      <p class="font-semibold text-2xl text-green-800">Goals</p>
+      <%= link_to "Schedules", meals_path, class: 'font-semibold text-2xl text-green-800 hover:underline decoration-2' %>
       <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
-        + Set Goal
+        + Exercise
       </button>
     </div>
   </div>
 
   <!-- stats -->
-  <div class="bg-green-200 rounded-lg p-2 col-span-3 row-span-1">
-    <p class="font-semibold text-2xl text-green-800">My Stats</p>
-  </div>
-
-  <!-- foods intake -->
-  <div class="p-2 flex flex-col gap-5 w-full col-span-4 row-span-2">
-    <div class="flex gap-5 items-center">
-      <p class="font-semibold text-2xl text-green-800">Food Intakes</p>
-      <%= link_to "+ Add Food Intake", 
-                    new_daily_intake_path,
-                    data: {
-                      turbo_frame: 'modal'
-                    },
-                    class: "bg-green-500 text-white font-bold text-lg p-2 rounded-md" %>
+  <div class="rounded-lg p-2 col-span-3 row-span-1 flex flex-col gap-3">
+    <div class="flex gap-5 items-center justify-between">
+      <%= link_to "Daily Intakes", meals_path, class: 'font-semibold text-2xl text-green-800 hover:underline decoration-2' %>
+      <div class="flex gap-3">
+        <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
+          + Food
+        </button>
+        <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
+          + Meal
+        </button>
+      </div>
     </div>
-
-    <div class="grid grid-cols-4 auto-rows-min overflow-y-auto h-full gap-5 p-2">
-      
-      <!-- food card -->
-      <%= link_to daily_intake_path(1), data: {turbo_frame: 'modal'} do %>
-        <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7 hover:-translate-y-6
-                    cursor-pointer transition-transform hover:bg-green-50">
-          <div
-            class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-          >
-            Image of a salad
-          </div>
-          <div class="flex-1">
-            <div class="flex justify-between items-center">
-              <p class="font-bold text-xl">Fruit Salad</p>
-              <p class="text-md font-light">1h ago</p>
-            </div>
-            <div class="flex justify-between items-center">
-              <p class="font-semi text-lg">Calories:</p>
-              <p class="text-md font-light">69</p>
-            </div>
-            <p class="font-semi text-lg">Nutrients:</p>
-            <div class="flex gap-1 text-white flex-wrap">
-              <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-              <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-              <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-              <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-            </div>
-          </div>
+    <div class="flex-1 w-full rounded-xl p-4 bg-green-100">
+      <div class="w-full h-full bg-green-500 grid grid-cols-4 gap-0.5 ">
+        <div class="bg-green-100 flex flex-col justify-center gap-2 px-4">
+          <p class="text-xl font-light text-gray-600">Calories</p>
+          <p class="text-4xl font-black">2.1k</p>
+          <p class="text-md text-gray-700">18% more than yesterday</p>
         </div>
-      <% end %>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
+        <div class="bg-green-100 flex flex-col justify-center gap-2 px-4">
+          <p class="text-xl font-light text-gray-600">Carbohydrates</p>
+          <p class="text-4xl font-black">900</p>
+          <p class="text-md text-gray-700">2% less than yesterday</p>
         </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
+        <div class="bg-green-100 flex flex-col justify-center gap-2 px-4">
+          <p class="text-xl font-light text-gray-600">Fats</p>
+          <p class="text-4xl font-black">97(g)</p>
+          <p class="text-md text-gray-700">10% more than yesterday</p>
+        </div>
+        <div class="bg-green-100 flex flex-col justify-center gap-2 px-4">
+          <p class="text-xl font-light text-gray-600">Protein</p>
+          <p class="text-4xl font-black">56(g)</p>
+          <p class="text-md text-gray-700">30% more than yesterday</p>
         </div>
       </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- food card -->
-      <div class="flex flex-col gap-3 shadow-lg rounded-xl p-7">
-        <div
-          class="bg-green-200 rounded-full h-32 flex items-center justify-center"
-        >
-          Image of a salad
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-between items-center">
-            <p class="font-bold text-xl">Fruit Salad</p>
-            <p class="text-md font-light">1h ago</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <p class="font-semi text-lg">Calories:</p>
-            <p class="text-md font-light">69</p>
-          </div>
-          <p class="font-semi text-lg">Nutrients:</p>
-          <div class="flex gap-1 text-white flex-wrap">
-            <span class="px-2 bg-blue-400 rounded-xl">Calcium</span>
-            <span class="px-2 bg-cyan-400 rounded-xl">Vitamin C</span>
-            <span class="px-2 bg-red-400 rounded-xl">Iron</span>
-            <span class="px-2 bg-purple-400 rounded-xl">Vitamin A</span>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </div>
 
-  <!-- exercises -->
-  <div class="p-2 flex flex-col col-span-3 row-span-2">
-    <div class="flex gap-5 items-center">
-      <p class="font-semibold text-2xl text-green-800">Recent Exercises</p>
-      <%= link_to "+ Add Exercise", 
-                    new_repetition_exercise_path,
-                    data: {
-                      turbo_frame: 'modal'
-                    },
-                    class: "bg-green-500 text-white font-bold text-lg p-2 rounded-md" %>
-    </div>
-
-
-    <ul class="flex flex-col mt-10 flex-1 overflow-y-auto gap-5">
-
-      <% @rep_exercises.each do |exercise| %>
-        <%= link_to repetition_exercise_path(exercise), data: {turbo_frame: 'modal'} do %>
-        <li class="flex px-2 justify-between items-center align-middle cursor-pointer hover:bg-green-200">
-          <div class="h-10 w-10 bg-green-300 rounded-md">
-            
-          </div>
-          <p class="font-bold text-xl"><%= exercise.name %></p>
-          <p class="font-medium text-lg underline">Category - Pending</p>
-          <p class="font-light text-xl"><%= exercise.repetition %></p>
-          <p class="font-light text-xl"><%= exercise.set %></p>
-          <p class="font-light text-xl">1 day ago</p>
-        </li>
-        <% end %>
-      <% end %>
-      
-      <%= link_to exercise_path(1), data: {turbo_frame: 'modal'} do %>
-        <li class="flex px-2 justify-between items-center align-middle cursor-pointer hover:bg-green-200">
-          <div class="h-10 w-10 bg-green-300 rounded-md">
-            
-          </div>
-          <p class="font-bold text-xl">Jogging</p>
-          <p class="font-medium text-lg underline">Cardio</p>
-          <p class="font-light text-xl">10km</p>
-          <p class="font-light text-xl">30mins</p>
-          <p class="font-light text-xl">1 day ago</p>
-        </li>
-      <% end %>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-      <li class="flex px-2 justify-between items-center align-middle">
-        <div class="h-10 w-10 bg-green-300 rounded-md">
-          
-        </div>
-        <p class="font-bold text-xl">Jogging</p>
-        <p class="font-medium text-lg underline">Cardio</p>
-        <p class="font-light text-xl">10km</p>
-        <p class="font-light text-xl">30mins</p>
-        <p class="font-light text-xl">1 day ago</p>
-      </li>
-      
-    </ul>
+  <!-- tables -->
+  <div class="p-2 flex flex-col col-span-7 row-span-2 gap-4">
+    <%= render partial: 'timed_exercises/table', locals: { timed_exercises: @timed_exercises } %>
   </div>
 </div>
