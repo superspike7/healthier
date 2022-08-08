@@ -4,6 +4,7 @@ class RepetitionExercisesController < ApplicationController
     @rep_exercises = current_user.repetition_exercises
   end
 
+
   def show; end
 
   def new
