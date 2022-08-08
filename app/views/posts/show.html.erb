@@ -1,23 +1,104 @@
-<%= turbo_stream_from 'comments' %>
+<div class="w-full h-full grid grid-cols-4 grid-rows-1">
+  <div class="col-start-2 col-span-2 row-end-2 overflow-auto flex flex-col border-x border-gray-200">
 
-<strong><%= @post.user.username%></strong>
-<p><%= @post.body%></p>
-<% if @post.images.attached?%>
-  <% @post.images.includes([:blob]).each do |image|%>
-    <p><%= image_tag image, width: "200px"%></p>
-  <%end%>
-<%end%>
-<div>
-  <%= render partial: "comments/form", locals: {post: @post}%>
-</div>
-<div id="<%= dom_id(@post) %>">
-  <% @comments.each do |comment|%>
-    <%= render 'posts/comment', comment:, user: current_user, post: @post %>
-  <%end%>
-</div>
-<div>
-  <% if @post.user_id == current_user.id%>
-    <%= link_to ' Edit', edit_post_path(@post)%>
-    <%= link_to ' Back', posts_path %>
-  <%end%>
+      <div>
+        <%= link_to "&larr;".html_safe, :back, class: 'text-5xl p-4 rounded-full hover:bg-gray-300' %>
+      </div>
+      <div class="flex p-4 gap-4 bg-white border-y-2 border-green-300">
+        <div class="flex gap-3">
+          <%= user_avatar current_user, class: 'h-10 w-10 rounded-full z-10' %>
+        </div>
+        
+        <div class="flex-1 flex flex-col justify-center relative">
+          <%= link_to new_post_report_path(@post.id),
+                      data: { turbo_frame: 'modal' },
+                      class: 'absolute top-0 right-0 cursor-pointer p-2 hover:bg-red-200 rounded-full z-10' do %>
+            <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-1' %>
+          <% end %>
+          <h5 class="font-medium text-lg"><%= @post.user.username %>
+            <% follow = current_user.relationships.find_by(followed_id: @post.user.id) %>
+            <%  if current_user.id != @post.user.id%>
+              <% if follow.nil? %>
+                <%= button_to "Follow", follows_path, params: { relationship: { followed_id: @post.user.id } }, method: :post%>
+              <%else%>
+                <%= button_to "Unfollow", follow_path(@post.user.id), method: :delete%>
+              <%end%>
+            <%end%>
+          </h5> 
+         <div class="p-2 min-h-max" ><%= @post.body %></div>
+         <% if @post.images.attached?%>
+           <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">
+              <% @post.images.each do |image|%>
+                <p><%= image_tag image, class: "w-full h-full object-cover" %></p>
+              <% end %>
+           </div>
+         <% end %>
+         <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
+             <p>420</p>
+           </div>
+           <div class="flex gap-2 items-center">
+             <% like = current_user.likes.find_by(post: @post) %>
+             <% if like.nil? %>
+              <%= button_to "Like", likes_path, params: { like: { post_id: @post.id } }, method: :post %>
+             <% else %>
+              <%= button_to "Unlike", like_path(like), method: :delete %>
+             <% end %>
+              <%= render 'posts/like', user: current_user, post: @post %>
+           </div>
+         </div>
+        </div>
+      </div>
+      <div class="flex w-full border-b-2 border-green-300 p-4 gap-4">
+        <input type="text" placeholder="Add your comment" class="border-2 rounded-full p-2 text-xl border-gray-100 flex-1">
+        <button class="bg-green-500 rounded-full p-2 text-xl font-bold text-gray-50 hover:bg-green-800" >Comment</button>
+      </div>
+      <!-- comments each-->
+
+      <div class="flex p-4 gap-4 bg-white border-b-2 border-green-300">
+        <div class="flex gap-3">
+          <%= user_avatar current_user, class: 'h-10 w-10 rounded-full z-10' %>
+        </div>
+        
+        <div class="flex-1 flex flex-col justify-center relative">
+          <h5 class="font-medium text-lg"><%= @post.user.username %></h5>
+          <div class="p-2 min-h-max" > Static Commentttt</div>
+          <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <% like = current_user.likes.find_by(post: @post) %>
+             <% if like.nil? %>
+              <%= button_to "Like", likes_path, params: { like: { post_id: @post.id } }, method: :post %>
+             <% else %>
+              <%= button_to "Unlike", like_path(like), method: :delete %>
+             <% end %>
+              <%= render 'posts/like', user: current_user, post: @post %>
+           </div>
+         </div>
+        </div>
+      </div>
+      
+      <div class="flex p-4 gap-4 bg-white border-b-2 border-green-300">
+        <div class="flex gap-3">
+          <%= user_avatar current_user, class: 'h-10 w-10 rounded-full z-10' %>
+        </div>
+        
+        <div class="flex-1 flex flex-col justify-center relative">
+          <h5 class="font-medium text-lg"><%= @post.user.username %></h5>
+          <div class="p-2 min-h-max" > Static Commentttt</div>
+          <div class="flex gap-10 font-light text-lg mt-4">
+           <div class="flex gap-2 items-center">
+             <% like = current_user.likes.find_by(post: @post) %>
+             <% if like.nil? %>
+              <%= button_to "Like", likes_path, params: { like: { post_id: @post.id } }, method: :post %>
+             <% else %>
+              <%= button_to "Unlike", like_path(like), method: :delete %>
+             <% end %>
+              <%= render 'posts/like', user: current_user, post: @post %>
+           </div>
+         </div>
+        </div>
+      </div>
+      
+  </div>
 </div>
