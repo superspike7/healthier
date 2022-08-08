@@ -1,11 +1,13 @@
 class DirectConversationsController < ApplicationController
   def index
-    @users = User.all
+    @users = User.where.not(id: current_user.id).includes([:avatar_attachment])
     @conversations = current_user.conversations
   end
 
   def show
+    @users = User.where.not(id: current_user.id).includes([:avatar_attachment])
     @conversation = current_user.conversations.find(params[:id])
+    @other_user = @conversation.members.last.user_id
     @conversation_messages = @conversation.messages.includes(:user)
     @message = current_user.messages.build(conversation_id: params[:id])
     @conversation.mark_as_read(current_user)

@@ -12,56 +12,19 @@
     </div>
     <div class="flex flex-col">
 
-      <!-- user card -->
-      <!-- currently opened -->
-      <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 bg-gray-100">
-        <div class="h-12 w-12 bg-green-200 rounded-full">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex gap-2">
-            <h4 class="font-bold">Reynard Mark</h4>
-            <p class="font-light">Aug 2</p>
+      <% @users.each do |user| %>
+        <%= button_to direct_conversations_path(other_user: user.id), class: 'w-full' do %>
+        <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 <%= message_status(user.id) %>">
+          <%= user_avatar user, class: 'h-12 w-12 bg-green-200 rounded-full' %>
+          <div class="flex flex-col">
+            <div class="flex gap-2">
+              <h4 class="font-bold"><%= user.username %></h4>
+            </div>
+              <p class="font-light underline">Start a new Conversation</p>
           </div>
-          <p class="font-light">What's up yo!</p>
         </div>
-      </div>
-    
-      <!-- unread -->
-      <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 bg-green-100">
-        <div class="h-12 w-12 bg-green-200 rounded-full">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex gap-2">
-            <h4 class="font-bold">Danica</h4>
-            <p class="font-light">Aug 2</p>
-          </div>
-          <p class="font-light">This is a recent message</p>
-        </div>
-      </div>
-      
-      <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4">
-        <div class="h-12 w-12 bg-green-200 rounded-full">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex gap-2">
-            <h4 class="font-bold">Elton James</h4>
-            <p class="font-light">Aug 2</p>
-          </div>
-          <p class="font-light">Pa push ng PR</p>
-        </div>
-      </div>
-      
-      <!-- New Conversation -->
-      <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4">
-        <div class="h-12 w-12 bg-green-200 rounded-full">
-        </div>
-        <div class="flex flex-col">
-          <div class="flex gap-2">
-            <h4 class="font-bold">NewUser</h4>
-          </div>
-            <p class="font-light">Create new Message</p>
-        </div>
-      </div>
+        <% end %>
+      <% end %>
 
     </div>
   </div>
