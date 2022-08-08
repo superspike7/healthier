@@ -17,12 +17,12 @@
         <% @conversations.each do |conversation| %>
           <%= link_to direct_conversation_path(conversation), class: 'w-full' do %>
           <div class="flex gap-2 hover:bg-gray-100 cursor-pointer p-4 <%= message_status(conversation.id) %>">
-            <%= user_avatar conversation.members.other_user(current_user), class: 'h-12 w-12 bg-green-200 rounded-full' %>
+            <%= conversation_avatar_to_display(conversation.members) %>
             <div class="flex flex-col">
               <div class="flex gap-2">
-                <h4 class="font-bold"><%= conversation.members.other_username(current_user) %></h4>
+                <h4 class="font-bold"><%= conversation_username_to_display(conversation.members) %></h4>
               </div>
-                <p class="font-light underline">Start a new Conversation</p>
+                <p class="font-light underline">Send a Message</p>
             </div>
           </div>
           <% end %>
