@@ -27,6 +27,12 @@ class User < ApplicationRecord
 
   after_create :create_daily_intake
 
+  def new_conversations
+    # ids of conversations recievers
+    recievers_ids = conversations.pluck(:members).map { |m| m.split(",")[0][1..-1].to_i }
+    User.where.not(id: recievers_ids)
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, email: auth.info.email).first_or_create do |user|
       user.username = auth.info.email.split('@')[0]
