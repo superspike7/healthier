@@ -48,11 +48,12 @@ class Conversation < ApplicationRecord
 
   def unread_notifications_count(user)
     unread_messages = notifications_as_conversation.unread
-    if user == Current.user
-      unread_messages.where(recipient: user).count
-    else
-      unread_messages.where.not(recipient: user).count
-    end
+    unread_count = if user == Current.user
+                     unread_messages.where(recipient: user).count
+                   else
+                     unread_messages.where.not(recipient: user).count
+                   end
+    unread_count.zero? ? nil : unread_count
   end
 
   # below are methods for turbostream target uniqueness
