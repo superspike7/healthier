@@ -1,11 +1,11 @@
 class DirectConversationsController < ApplicationController
   def index
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.recent
     @new_conversations = current_user.new_conversations.includes([:avatar_attachment])
   end
 
   def show
-    @conversations = current_user.conversations
+    @conversations = current_user.conversations.recent
     @new_conversations = current_user.new_conversations.includes([:avatar_attachment])
     
     @conversation = current_user.conversations.find(params[:id])

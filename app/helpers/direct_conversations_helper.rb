@@ -1,5 +1,4 @@
 module DirectConversationsHelper
-
   def conversation_username_to_display(members)
     other = members.other_user(current_user)
     if members.not_the_passed_user(current_user).blank?
