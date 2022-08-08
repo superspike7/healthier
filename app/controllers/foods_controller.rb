@@ -3,6 +3,7 @@ class FoodsController < ApplicationController
 
   def index
     @foods = current_user.foods
+    render partial: 'foods/table', locals: { foods: @foods }
   end
 
   def show; end
@@ -14,7 +15,7 @@ class FoodsController < ApplicationController
   def create
     @new_food = current_user.foods.build(food_params)
     if @new_food.save
-      redirect_to foods_path, notice: "#{@new_food.name} has been successfully added."
+      redirect_to root_path, notice: "#{@new_food.name} has been successfully added."
     else
       render :new
     end
