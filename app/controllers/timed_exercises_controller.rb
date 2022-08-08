@@ -2,6 +2,7 @@ class TimedExercisesController < ApplicationController
   before_action :set_timed_exercise, only: %i[show edit update destroy]
   def index
     @timed_exercises = current_user.timed_exercises
+    render partial: 'timed_exercises/table', locals: { timed_exercises: @timed_exercises }
   end
 
   def show; end
@@ -13,7 +14,7 @@ class TimedExercisesController < ApplicationController
   def create
     @timed_exercise = current_user.timed_exercises.build(timed_exercise_params)
     if @timed_exercise.save
-      redirect_to timed_exercises_path, notice: "Successfully created #{@timed_exercise.name}"
+      redirect_to root_path, notice: "Successfully created #{@timed_exercise.name}"
     else
       render :new
     end
