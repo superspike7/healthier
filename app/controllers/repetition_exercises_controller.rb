@@ -2,6 +2,7 @@ class RepetitionExercisesController < ApplicationController
   before_action :set_repetition_exercise, only: %i[show edit update destroy]
   def index
     @rep_exercises = current_user.repetition_exercises
+    render partial: 'repetition_exercises/table', locals: { rep_exercises: @rep_exercises }
   end
 
 
@@ -14,7 +15,7 @@ class RepetitionExercisesController < ApplicationController
   def create
     @rep_exercise = current_user.repetition_exercises.build(repetition_exercise_params)
     if @rep_exercise.save
-      redirect_to repetition_exercises_path
+      redirect_to root_path
     else
       render :new
     end
