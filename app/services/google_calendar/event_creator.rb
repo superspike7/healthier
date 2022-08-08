@@ -1,11 +1,9 @@
 
 module GoogleCalendar
   class EventCreator < ApplicationService
-    def initialize(user, start, deadline, event_name)
+    def initialize(user, event_params)
       @user = user
-      @start = start # Time.current.to_datetime.rfc3339
-      @deadline = deadline #1.day.from_now.to_datetime.rfc3339
-      @event_name = event_name
+      @event_params = event_params
     end
 
     def call
@@ -13,6 +11,16 @@ module GoogleCalendar
     end
 
     private
+
+    def start_time
+      Time.new(@event_params['start(1i)'], @event_params['start(2i)'], @event_params['start(3i)'],
+               @event_params['start(4i)'], @event_params['start(5i)']).to_datetime.rfc3339
+    end
+
+    def end_time
+      Time.new(@event_params['end(1i)'], @event_params['end(2i)'], @event_params['end(3i)'],
+               @event_params['end(4i)'], @event_params['end(5i)']).to_datetime.rfc3339
+    end
 
     def create_event
       calendar_client = Clients::GoogleCalendar.call(@user)
@@ -26,14 +34,10 @@ module GoogleCalendar
 
     def calendar_event
       Google::Apis::CalendarV3::Event.new(
-        summary: @event_name,
-        start: Google::Apis::CalendarV3::EventDateTime.new(date_time: @start, time_zone: 'Asia/Manila'),
-        end: Google::Apis::CalendarV3::EventDateTime.new(date_time: @deadline, time_zone: 'Asia/Manila')
+        summary: @event_params[:name],
+        start: Google::Apis::CalendarV3::EventDateTime.new(date_time: start_time, time_zone: 'Asia/Manila'),
+        end: Google::Apis::CalendarV3::EventDateTime.new(date_time: end_time, time_zone: 'Asia/Manila')
       )
-    end
-
-    def time_to_rfc3339
-      # Time.new()
     end
   end
 end
