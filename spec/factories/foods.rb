@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :food do
-    name { "MyString" }
-    description { "MyString" }
+    association :user, factory: :user
+    name { "Food" }
+    description { "Testfood" }
     calories { 1.5 }
     carbohydrates { 1.5 }
     fats { 1.5 }
