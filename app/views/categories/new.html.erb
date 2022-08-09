@@ -1,19 +1,52 @@
-<div>
-  <h1><b>New Exercise Category</b></h1>
-  <%= form_with model: @new_category, scope: :category, url: categories_path do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name%>
-    </div>
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+      >
+        <div class="px-7 pt-7">
+          <h1 class="font-bold text-2xl">Create new Routine</h1>
+        </div>
+        <div>
+          <%= form_with model: @new_category, data: { turbo_frame: '_top' } do |f| %>
+            <div>
+              <div class="py-10 px-7 flex flex-col gap-6">
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :name, class: "col-span-2 text-gray-700" %>
+                  <%= f.text_field :name, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :description, class: "col-span-2 text-gray-700" %>
+                  <%= f.text_field :description, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center grid-rows-2 pt-5">
+                  <label class="col-span-2 text-gray-700 row-end-2">Timed Exercise</label>
+                  <%= select_tag :timed_exercises, 
+                                 options_from_collection_for_select(current_user.timed_exercises, "id", "name"),
+                                 class: 'col-span-4', data: {controller: "tom-select", "url": '/timed/new?name='},
+                                 multiple: true, placeholder: 'add timed exercise' %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center grid-rows-2">
+                  <label class="col-span-2 text-gray-700 row-end-2">Rep Exercise</label>
+                  <%= select_tag :repetition_exercises, 
+                                 options_from_collection_for_select(current_user.repetition_exercises, "id", "name"),
+                                 class: 'col-span-4', data: {controller: "tom-select", "url": '/repetitions/new?name='},
+                                 multiple: true, placeholder: 'add rep exercise' %>
+                </div>
+              </div>
 
-    <div>
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
-
-
-    <div>
-      <%= form.submit%>
+              <div
+                class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
+              >
+                <%= f.submit 'Create Routine', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
+                <button data-action="turbo-modal#hideModal">Cancel</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
-</div>
+<% end %>
