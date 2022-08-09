@@ -12,3 +12,9 @@ application.register("calendar", CalendarController);
 
 import VanishController from "./vanish_controller.js";
 application.register("vanish", VanishController);
+
+import TomSelectController from "./tom_select_controller.js";
+application.register("tom-select", TomSelectController);
+
+import SecondModalController from "./second_modal_controller.js";
+application.register("second-modal", SecondModalController);
