@@ -42,25 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
-  create_table "categories_repetition_exercises", force: :cascade do |t|
-    t.bigint "repetition_exercise_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_repetition_exercises_on_category_id"
-    t.index ["repetition_exercise_id", "category_id"], name: "categories_rep_exercises", unique: true
-    t.index ["repetition_exercise_id"], name: "index_categories_repetition_exercises_on_repetition_exercise_id"
-  end
-
   create_table "categories_timed_exercises", force: :cascade do |t|
     t.bigint "timed_exercise_id"
     t.bigint "category_id"
@@ -82,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   end
 
   create_table "conversations", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "members_count"
@@ -101,6 +83,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_daily_intakes_on_user_id"
+  end
+
+  create_table "exercise_categories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_exercise_categories_on_user_id"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -157,12 +148,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   create_table "messages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
-    t.integer "receiver_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -196,7 +185,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "repetition_exercises", force: :cascade do |t|
+  create_table "rep_categ", force: :cascade do |t|
+    t.bigint "rep_exercise_id"
+    t.bigint "exercise_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exercise_category_id"], name: "index_rep_categ_on_exercise_category_id"
+    t.index ["rep_exercise_id", "exercise_category_id"], name: "index_rep_categ_on_rep_exercise_id_and_exercise_category_id", unique: true
+    t.index ["rep_exercise_id"], name: "index_rep_categ_on_rep_exercise_id"
+  end
+
+  create_table "rep_exercises", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
     t.text "description"
@@ -204,7 +203,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.integer "set"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_repetition_exercises_on_user_id"
+    t.index ["user_id"], name: "index_rep_exercises_on_user_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -245,10 +244,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "provider"
+    t.boolean "admin", default: false, null: false
     t.string "access_token"
     t.string "refresh_token"
     t.boolean "permit_calendar", default: false
-    t.boolean "admin", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "email"], name: "index_users_on_provider_and_email"
@@ -258,10 +257,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "daily_intakes", "users"
+  add_foreign_key "exercise_categories", "users"
   add_foreign_key "foods", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
@@ -273,7 +272,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   add_foreign_key "posts", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "followed_id"
-  add_foreign_key "repetition_exercises", "users"
+  add_foreign_key "rep_exercises", "users"
   add_foreign_key "reports", "posts"
   add_foreign_key "reports", "users"
   add_foreign_key "reports", "users", column: "reported_id"
