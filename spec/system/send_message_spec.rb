@@ -5,9 +5,19 @@ RSpec.describe "Sending of message", type: :system do
   let!(:another_user) { create(:user) }
 
   it 'creates a message to send to other users' do
+    message_body = 'Hello'
+
     sign_in user
     visit direct_conversations_path
 
-    click_on another_user.username
+    within all('form')[1] do
+      click_on another_user.username
+    end
+
+    fill_in 'message_content', with: message_body
+
+    click_on 'commit'
+
+    expect(page).to have_text(message_body)
   end
 end
