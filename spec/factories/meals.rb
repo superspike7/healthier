@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :meal do
-    name { "MyString" }
-    description { "MyString" }
-    user { nil }
+    association :user, factory: :user
+    name { 'Test meal' }
+    description { 'Test description' }
   end
 end
