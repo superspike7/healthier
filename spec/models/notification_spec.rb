@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Notification, type: :model do
   let(:user) { create(:user) }
   let(:conversation) { create(:conversation) }
-  let(:message_notifications) { Notification.where(type: MessageNotification.name) }
   let!(:message_notification) { MessageNotification.with(conversation:).deliver(user) }
 
   describe '.all_except_message_notifications' do
