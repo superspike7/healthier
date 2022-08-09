@@ -2,12 +2,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   def index
     @posts = Post.all.with_attachments_and_user.show_latest
-    @comments = Comment.include_user_only.comment_desc
+    @comments = Comment.include_user_only.comment_asc
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.where(post_id: params[:id]).include_user_only.comment_desc
+    @comments = Comment.where(post_id: params[:id]).include_user_only.comment_asc
   end
 
   def new

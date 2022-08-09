@@ -11,7 +11,7 @@ class Admin::UsersController < AdminController
       
       # temporary fetch, this should be @user.posts
       @posts = Post.all.with_attachments_and_user.show_latest
-      @comments = Comment.include_user_only.comment_desc
+      @comments = Comment.include_user_only.comment_asc
     end
 
 
