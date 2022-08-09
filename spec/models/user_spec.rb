@@ -5,6 +5,12 @@ RSpec.describe User, type: :model do
   let(:other_user) { create(:other_user) }
   let(:conversation) { create(:conversation) }
 
+  describe 'after_create#create_daily_intake' do
+    it 'creates a daily intake' do
+      expect(user.daily_intakes.count).to eq(1)
+    end
+  end
+
   describe '#existing_conversation_with' do
     context 'when current user is passed as an argument' do
       context 'and when there is an existing conversation to self' do
