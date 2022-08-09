@@ -18,7 +18,7 @@ local:
 google:
   service: GCS
   project: <%= ENV["google_project_name"]%>
-  credentials: <%= Rails.root.join("config/secrets/healthier2022.json")%>
+  credentials: <%= Rails.root.join("config/healthier2022.json")%>
   bucket: <%= ENV["google_bucket_name"]%>
 
 
