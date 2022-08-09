@@ -6,9 +6,9 @@
         <%= link_to "Daily Intakes", daily_intakes_path, class: 'font-semibold text-2xl text-green-800 opacity-50 hover:underline decoration-2' %>
       </div>
       <div class="flex gap-3">
-        <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
-          + Routine 
-        </button>
+        <%= link_to "+ Routine", new_routine_path,
+                    data: { turbo_frame: 'modal' },
+                    class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
       </div>
     </div>
     <div class="w-full flex-1 grid grid-cols-2 gap-5 overflow-y-auto">

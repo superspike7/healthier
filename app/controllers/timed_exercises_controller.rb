@@ -8,7 +8,7 @@ class TimedExercisesController < ApplicationController
   def show; end
 
   def new
-    @timed_exercise = current_user.timed_exercises.build
+    @timed_exercise = current_user.timed_exercises.build(name: params[:name])
   end
 
   def create
