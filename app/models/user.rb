@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :daily_intakes, dependent: :destroy
   has_many :repetition_exercises, dependent: :destroy
   has_many :timed_exercises, dependent: :destroy
-  has_many :categories, dependent: :destroy
+  has_many :routines, dependent: :destroy
 
   validates :username, format: { without: /\s/, message: 'Spaces are not allowed.' }, presence: true
 

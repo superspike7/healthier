@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :category do
+  factory :routine do
     association :user, factory: :user
-    name { 'Category Test' }
+    name { 'routine Test' }
     description { 'Test Description' }
   end
 end
