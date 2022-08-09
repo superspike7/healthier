@@ -29,9 +29,9 @@ class User < ApplicationRecord
 
   after_create :create_daily_intake
 
-  def new_conversations
+  def new_conversations 
     # ids of conversations recievers
-    recievers_ids = conversations.pluck(:members).map { |m| m.split(",")[0][1..-1].to_i }
+    recievers_ids = messages.pluck(:receiver_id).uniq
     User.where.not(id: recievers_ids)
   end
 
