@@ -3,7 +3,6 @@ class UserreportMailer < ApplicationMailer
     @greeting = "Hi"
     @reported_user = params[:reported_user]
 
-
     mail to: @reported_user.email,
     subject: "VIOLATING COMMUNITY STANDARD"
   end
