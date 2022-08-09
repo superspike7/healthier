@@ -1,9 +1,7 @@
 FactoryBot.define do
-  factory :timed_exercise do
+  factory :category do
     association :user, factory: :user
-    name { 'Timed Test Exercise' }
+    name { 'Category Test' }
     description { 'Test Description' }
-    hour { 1 }
-    minutes { 1 }
   end
 end
