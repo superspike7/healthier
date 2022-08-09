@@ -9,3 +9,6 @@ application.register("turbo-modal", TurboModalController);
 
 import CalendarController from "./calendar_controller.js";
 application.register("calendar", CalendarController);
+
+import VanishController from "./vanish_controller.js";
+application.register("vanish", VanishController);

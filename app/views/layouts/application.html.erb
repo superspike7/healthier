@@ -72,7 +72,8 @@
       
       <div class="flex-1 flex flex-col max-h-screen">
         <!-- header bar -->
-        <div class="flex justify-between px-8 py-4 border-b border-gray-300">
+        <div class="flex justify-between px-8 py-4 border-b border-gray-300 relative">
+          <%= render partial: 'shared/flash' %>
           <div class="flex-1">
           </div>
           <%= link_to edit_user_registration_path do %>
