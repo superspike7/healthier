@@ -1,11 +1,11 @@
-<h1>Exercise categories</h1>
+<h1>Exercise routines</h1>
 
-<% @categories.each do |category|%>
-    <p><b>Category:</b> <%= category.name%></p>
-    <p><b>Description:</b> <%= category.description%></p>
-    <%= link_to "Update", edit_category_path(category)%>
-    <%= button_to "Delete", category_path(category), method: :delete %>
+<% @routines.each do |routine|%>
+    <p><b>routine:</b> <%= routine.name%></p>
+    <p><b>Description:</b> <%= routine.description%></p>
+    <%= link_to "Update", edit_routine_path(routine)%>
+    <%= button_to "Delete", routine_path(routine), method: :delete %>
 <%end%>
 
-<%= link_to "Add exercise category", new_category_path %>
+<%= link_to "Add exercise routine", new_routine_path %>
 

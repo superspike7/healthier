@@ -4,7 +4,7 @@ class ExerciseSchedulesController < ApplicationController
   end
 
   def new
-    @categories = current_user.categories
+    @routines = current_user.routines
   end
 
   def create

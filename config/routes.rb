@@ -30,12 +30,12 @@ Rails.application.routes.draw do
   resource :profile, controller: 'profile', only: [:show, :edit, :update]
   resources :repetition_exercises, path: 'repetitions'
   resources :timed_exercises, path: 'timed'
-  resources :category_exercises, only: [:index], path: 'routines' , as: 'routines'
-  resources :categories, only: [:new], path: 'routines', as: 'routines'
-  resources :categories do
-    resources :category_exercises, only: [:create, :new], path: 'routines', as: 'routines'
-    resources :category_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
-    resources :category_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
+  resources :routine_exercises, only: [:index], path: 'routines' , as: 'routines'
+  resources :routines, only: [:new], path: 'routines', as: 'routines'
+  resources :routines do
+    resources :routine_exercises, only: [:create, :new], path: 'routines', as: 'routines'
+    resources :routine_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
+    resources :routine_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
   end
   resources :exercise_schedules, only: [:create, :edit, :index, :new], path: 'schedules'
 

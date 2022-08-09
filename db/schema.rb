@@ -42,35 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
-  create_table "categories_repetition_exercises", force: :cascade do |t|
-    t.bigint "repetition_exercise_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_repetition_exercises_on_category_id"
-    t.index ["repetition_exercise_id", "category_id"], name: "categories_rep_exercises", unique: true
-    t.index ["repetition_exercise_id"], name: "index_categories_repetition_exercises_on_repetition_exercise_id"
-  end
-
-  create_table "categories_timed_exercises", force: :cascade do |t|
-    t.bigint "timed_exercise_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_categories_timed_exercises_on_category_id"
-    t.index ["timed_exercise_id", "category_id"], name: "categories_time_exercises", unique: true
-    t.index ["timed_exercise_id"], name: "index_categories_timed_exercises_on_timed_exercise_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
@@ -207,6 +178,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.index ["user_id"], name: "index_repetition_exercises_on_user_id"
   end
 
+  create_table "repetition_exercises_routines", force: :cascade do |t|
+    t.bigint "repetition_exercise_id"
+    t.bigint "routine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["repetition_exercise_id", "routine_id"], name: "rep_exercises_routines", unique: true
+    t.index ["repetition_exercise_id"], name: "index_repetition_exercises_routines_on_repetition_exercise_id"
+    t.index ["routine_id"], name: "index_repetition_exercises_routines_on_routine_id"
+  end
+
   create_table "reports", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id"
@@ -218,6 +199,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.index ["post_id"], name: "index_reports_on_post_id"
     t.index ["reported_id"], name: "index_reports_on_reported_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
+  create_table "routines", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_routines_on_user_id"
+  end
+
+  create_table "routines_timed_exercises", force: :cascade do |t|
+    t.bigint "timed_exercise_id"
+    t.bigint "routine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["routine_id"], name: "index_routines_timed_exercises_on_routine_id"
+    t.index ["timed_exercise_id", "routine_id"], name: "routines_time_exercises", unique: true
+    t.index ["timed_exercise_id"], name: "index_routines_timed_exercises_on_timed_exercise_id"
   end
 
   create_table "timed_exercises", force: :cascade do |t|
@@ -258,7 +258,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "daily_intakes", "users"
@@ -277,5 +276,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
   add_foreign_key "reports", "posts"
   add_foreign_key "reports", "users"
   add_foreign_key "reports", "users", column: "reported_id"
+  add_foreign_key "routines", "users"
   add_foreign_key "timed_exercises", "users"
 end
