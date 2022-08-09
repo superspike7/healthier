@@ -92,3 +92,6 @@ group :test do
 end
 
 gem "noticed", "~> 1.5"
+
+#Gem file for google cloud storage
+gem "google-cloud-storage", "~> 1.8", require: false

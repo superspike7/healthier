@@ -48,3 +48,6 @@ dump.rdb
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore google cloud services key file
+/config/secrets/healthier2022.json
