@@ -5,7 +5,7 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
-  scope :comment_desc, -> { order('created_at ASC') }
+  scope :comment_asc, -> { order('created_at ASC') }
   scope :include_user_only, -> { includes(:user) }
 
   after_create_commit do
