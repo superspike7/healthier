@@ -6,3 +6,6 @@ import { application } from "./application";
 
 import TurboModalController from "./turbo_modal_controller.js";
 application.register("turbo-modal", TurboModalController);
+
+import CalendarController from "./calendar_controller.js";
+application.register("calendar", CalendarController);

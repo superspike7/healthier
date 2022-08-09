@@ -245,10 +245,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_170406) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "provider"
-    t.boolean "admin", default: false, null: false
     t.string "access_token"
     t.string "refresh_token"
     t.boolean "permit_calendar", default: false
+    t.boolean "admin", default: false, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["provider", "email"], name: "index_users_on_provider_and_email"
