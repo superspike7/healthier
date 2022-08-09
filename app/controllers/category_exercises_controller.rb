@@ -1,5 +1,9 @@
 class CategoryExercisesController < ApplicationController
-  before_action :set_category
+  before_action :set_category, except: :index
+
+  def index
+    render partial: 'category_exercises/exercises' 
+  end
 
   def new
     @timed_exercises = current_user.timed_exercises.all_except(@category.timed_exercises)

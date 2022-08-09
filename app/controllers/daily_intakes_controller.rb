@@ -1,6 +1,7 @@
 class DailyIntakesController < ApplicationController
   def index
-    @daily_intakes = current_user.daily_intakes
+    # @nutrients_today
+    render partial: 'daily_intakes/daily_intakes' 
   end
 
   def show

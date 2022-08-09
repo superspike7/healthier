@@ -1,0 +1,42 @@
+<%= turbo_frame_tag 'dashboard_tab_upper' do %>
+    <div class="flex flex-col gap-3 h-full">
+    <div class="flex gap-5 items-center justify-between">
+      <div class="flex gap-2">
+        <%= link_to "Daily Intakes", daily_intakes_path,
+                    class: 'font-semibold text-2xl text-green-800 hover:underline decoration-2' %>
+        <%= link_to "Routines", routines_path,
+                    class: 'font-semibold text-2xl text-green-800 opacity-50 hover:underline decoration-2' %>
+      </div>
+      <div class="flex gap-3">
+        <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
+          + Food
+        </button>
+        <button class="bg-green-500 text-white font-bold text-lg p-2 rounded-md">
+          + Meal
+        </button>
+      </div>
+    </div>
+    <div class="w-full h-full grid grid-cols-2 gap-5">
+      <div class="bg-green-100 flex flex-col justify-center gap-2 items-center rounded-xl">
+        <p class="text-xl font-light text-gray-600">Calories</p>
+        <p class="text-2xl font-black">2.1k</p>
+        <p class="text-md text-gray-700">18% more than yesterday</p>
+      </div>
+      <div class="bg-green-100 flex flex-col justify-center gap-2 items-center rounded-xl">
+        <p class="text-xl font-light text-gray-600">Carbs</p>
+        <p class="text-2xl font-black">900</p>
+        <p class="text-md text-gray-700">2% less than yesterday</p>
+      </div>
+      <div class="bg-green-100 flex flex-col justify-center gap-2 items-center rounded-xl">
+        <p class="text-xl font-light text-gray-600">Fats</p>
+        <p class="text-2xl font-black">97(g)</p>
+        <p class="text-md text-gray-700">10% more than yesterday</p>
+      </div>
+      <div class="bg-green-100 flex flex-col justify-center gap-2 items-center rounded-xl">
+        <p class="text-xl font-light text-gray-600">Protein</p>
+        <p class="text-2xl font-black">56(g)</p>
+        <p class="text-md text-gray-700">30% more than yesterday</p>
+      </div>
+    </div>
+  </div>
+<% end %>
