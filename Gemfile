@@ -89,6 +89,7 @@ group :test do
   # rspec progress bar formatter
   gem 'fuubar'
   gem "faker"
+  gem 'capybara'
 end
 
 gem "noticed", "~> 1.5"
