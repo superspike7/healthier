@@ -14,12 +14,12 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy_including_notifications
-    redirect_back_or_to root_path
+    redirect_back_or_to root_path, notice: 'Successfully deleted your comment.'
   end
 
   private
 
   def comment_params
-    params.permit(:body).merge(post_id: params[:post_id])
+    params.require(:comment).permit(:body).merge(post_id: params[:post_id])
   end
 end
