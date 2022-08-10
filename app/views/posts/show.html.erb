@@ -27,7 +27,8 @@
               <% end %>
            </div>
          <% end %>
-         <div class="flex gap-10 font-light text-lg mt-4">
+         <div class="flex gap-10 font-light text-lg mt-4 items-center justify-between">
+          <div class='flex gap-10'>
            <div class="flex gap-2 items-center">
              <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
              <%= render 'posts/comment', user: current_user, post: @post %>
@@ -41,6 +42,12 @@
              <% end %>
               <%= render 'posts/like', user: current_user, post: @post %>
            </div>
+          </div>
+          <% if current_user == @post.user %>
+            <%= button_to post_path(@post), method: :delete, class: 'w-6 mr-2 transform hover:text-green-500 hover:scale-110 cursor-pointer' do %>
+              <%= embedded_svg 'icons/delete.svg' %>
+            <% end %>
+          <% end %>
          </div>
         </div>
       </div>
