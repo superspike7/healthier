@@ -1,7 +1,8 @@
 class DailyIntakesController < ApplicationController
   def index
     # @nutrients_today
-    render partial: 'daily_intakes/daily_intakes', locals: { intakes: @intakes}
+    @daily_intake_today = current_user.daily_intakes.last
+    render partial: 'daily_intakes/daily_intakes', locals: { intakes: @intakes }
   end
 
   def show

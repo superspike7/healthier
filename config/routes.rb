@@ -31,8 +31,8 @@ Rails.application.routes.draw do
   resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile' do
     resources :report_user
   end
-  resources :repetition_exercises, path: 'repetitions'
-  resources :timed_exercises, path: 'timed'
+  resources :repetition_exercises, except: [:show], path: 'repetitions'
+  resources :timed_exercises, except: [:show], path: 'timed'
   resources :routine_exercises, only: [:index], path: 'routines' , as: 'routines'
   resources :routines do
     resources :routine_exercises, only: [:create, :new], path: 'routines', as: 'exercises'

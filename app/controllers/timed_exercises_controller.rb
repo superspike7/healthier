@@ -1,11 +1,10 @@
 class TimedExercisesController < ApplicationController
-  before_action :set_timed_exercise, only: %i[show edit update destroy]
+  before_action :set_timed_exercise, only: %i[edit update destroy]
+
   def index
     @timed_exercises = current_user.timed_exercises
-    render partial: 'timed_exercises/table', locals: { timed_exercises: @timed_exercises }
+    render partial: 'timed_exercises/table'
   end
-
-  def show; end
 
   def new
     @timed_exercise = current_user.timed_exercises.build(name: params[:name])
@@ -24,7 +23,7 @@ class TimedExercisesController < ApplicationController
 
   def update
     if @timed_exercise.update(timed_exercise_params)
-      redirect_to @timed_exercise, notice: "Successfully updated #{@timed_exercise.name}"
+      redirect_to root_path, notice: "Successfully updated #{@timed_exercise.name}"
     else
       render :edit
     end
@@ -32,7 +31,7 @@ class TimedExercisesController < ApplicationController
 
   def destroy
     @timed_exercise.destroy
-    redirect_to timed_exercises_path, notice: "Successfully deleted #{@timed_exercise.name}"
+    redirect_to timed_exercises_path
   end
 
   private

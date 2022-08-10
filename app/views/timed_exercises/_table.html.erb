@@ -28,14 +28,12 @@
 
               <th class="py-3 px-6 text-left">Minutes</th>
 
-              <th class="py-3 px-6 text-center">Status</th>
-
               <th class="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
 
           <tbody class="text-gray-600 text-sm font-light">
-            <% timed_exercises.each do |exercise| %>
+            <% @timed_exercises.each do |exercise| %>
             <tr class="border-b border-gray-200 hover:bg-gray-100">
               <td class="py-3 px-6 text-left whitespace-nowrap">
                 <div class="flex items-center">
@@ -61,21 +59,15 @@
                 </div>
               </td>
 
-              <td class="py-3 px-6 text-center">
-                <span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs">
-                  Finished
-                </span>
-              </td>
-
               <td class="py-3 px-6 text-center flex justify-center">
-                <%= link_to admin_report_path(1),
+                <%= link_to edit_timed_exercise_path(exercise),
                             data: { turbo_frame: 'modal' },
                             class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
-                  <%= embedded_svg 'icons/eye.svg' %>
+                  <%= embedded_svg 'icons/edit.svg' %>
                 <% end %>
-                <%= button_to admin_report_path(1), 
+                <%= button_to timed_exercise_path(exercise), 
                               class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
-                              method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
+                              method: :delete do %>
                    <%= embedded_svg 'icons/delete.svg' %>
                 <% end %>
               </td>

@@ -1,8 +1,0 @@
-<h1>Timed Exercises</h1>
-
-<p><b>Exercse name:</b> <%= @timed_exercise.name%></p>
-<p><b>Description:</b> <%= @timed_exercise.description%></p>
-<p><b>Hour:</b> <%= @timed_exercise.hour%></p>
-<p><b>Minute:</b> <%= @timed_exercise.minutes%></p>
-<%= link_to "Update", edit_timed_exercise_path(@timed_exercise)%>
-<%= button_to "Delete", timed_exercise_path(@timed_exercise), method: :delete %>
