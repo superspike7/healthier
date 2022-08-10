@@ -68,8 +68,8 @@
                     <%= button_to "Follow", follows_path, params: { relationship: { followed_id: post.user.id } }, method: :post%>
                   <%else%>
                     <%= button_to "Unfollow", follow_path(post.user.id), method: :delete%>
-                  <%end%>
-                <%end%></h5> 
+                  <% end %>
+                <% end %></h5> 
                <p class="p-2 min-h-max" ><%= post.body %></p>
                <% if post.images.attached?%>
                  <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">

@@ -4,6 +4,5 @@
   </div>
   <div class="font-sm text-gray-600 flex gap-2 <%= "justify-end" if message.user == user %>" data-hidden="<%= owned_by %>">
     <p data-hidden="<%= owned_by %>"><%= message.created_at.strftime("%b. %d, %Y, %I:%M%p") %> </p>
-    <span data-hidden="<%= owned_by %>">seen</span>
   </div>
 </div>

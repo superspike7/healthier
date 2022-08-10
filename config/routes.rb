@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
   resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
   resources :post_reports, only: :new, path_names: { new: 'new/:post_id' }
-  resource :profile, controller: 'profile', only: [:show, :edit, :update]
+  resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile'
   resources :repetition_exercises, path: 'repetitions'
   resources :timed_exercises, path: 'timed'
   resources :routine_exercises, only: [:index], path: 'routines' , as: 'routines'
