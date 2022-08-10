@@ -22,7 +22,7 @@ class Meal < ApplicationRecord
   end
 
   def add_food(food)
-    foods << Food.find(food[:id])
+    foods << Food.find(food[:food_ids])
   end
 
   def remove_food(food)

@@ -8,11 +8,13 @@ class MealsController < ApplicationController
 
   def new
     @new_meal = current_user.meals.build
+    @foods = current_user.foods
   end
 
   def create
     @new_meal = current_user.meals.build(meal_params)
     if @new_meal.save
+      @new_meal.add_food(meal_with_food_params)
       redirect_to root_path, notice: "#{@new_meal.name} has been successfully added."
     else
       render :new
@@ -42,7 +44,11 @@ class MealsController < ApplicationController
     @meal = current_user.meals.find(params[:id])
   end
 
+  def meal_with_food_params
+    params.require(:meal).permit(:name, :description, food_ids: []).tap { |param| param[:food_ids].reject!(&:blank?) }
+  end
+
   def meal_params
-    params.require(:meal).permit(:name, :description, food_ids: [])
+    { name: meal_with_food_params[:name], description: meal_with_food_params[:description] }
   end
 end
