@@ -5,26 +5,28 @@
     >
       <div
         class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
-        data-turbo-modal-target="modal"
-        data-action="click@window->turbo-modal#outsideClose"
       >
         <div class="px-7 pt-7">
-          <h1 class="font-bold text-2xl">Add a Food in your Daily Intake</h1>
+          <h1 class="font-bold text-2xl">Intake Food</h1>
         </div>
         <div>
           <%= form_with model: @new_food_in_daily_intake, url: daily_intake_foods_url do |f| %>
             <div>
               <div class="py-10 px-7 flex flex-col gap-6">
-                <div class="grid grid-cols-6 text-xl items-center">
-                  <%= f.label :id, 'Food ', class: "col-span-2 text-gray-700" %>
-                  <%= f.collection_select :id, @foods, :id, :name %>
+                <div class="grid grid-cols-6 text-xl items-center grid-rows-2 pt-5">
+                  <label class="col-span-2 text-gray-700 row-end-2">Timed Exercise</label>
+                  <%= f.select :timed, 
+                                 options_from_collection_for_select(@foods, "id", "name"),
+                                 {},
+                                 class: 'col-span-4', data: {controller: "tom-select", "url": '/foods/new?name='},
+                                 multiple: true, placeholder: 'add food' %>
                 </div>
               </div>
 
               <div
                 class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
               >
-                <%= f.submit 'Add New Intake', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
+                <%= f.submit 'Add Intake', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
                 <button data-action="turbo-modal#hideModal">Cancel</button>
               </div>
             </div>
