@@ -1,0 +1,20 @@
+<%= turbo_frame_tag 'preview', class: 'w-full h-full' do %>
+  <div class="bg-green-500 w-full h-full rounded-xl flex flex-col p-4 gap-4">
+    <p class="text-3xl text-gray-50 font-bold text-center"><%= date.to_date.strftime("%a %B %d %Y") %></p>
+    <div class="flex-1 w-full bg-white rounded-xl p-4 flex flex-col gap-2">
+      <% events.each do |event| %>
+      <div class="w-full bg-cyan-200 h-10 flex justify-between p-2 rounded-lg items-center">
+        <div class="flex gap-2 items-end">
+          <p><%= event["name"] %></p>
+          <span class="text-sm text-gray-600">5r 5s</span>
+        </div>
+        <div class="flex gap-2 text-gray-600 text-sm">
+          <p><%= event["start"].to_time.strftime("%I:%M %p") %></p>
+          <p>-</p>
+          <p><%= event["end"].to_time.strftime("%I:%M %p") %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

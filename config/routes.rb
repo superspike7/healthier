@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/auth/google/callback', to: 'google_oauth_calendar#create', constraints: lambda { |req| !(req.env['omniauth.origin'] =~ /login/) }
   get '/auth/failure', to: 'google_oauth_calendar#failure', constraints: lambda { |req| !(req.env['omniauth.origin'] =~ /login/) }
+  get 'schedule_preview', to: 'exercise_schedules#preview'
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   devise_scope :user do
