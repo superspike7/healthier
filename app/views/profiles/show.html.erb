@@ -5,11 +5,11 @@
         <%= user_avatar @user, class: 'w-full h-full rounded-full' %>
       </div>
     </div>
-    <div class="w-full flex justify-end gap-2 p-2">
+    <div class="w-full flex justify-end items-center gap-2 p-2">
       <%= button_to direct_conversations_path(other_user: @user.id), class: "p-2 border border-gray-200 hover:bg-green-400 rounded-full" do %>
         <%= embedded_svg 'icons/chat.svg', class: 'h-7' %>
       <% end %>
-      <% unless current_user.username == @user.username %>
+      <% unless current_user == @user %>
         <%= link_to new_admin_report_path(@user.username),
                     data: { turbo_frame: 'modal' },
                     class: 'p-2 border border-gray-200 hover:bg-red-400 rounded-full' do %>
@@ -27,11 +27,9 @@
         <% end %>
       <% end %>
 
-      <button
-        class="font-bold text-lg border border-gray-200 p-1 px-2 rounded-full hover:bg-gray-50"
-      >
-        Edit Profile
-      </button>
+      <% if current_user == @user %>
+        <%= link_to 'Edit Profile', edit_profile_path(@user.username), class: "font-bold text-lg border border-gray-200 p-1 px-2 rounded-full hover:bg-gray-50"  %>
+      <% end %>
     </div>
     <div class="w-full text-center">
       <h2 class="text-xl font-bold"><%= @user.username %></h2>
