@@ -7,10 +7,10 @@ class Admin::UsersController < AdminController
     end
 
     def show
-      @user = User.find_by_username(params[:username])
+      @user = User.find_by!(username: params[:username])
       
       # temporary fetch, this should be @user.posts
-      @posts = Post.all.with_attachments_and_user.show_latest
+      @posts = @user.posts.with_attachments_and_user.show_latest
       @comments = Comment.include_user_only.comment_asc
     end
 

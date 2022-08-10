@@ -16,6 +16,6 @@ class ReportUserController < ApplicationController
     private
 
     def report_params
-        params.permit(:reason, :report_type).merge(reported_id: params[:profile_id])
+        params.permit(:reason, :report_type).merge(reported_id: params[:profile_username])
     end
 end

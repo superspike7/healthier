@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   end
   resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
   resources :post_reports, only: :new, path_names: { new: 'new/:post_id' }
-  resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile'
+  resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile' do
+    resources :report_user
+  end
   resources :repetition_exercises, path: 'repetitions'
   resources :timed_exercises, path: 'timed'
   resources :routine_exercises, only: [:index], path: 'routines' , as: 'routines'
@@ -50,9 +52,5 @@ Rails.application.routes.draw do
     resources :reports, path_names: {new: 'new/:username' }
     resources :users, except: :show
     resources :users, only: :show, param: :username
-  end
-
-  resources :profile do
-    resources :report_user
   end
 end
