@@ -22,10 +22,8 @@ Rails.application.routes.draw do
   resources :direct_conversations, only: %i[create index show update], path: 'direct'
   resources :conversation_messages, only: :create
   resources :notifications, only: :index
-  resources :foods
-  resources :meals do
-    resources :foods_meals, only: [:create, :destroy, :new], path: 'food', as: 'foods'
-  end
+  resources :foods, except: :show
+  resources :meals, except: :show
   resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
   resources :post_reports, only: :new, path_names: { new: 'new/:post_id' }
   resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile' do

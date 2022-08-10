@@ -1,12 +1,10 @@
 class MealsController < ApplicationController
-  before_action :set_meal, only: %i[show edit update destroy]
+  before_action :set_meal, only: %i[edit update destroy]
 
   def index
     @meals = current_user.meals.includes(:foods)
-    render partial: 'meals/table', locals: { meals: @meals }
+    render partial: 'meals/table'
   end
-
-  def show; end
 
   def new
     @new_meal = current_user.meals.build
@@ -15,7 +13,7 @@ class MealsController < ApplicationController
   def create
     @new_meal = current_user.meals.build(meal_params)
     if @new_meal.save
-      redirect_to meals_path, notice: "#{@new_meal.name} has been successfully added."
+      redirect_to root_path, notice: "#{@new_meal.name} has been successfully added."
     else
       render :new
     end
@@ -35,7 +33,7 @@ class MealsController < ApplicationController
 
   def destroy
     @meal.destroy
-    redirect_to meals_path, notice: "#{@meal.name} has been successfully deleted."
+    redirect_to meals_path
   end
 
   private
