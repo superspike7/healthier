@@ -63,7 +63,7 @@
            <div class="flex gap-10 font-light text-lg mt-4">
              <div class="flex gap-2 items-center">
                <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
-               <p>420</p>
+               <p><%= post.comments.count %></p>
              </div>
              <div class="flex gap-2 items-center">
                <% like = current_user.likes.find_by(post: post) %>
