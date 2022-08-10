@@ -2,7 +2,8 @@ class RoutineExercisesController < ApplicationController
   before_action :set_routine, except: :index
 
   def index
-    render partial: 'routine_exercises/exercises'
+    @routines = current_user.routines.include_associations
+    render partial: 'routine_exercises/exercises', locals: { routines: @routines }
   end
 
   def new
