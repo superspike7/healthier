@@ -1,0 +1,76 @@
+<%= turbo_frame_tag "dashboard_tab" do %>
+  <div class="flex items-center">
+    <%= link_to 'Timed Exercises', timed_exercises_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+    <%= link_to 'Rep Exercises', repetition_exercises_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+    <%= link_to 'Foods', foods_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
+    <p class="text-xl border-b-2 border-b-gray-900 px-6 cursor-pointer">Meals</p>
+  </div>
+  <div class="flex-1 overflow-hidden">
+    <div class="bg-gray-50 col-span-3 row-span-3 rounded-xl max-h-full h-full flex flex-col">
+      <div class="flex w-full p-2 justify-between px-4 items-center">
+        <h2 class="text-2xl font-semibold">Meals</h2>
+        <%= link_to '+ Meal',
+                    new_meal_path,
+                    data: { turbo_frame: 'second-modal'},
+                    class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
+      </div>
+      <div class="overflow-y-auto flex-1">
+        <table class="min-w-max w-full table-auto">
+          <thead>
+            <tr
+              class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+            >
+              <th class="py-3 px-6 text-left">Name</th>
+
+              <th class="py-3 px-6 text-left">Description</th>
+
+              <th class="py-3 px-6 text-left">Foods</th>
+
+              <th class="py-3 px-6 text-center">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-gray-600 text-sm font-light">
+            <% meals.each do |meal| %>
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+              <td class="py-3 px-6 text-left whitespace-nowrap">
+                <div class="flex items-center">
+                  <span class="font-medium"><%= meal.name %></span>
+                </div>
+              </td>
+
+              <td class="py-3 px-6 text-center">
+                <div class="flex items-center">
+                  <span><%= meal.description %></span>
+                </div>
+              </td>
+
+              <td class="py-3 px-6 text-center">
+                <div class="flex items-center">
+                  <% meal.foods.each do |food| %>
+                    <span><%= food %></span>
+                  <% end %>
+                </div>
+              </td>
+
+              <td class="py-3 px-6 text-center flex justify-center">
+                <%= link_to edit_meal_path(meal),
+                            data: { turbo_frame: 'modal' },
+                            class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+                  <%= embedded_svg 'icons/edit.svg' %>
+                <% end %>
+                <%= button_to meal_path(meal), 
+                              class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
+                              method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
+                   <%= embedded_svg 'icons/delete.svg' %>
+                <% end %>
+              </td>
+
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
