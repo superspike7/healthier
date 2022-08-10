@@ -21,11 +21,13 @@ class MealsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @foods = current_user.foods
+  end
 
   def update
     if @meal.update(meal_params)
-      redirect_to meals_path, notice: "#{@meal.name} has been successfully updated."
+      redirect_to root_path, notice: "#{@meal.name} has been successfully updated."
     else
       render :edit
     end
@@ -43,6 +45,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:name, :description)
+    params.require(:meal).permit(:name, :description, food_ids: [])
   end
 end
