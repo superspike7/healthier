@@ -1,12 +1,10 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: %i[show edit update destroy]
+  before_action :set_food, only: %i[edit update destroy]
 
   def index
     @foods = current_user.foods
-    render partial: 'foods/table', locals: { foods: @foods }
+    render partial: 'foods/table'
   end
-
-  def show; end
 
   def new
     @new_food = current_user.foods.build
