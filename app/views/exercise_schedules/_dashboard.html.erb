@@ -1,5 +1,4 @@
 <% if current_user.permit_calendar? %>
-  
     <div class="flex w-full p-2 justify-between px-4 items-center">
       <%= link_to "Schedules", meals_path, class: 'font-semibold text-2xl text-green-800 hover:underline decoration-2' %>
         <%= link_to '+ Schedule',
@@ -9,32 +8,10 @@
     </div>
     <div class="h-full w-full grid grid-cols-2 place-items-center">
     <div id="calendar" data-controller="calendar"></div>
-    <div class="bg-green-500 w-full h-full rounded-xl flex flex-col p-4 gap-4">
-      <p class="text-3xl text-gray-50 font-bold text-center">August 9, 2022</p>
-      <div class="flex-1 w-full bg-white rounded-xl p-4 flex flex-col gap-2">
-        <div class="w-full bg-cyan-200 h-10 flex justify-between p-2 rounded-lg items-center">
-          <div class="flex gap-2 items-end">
-            <p>Jogging</p>
-            <span class="text-sm text-gray-600">30mins</span>
-          </div>
-          <p class="text-gray-600">5:10AM</p>
-        </div>
-        <div class="w-full bg-cyan-200 h-10 flex justify-between p-2 rounded-lg items-center">
-          <div class="flex gap-2 items-end">
-            <p>Pushups</p>
-            <span class="text-sm text-gray-600">5r 5s</span>
-          </div>
-          <p class="text-gray-600">6:30AM</p>
-        </div>
-        <div class="w-full bg-cyan-200 h-10 flex justify-between p-2 rounded-lg items-center">
-          <div class="flex gap-2 items-end">
-            <p>Truncated name...</p>
-            <span class="text-sm text-gray-600">5r 5s</span>
-          </div>
-          <p class="text-gray-600">6:50AM</p>
-        </div>
-      </div>
-    </div>
+
+    <%= turbo_frame_tag 'preview', class: 'w-full h-full' do %>
+    <% end %>
+
     </div>
   
   <% else %>

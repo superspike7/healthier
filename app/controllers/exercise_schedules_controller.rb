@@ -12,6 +12,12 @@ class ExerciseSchedulesController < ApplicationController
     redirect_to root_url, alert: 'Successfully created an event.'
   end
 
+  def preview 
+    @date = params[:date]
+    @events = JSON.parse(params[:events])
+    render partial: 'exercise_schedules/preview', locals: { date: @date, events: @events }
+  end
+
   private
 
   def exercise_schedule_params
