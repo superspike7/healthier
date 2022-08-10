@@ -1,2 +1,48 @@
+<%= turbo_frame_tag "modal" do %>
+  <%= tag.div data: { controller: "second-modal", action: "turbo:submit-end->second-modal#submitEnd" } do %>
+    <div
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-50 animated fadeInUp"
+    >
+      <div
+        class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
+        data-second-modal-target="modal"
+        data-action="click@window->second-modal#outsideClose"
+      >
+        <div class="px-7 pt-7">
+          <h1 class="font-bold text-2xl">New Timed Exercise</h1>
+        </div>
+        <div>
+          <%= form_with model: @timed_exercise, data: { turbo_frame: '_top' } do |f| %>
+              <div class="py-10 px-7 flex flex-col gap-6">
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :name, class: "col-span-2 text-gray-700" %>
+                  <%= f.text_field :name, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :description, class: "col-span-2 text-gray-700" %>
+                  <%= f.text_field :description, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :hour, class: "col-span-2 text-gray-700" %>
+                  <%= f.number_field :hour, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+                <div class="grid grid-cols-6 text-xl items-center">
+                  <%= f.label :minutes, class: "col-span-2 text-gray-700" %>
+                  <%= f.number_field :minutes, class: "col-span-4 p-1 px-2 rounded-xl border border-gray-400" %>
+                </div>
+              </div>
 
-<%= render "form", timed_exercise: @timed_exercise %>
+              <div
+                class="bg-gray-200 px-7 py-1 pt-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
+              >
+                <%= f.submit 'Update Timed Exercise', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
+              <button data-action="second-modal#hideModal" class="text-xl px-8">Cancel</button>
+              </div>
+          <% end %>
+          <div class="w-full bg-gray-200 flex justify-end p-2 rounded-b-xl">
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

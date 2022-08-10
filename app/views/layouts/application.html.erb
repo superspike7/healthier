@@ -59,9 +59,11 @@
               <%= embedded_svg 'icons/bell.svg', class: 'h-8' %>
             </li>
           <% end %>
-          <li class="cursor-pointer hover:bg-green-300 p-4 rounded-full">
-            <%= embedded_svg 'icons/settings.svg', class: 'h-8' %>
-          </li>
+          <%= link_to edit_user_registration_path do %>
+            <li class="cursor-pointer hover:bg-green-300 p-4 rounded-full">
+              <%= embedded_svg 'icons/settings.svg', class: 'h-8' %>
+            </li>
+          <% end %>
           <li class="p-2">
             <button class="bg-blue-500 rounded-full p-2"><%= embedded_svg 'icons/plus.svg', class: 'h-8' %></button>
           </li>
@@ -77,7 +79,7 @@
           <%= render partial: 'shared/flash' %>
           <div class="flex-1">
           </div>
-          <%= link_to edit_user_registration_path do %>
+          <%= link_to profile_path(current_user.username) do %>
             <p class="p-2 cursor-pointer hover:underline font-medium text-xl">
               <%= current_user.username %>
             </p>

@@ -25,7 +25,7 @@ class FoodsController < ApplicationController
 
   def update
     if @food.update(food_params)
-      redirect_to foods_path, notice: "#{@food.name} has been successfully updated."
+      redirect_to root_path, notice: "#{@food.name} has been successfully updated."
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class FoodsController < ApplicationController
 
   def destroy
     @food.destroy
-    redirect_to foods_path, notice: "#{@food.name} has been successfully deleted."
+    redirect_to foods_path
   end
 
   private
