@@ -51,3 +51,6 @@ dump.rdb
 
 # Ignore google cloud services key file
 /config/healthier2022.json
+
+# google credentials in root
+google-credentials.json
