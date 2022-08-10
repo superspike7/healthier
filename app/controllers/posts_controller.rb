@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.where(post_id: params[:id]).include_user_only.comment_asc
+    @comments = @post.comments.includes(:user, user: :avatar_attachment)
   end
 
   def new

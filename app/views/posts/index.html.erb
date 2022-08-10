@@ -37,16 +37,7 @@
                       class: 'absolute top-0 right-0 cursor-pointer p-2 hover:bg-red-200 rounded-full' do %>
             <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-1' %>
           <% end %>
-          <h5 class="font-medium text-lg"><%= post.user.username %>
-            <% follow = current_user.relationships.find_by(followed_id: post.user.id) %>
-            <%  if current_user.id != post.user.id%>
-              <% if follow.nil? %>
-                <%= button_to "Follow", follows_path, params: { relationship: { followed_id: post.user.id } }, method: :post%>
-              <%else%>
-                <%= button_to "Unfollow", follow_path(post.user.id), method: :delete%>
-              <%end%>
-            <%end%>
-          </h5> 
+          <%= link_to post.user.username, profile_path(post.user.username), class: "font-medium text-lg" %>
          <div class="p-2 min-h-max" ><%= post.body %></div>
          <% if post.images.attached?%>
            <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">
@@ -56,14 +47,13 @@
            </div>
          <% end %>
          <div class="flex gap-10 font-light text-lg mt-4">
-           <%= link_to post_path(post) do %>
-             <%= embedded_svg 'icons/eye.svg', class: 'h-8 w-8 hover:stroke-blue-500 cursor-pointer' %>
-           <% end %>
-
            <div class="flex gap-10 font-light text-lg mt-4">
+            <%= link_to post_path(post) do %>
+             <%= embedded_svg 'icons/eye.svg', class: 'h-8 w-8 hover:stroke-blue-500 cursor-pointer' %>
+            <% end %>
              <div class="flex gap-2 items-center">
                <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
-               <p><%= post.comments.count %></p>
+               <%= render 'posts/comment', user: current_user, post: %>
              </div>
              <div class="flex gap-2 items-center">
                <% like = current_user.likes.find_by(post: post) %>

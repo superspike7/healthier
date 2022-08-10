@@ -1,9 +1,1 @@
-<% if comment.post_id == post.id%>
-<div id="<%= dom_id(comment) %>">
-  <h4><%= comment.user.username %></h4>
-  <h4><%= comment.body %></h4>
-  <% if comment.user_id == user&.id %>
-    <%= button_to 'Delete comment', post_comment_path(post.id, comment), method: :delete %>
-  <% end %>
-</div>
-<% end %>
+<p id="post_comments_<%= post.id %>"><%= post.comments.count %></p>

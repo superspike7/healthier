@@ -9,13 +9,15 @@ class Comment < ApplicationRecord
   scope :include_user_only, -> { includes(:user) }
 
   after_create_commit do
-    broadcast_append_later_to 'comments', partial: 'posts/comment',
-                                          target: "post_#{post.id}",
-                                          locals: { comment: self, post:, user: nil }
+    broadcast_update_later_to 'comments', partial: 'posts/comment',
+                                          target: "post_comments_#{post.id}",
+                                          locals: { post:, user: Current.user }
   end
 
   after_destroy_commit do
-    broadcast_remove_to 'comments', target: "comment_#{id}"
+    broadcast_update_to 'comments', partial: 'posts/comment',
+                                    target: "post_comments_#{post.id}",
+                                    locals: { post:, user: Current.user }
   end
 
   def add(sender:, receiver:)
