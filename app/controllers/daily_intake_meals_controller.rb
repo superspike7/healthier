@@ -1,12 +1,6 @@
 class DailyIntakeMealsController < ApplicationController
   def new
-    if current_user.meals.count.zero?
-      flash[:notice] = 'Please add a meal first before adding a meal in daily intake.'
-      redirect_to new_meal_url
-    else
-      @meals = current_user.meals
-      @new_meal_in_daily_intake = current_user.daily_intakes.last.meals.build
-    end
+    @meals = current_user.meals
   end
 
   def create
