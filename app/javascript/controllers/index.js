@@ -18,3 +18,7 @@ application.register("tom-select", TomSelectController);
 
 import SecondModalController from "./second_modal_controller.js";
 application.register("second-modal", SecondModalController);
+
+import Flatpickr from "stimulus-flatpickr";
+import "../../../node_modules/flatpickr/dist/flatpickr.css";
+application.register("flatpickr", Flatpickr);
