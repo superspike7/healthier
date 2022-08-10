@@ -1,0 +1,49 @@
+<%= turbo_frame_tag 'dashboard_tab_upper' do %>
+  <div class="flex flex-col gap-3 h-full">
+    <div class="flex gap-5 items-center justify-between">
+      <div class="flex gap-2">
+        <%= link_to "Routines", routines_path, class: 'font-semibold text-2xl text-green-800 hover:underline decoration-2' %>
+        <%= link_to "Daily Intakes", daily_intakes_path, class: 'font-semibold text-2xl text-green-800 opacity-50 hover:underline decoration-2' %>
+      </div>
+      <div class="flex gap-3">
+        <%= link_to "+ Routine", new_routine_path,
+                    data: { turbo_frame: 'modal' },
+                    class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
+      </div>
+    </div>
+    <div class="w-full flex-1 grid grid-cols-2 gap-5 overflow-y-auto">
+
+    <% @routines.each do |routine| %>
+      <div class="flex flex-col items-center drop-shadow-lg border-gray-300 border rounded-xl">
+        <div class="p-2 border-b border-gray-300 w-full bg-gray-100">
+          <p class="text-lg font-semibold"><%= routine.name %></p>
+        </div>
+        <div class="bg-white p-2 w-full rounded-b-xl flex flex-col gap-2">
+          <% routine.timed_exercises.each do |timed_exercise| %>
+            <div class="flex justify-between">
+              <div class="flex gap-2">
+                <span><%= embedded_svg 'icons/time.svg', class: 'fill-gray-400 h-6' %></span>
+                <p class="text-gray-800"><%= timed_exercise.name %></p>
+              </div>
+              <p class="text-gray-400 font-light"><%= timed_exercise.minutes %> mins</p>
+            </div>
+          <% end %>
+          <% routine.repetition_exercises.each do |rep_exercise| %>
+            <div class="flex justify-between">
+              <div class="flex gap-2 items-center">
+                <span><%= embedded_svg 'icons/repeat.svg', class: 'fill-gray-400 h-6 ' %></span>
+                <p class="text-gray-800"><%= rep_exercise.name %></p>
+              </div>
+              <div>
+                <p class="text-gray-400 font-light"><%= rep_exercise.set %> sets</p>
+                <p class="text-gray-400 font-light"><%= rep_exercise.repetition %> reps</p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    </div>
+  </div>
+<% end %>

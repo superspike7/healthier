@@ -5,7 +5,6 @@ class RepetitionExercisesController < ApplicationController
     render partial: 'repetition_exercises/table', locals: { rep_exercises: @rep_exercises }
   end
 
-
   def show; end
 
   def new

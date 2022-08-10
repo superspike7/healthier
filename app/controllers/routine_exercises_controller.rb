@@ -1,8 +1,8 @@
-class routineExercisesController < ApplicationController
+class RoutineExercisesController < ApplicationController
   before_action :set_routine, except: :index
 
   def index
-    render partial: 'routine_exercises/exercises' 
+    render partial: 'routine_exercises/exercises'
   end
 
   def new

@@ -31,9 +31,8 @@ Rails.application.routes.draw do
   resources :repetition_exercises, path: 'repetitions'
   resources :timed_exercises, path: 'timed'
   resources :routine_exercises, only: [:index], path: 'routines' , as: 'routines'
-  resources :routines, only: [:new], path: 'routines', as: 'routines'
   resources :routines do
-    resources :routine_exercises, only: [:create, :new], path: 'routines', as: 'routines'
+    resources :routine_exercises, only: [:create, :new], path: 'routines', as: 'exercises'
     resources :routine_repetition_exercises, only: :destroy, path: 'repetition', as: 'repetition_exercise'
     resources :routine_timed_exercises, only: :destroy, path: 'timed', as: 'timed_exercise'
   end
