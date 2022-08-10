@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy]
   def index
     @posts = Post.all.with_attachments_and_user.show_latest
     @comments = Comment.include_user_only.comment_asc
@@ -25,27 +24,13 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @post.update(post_params)
-      redirect_to @post, notice: 'Post successfully updated.'
-    else
-      render :edit
-    end
-  end
-
   def destroy
-    @post.destroy
+    post = current_user.posts.find(params[:id])
+    post.destroy
     redirect_back_or_to posts_url, notice: 'Post successfully deleted'
   end
 
   private
-
-  def set_post
-    @post = current_user.posts.find_by(id: params[:id])
-  end
 
   def post_params
     params.require(:post).permit(:body, images: [])
