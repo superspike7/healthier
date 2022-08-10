@@ -1,12 +1,12 @@
-<%= turbo_frame_tag "modal" do %>
-  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" } do %>
+<%= turbo_frame_tag "second-modal" do %>
+  <%= tag.div data: { controller: "second-modal", action: "turbo:submit-end->second-modal#submitEnd" } do %>
     <div
-      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-10 animated fadeInUp"
+      class="fixed inset-0 flex items-center justify-center h-screen w-screen bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg z-50 animated fadeInUp"
     >
       <div
         class="flex-grow max-w-screen-sm rounded-xl bg-gray-100 flex flex-col"
-        data-turbo-modal-target="modal"
-        data-action="click@window->turbo-modal#outsideClose"
+        data-second-modal-target="modal"
+        data-action="click@window->second-modal#outsideClose"
       >
         <div class="px-7 pt-7">
           <h1 class="font-bold text-2xl">Add Meal</h1>
@@ -29,7 +29,7 @@
                 class="bg-gray-200 px-7 py-4 flex flex-row-reverse gap-3 items-center font-medium text-lg rounded-b-xl"
               >
                 <%= f.submit 'Add Meal', class: "px-4 py-2 bg-green-500 text-white rounded-xl" %>
-                <button data-action="turbo-modal#hideModal">Cancel</button>
+                <button data-action="second-modal#hideModal">Cancel</button>
               </div>
             </div>
           <% end %>

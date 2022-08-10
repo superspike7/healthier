@@ -2,7 +2,8 @@ class MealsController < ApplicationController
   before_action :set_meal, only: %i[show edit update destroy]
 
   def index
-    @meals = current_user.meals
+    @meals = current_user.meals.includes(:foods)
+    render partial: 'meals/table', locals: { meals: @meals }
   end
 
   def show; end
