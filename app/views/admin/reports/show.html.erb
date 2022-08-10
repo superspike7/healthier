@@ -13,41 +13,31 @@
             <p class="font-light">Reporter:</p>
             <div class="flex gap-2 px-4">
               <%= user_avatar User.first, class: 'h-8 w-8 rounded-full' %>
-              <h3 class="font-bold">Reynard</h3>
+              <h3 class="font-bold"><%= @report.user.username %></h3>
             </div>
           </div>
           <div class="text-xl flex flex-col gap-2">
             <p class="font-light">Reported:</p>
             <div class="flex gap-2 px-4">
               <%= user_avatar User.first, class: 'h-8 w-8 rounded-full' %>
-              <h3 class="font-bold">Vinz</h3>
+              <h3 class="font-bold"><%= @report.reported.username %></h3>
             </div>
           </div>
           <div class="text-xl flex flex-col gap-2">
             <p class="font-light">Reason:</p>
             <div class="flex gap-2 px-4">
-              <h3 class="font-bold underline">Sobrang Gwapo</h3>
+              <h3 class="font-bold underline"><%= @report.reason %></h3>
             </div>
           </div>
           <div class="text-xl flex flex-col gap-2">
-            <p class="font-light">Description:</p>
+            <p class="font-light">Report Type:</p>
             <div class="flex gap-2 px-4">
-              <h3 class="font-medium">
-                loooooong sentences of description 
-                loooooong sentences of description 
-                loooooong sentences of description 
-              </h3>
-            </div>
-          </div>
-          <div class="text-xl flex flex-col gap-2">
-            <p class="font-light">Status:</p>
-            <div class="flex gap-2 px-4">
-              <h3 class="p-2 px-3 rounded-full bg-gray-300 text-gray-600">Pending</h3>
+              <h3 class="font-medium"><%= @report.report_type %></h3>
             </div>
           </div>
           <div class="text-xl flex gap-2 justify-end px-2">
-            <button class="font-bold py-2 px-3 rounded-full bg-red-500 text-red-50">Reject</button>
-            <button class="font-bold py-2 px-3 rounded-full bg-green-500 text-green-50">Approve</button>
+            <%= link_to 'View Profile',  profile_path(@report.reported.username), class: "font-bold py-2 px-3 rounded-full bg-red-500 text-red-50" %>
+            <%= button_to 'Delete User', admin_user_path(@report.reported.id), method: :delete, data: {confirm: 'Are you sure?'}, class: "font-bold py-2 px-3 rounded-full bg-green-500 text-green-50" %>
           </div>
         </div>
       </div>

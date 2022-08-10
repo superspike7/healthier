@@ -4,7 +4,7 @@
   </div>
         
   <div class="flex-1 flex flex-col justify-center relative">
-    <%= link_to new_post_report_path(post.id), data: { turbo_frame: 'modal' },
+    <%= link_to new_post_report_post_path(post), data: { turbo_frame: 'modal' },
                                                class: 'absolute top-0 right-0 cursor-pointer p-2 hover:bg-red-200 rounded-full' do %>
       <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-1' %>
     <% end %>
