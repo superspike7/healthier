@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     get '/auth/failure', to: 'users/omniauth_callbacks#failure'
   end
 
-  resources :posts do
-    resources :comments
+  resources :posts, except: [:edit, :update] do
+    resources :comments, only: [:create, :destroy]
     resources :report_post
   end
   resources :likes, only: [:create, :destroy]
