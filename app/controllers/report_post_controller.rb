@@ -8,7 +8,7 @@ class ReportPostController < ApplicationController
   def create
     @report = current_user.reports.build(reportpost_params)
     if @report.save
-      redirect_to posts_path, notice: 'Report User Successfully.'
+      redirect_to posts_path, notice: 'Reported Post Successfully.'
     else
       render :new
     end

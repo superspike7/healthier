@@ -30,9 +30,8 @@ class User < ApplicationRecord
   after_create :create_daily_intake
 
   def new_conversations 
-    # ids of conversations recievers
     recievers_ids = messages.pluck(:receiver_id).uniq
-    User.where.not(id: recievers_ids)
+    User.where(admin: false).where.not(id: recievers_ids)
   end
 
   def self.from_omniauth(auth)

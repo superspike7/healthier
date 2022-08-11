@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(_resource)
     if current_user.admin?
-      admin_reports_path
+      admin_users_path
     else
       root_url
     end
