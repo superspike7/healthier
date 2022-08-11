@@ -30,41 +30,9 @@
             </tr>
           </thead>
 
-          <tbody class="text-gray-600 text-sm font-light">
+          <tbody class="text-gray-600 text-sm font-light" id="meals">
             <% @meals.each do |meal| %>
-            <tr class="border-b border-gray-200 hover:bg-gray-100">
-              <td class="py-3 px-6 text-left whitespace-nowrap">
-                <div class="flex items-center">
-                  <span class="font-medium"><%= meal.name %></span>
-                </div>
-              </td>
-
-              <td class="py-3 px-6 text-center">
-                <div class="flex items-center">
-                  <span><%= meal.description %></span>
-                </div>
-              </td>
-
-              <td class="py-3 px-6 text-center">
-                <div class="flex items-center gap-4">
-                  <span><%= render_food_names_from_meal(meal) %></span>
-                </div>
-              </td>
-
-              <td class="py-3 px-6 text-center flex justify-center">
-                <%= link_to edit_meal_path(meal),
-                            data: { turbo_frame: 'modal' },
-                            class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
-                  <%= embedded_svg 'icons/edit.svg' %>
-                <% end %>
-                <%= button_to meal_path(meal), 
-                              class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
-                              method: :delete, data: { turbo_confirm: 'are you sure?' } do %>
-                   <%= embedded_svg 'icons/delete.svg' %>
-                <% end %>
-              </td>
-
-            </tr>
+              <%= render partial: "meals/item", locals: { meal: meal} %>
             <% end %>
           </tbody>
         </table>
