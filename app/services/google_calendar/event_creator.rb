@@ -31,13 +31,11 @@ module GoogleCalendar
     end
 
     def start_time
-      Time.new(@event_params['start(1i)'], @event_params['start(2i)'], @event_params['start(3i)'],
-               @event_params['start(4i)'], @event_params['start(5i)']).to_datetime.rfc3339
+      @event_params[:start].to_datetime.change(offset: '+0800').rfc3339
     end
 
     def end_time
-      Time.new(@event_params['end(1i)'], @event_params['end(2i)'], @event_params['end(3i)'],
-               @event_params['end(4i)'], @event_params['end(5i)']).to_datetime.rfc3339
+      @event_params[:end].to_datetime.change(offset: '+0800').rfc3339
     end
   end
 end
