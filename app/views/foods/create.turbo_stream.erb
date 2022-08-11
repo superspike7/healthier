@@ -1,0 +1,3 @@
+<%= turbo_stream.append "foods", partial: "foods/item", locals: { food: @new_food} %>
+<%= turbo_stream.append "food_options", partial: "routines/option", locals: { option: @new_food} %>
+<%= turbo_stream.append "flash", partial: "shared/flash" %>
