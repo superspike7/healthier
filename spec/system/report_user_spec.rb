@@ -13,6 +13,6 @@ RSpec.describe "user reports another user", type: :system do
     choose ("reason_suspicious_or_spam")
     click_on "SUBMIT REPORT"
 
-    expect(page).to have_text("Report User Successfully.")
+    expect(page).to have_text("Reported User Successfully.")
   end
 end
