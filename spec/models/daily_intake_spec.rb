@@ -13,7 +13,7 @@ RSpec.describe DailyIntake, type: :model do
 
   describe '#add_food_from_meal' do
     it 'adds meal in the daily intake' do
-      meal.add_food(food)
+      meal.add_food({ food_ids: food.id })
       expect { daily_intake.add_food_from_meal(meal) }.to change { daily_intake.foods.count }.by(meal.foods.count)
     end
   end
