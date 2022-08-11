@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :notifications, only: :index
   resources :foods, except: :show
   resources :meals, except: :show
-  resources :daily_intakes, only: [:index, :show, :create], path: 'daily'
+  resources :daily_intakes, only: [:index, :create], path: 'daily'
   resources :post_reports, only: :new, path_names: { new: 'new/:post_id' }
   resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile' do
     resources :report_user

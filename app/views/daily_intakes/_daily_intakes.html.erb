@@ -18,25 +18,25 @@
       </div>
     </div>
     <div class="w-full h-full grid grid-cols-2 gap-5">
-      <div class="bg-green-200 flex flex-col justify-center gap-2 items-center rounded-xl">
+      <div class="<%= nutrient_background_color(@nutrients_description.calories) %> flex flex-col justify-center gap-2 items-center rounded-xl">
         <p class="text-xl font-light text-gray-600">Calories</p>
         <p class="text-2xl font-black"><%= @daily_intake_today.total_calories %></p>
-        <p class="text-md text-gray-700">Perfect Amount</p>
+        <p class="text-md text-gray-700"><%= @nutrients_description.calories %></p>
       </div>
-      <div class="bg-red-200 flex flex-col justify-center gap-2 items-center rounded-xl">
-        <p class="text-xl font-light text-gray-600">Carbs</p>
+      <div class="<%= nutrient_background_color(@nutrients_description.carbohydrates) %> flex flex-col justify-center gap-2 items-center rounded-xl">
+        <p class="text-xl font-light text-gray-600">Carbohydrates</p>
         <p class="text-2xl font-black"><%= @daily_intake_today.total_carbohydrates %>(g)</p>
-        <p class="text-md text-gray-700">Too Much</p>
+        <p class="text-md text-gray-700"><%= @nutrients_description.carbohydrates %></p>
       </div>
-      <div class="bg-purple-100 flex flex-col justify-center gap-2 items-center rounded-xl">
+      <div class="<%= nutrient_background_color(@nutrients_description.fats) %> flex flex-col justify-center gap-2 items-center rounded-xl">
         <p class="text-xl font-light text-gray-600">Fats</p>
         <p class="text-2xl font-black"><%= @daily_intake_today.total_fats %>(g)</p>
-        <p class="text-md text-gray-700">You need more</p>
+        <p class="text-md text-gray-700"><%= @nutrients_description.fats %></p>
       </div>
-      <div class="bg-gray-200 flex flex-col justify-center gap-2 items-center rounded-xl">
+      <div class="<%= nutrient_background_color(@nutrients_description.protein) %> flex flex-col justify-center gap-2 items-center rounded-xl">
         <p class="text-xl font-light text-gray-600">Protein</p>
         <p class="text-2xl font-black"><%= @daily_intake_today.total_protein %>(g)</p>
-        <p class="text-md text-gray-700">Eat food with Protein</p>
+        <p class="text-md text-gray-700"><%= @nutrients_description.protein %></p>
       </div>
     </div>
   </div>
