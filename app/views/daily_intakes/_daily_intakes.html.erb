@@ -7,7 +7,7 @@
         <%= link_to "Routines", routines_path,
                     class: 'font-semibold text-2xl text-green-800 opacity-50 hover:underline decoration-2' %>
       </div>
-      <div class="flex gap-3">
+      <div class="flex gap-3 items-center">
         <%= link_to "+ Food", new_daily_intake_food_path,
                     data: {turbo_frame: 'modal'},
                     class: 'border border-green-500 text-green-500 font-bold text-lg p-2 rounded-md'%>
@@ -15,6 +15,9 @@
         <%= link_to "+ Meal", new_daily_intake_meal_path,
                     data: {turbo_frame: 'modal'},
                     class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md'%>
+        <%= button_to daily_intakes_path, class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' do %>
+          <%= embedded_svg 'icons/refresh.svg' %>
+        <% end %>
       </div>
     </div>
     <div class="w-full h-full grid grid-cols-2 gap-5">
