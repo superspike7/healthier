@@ -11,9 +11,9 @@
         <p class="text-2xl font-semibold text-gray-600">Newest User</p>
         <div class="flex justify-between gap-2 items-center">
           <div>
-            <%= image_tag @newest_user.avatar.attached? ? @newest_user.avatar : 'default_profile.png', class: 'w-14 h-14 rounded-full' %>
+            <%= user_avatar @newest_user, class: 'w-14 h-14 rounded-full' %>
           </div>
-          <p class="text-4xl font-bold"><%= @newest_user.username %></p>
+          <p class="text-2xl font-bold"><%= @newest_user.username %></p>
         </div>
       </div>
     </div>

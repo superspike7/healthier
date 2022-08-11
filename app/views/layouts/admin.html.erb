@@ -41,12 +41,12 @@
         <div class="flex justify-between px-8 py-4 border-b border-gray-300 items-center">
           <div class="flex-1">
           </div>
-          <%= link_to edit_user_registration_path, class: 'flex flex-col' do %>
-            <p class="px-2 cursor-pointer hover:underline font-medium text-xl">
+          <div class='flex flex-col'>
+            <p class="px-2 font-medium text-xl">
               <%= current_user.username %>
             </p>
             <p class="text-end px-2 font-semibold text-sm">Admin</p>
-          <% end %>
+          </div>
           <div class="h-12 w-12 rounded-full">
            <% if current_user.avatar.attached? %>
             <%= image_tag current_user.avatar, class: 'object-cover rounded-full' %>
