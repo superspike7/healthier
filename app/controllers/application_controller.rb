@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
     Current.user = current_user
   end
 
+  def authorize_admin
+    not_found unless current_user.admin?
+  end
+
+  def authorize_user
+    not_found if current_user.admin?
+  end
+
   def not_found
     raise ActionController::RoutingError, 'Not Found'
   end

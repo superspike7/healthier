@@ -1,4 +1,6 @@
 class ConversationMessagesController < ApplicationController
+  before_action :authorize_user
+  
   def create
     message = current_user.messages.build(conversation_message_params)
     message.send_message_with_notification

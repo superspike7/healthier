@@ -1,4 +1,6 @@
 class RoutinesController < ApplicationController
+  before_action :authorize_user
+  
   def index
     @routines = current_user.routines
     render partial: 'routine_exercises/exercises'

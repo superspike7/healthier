@@ -1,4 +1,6 @@
 class DirectConversationsController < ApplicationController
+  before_action :authorize_user
+
   def index
     @conversations = current_user.conversations.recent
     @new_conversations = current_user.new_conversations.includes([:avatar_attachment])
