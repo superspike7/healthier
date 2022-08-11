@@ -10,11 +10,6 @@ class PostsController < ApplicationController
     @comments = @post.comments.includes(:user, user: :avatar_attachment)
   end
 
-  def new
-    @new_post = current_user.posts.build
-    @comment = current_user.comments.build
-  end
-
   def create
     @post = current_user.posts.build(post_params)
 
