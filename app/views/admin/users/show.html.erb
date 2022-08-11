@@ -5,100 +5,23 @@
         <%= user_avatar @user, class: 'w-full h-full rounded-full' %>
       </div>
     </div>
-    <div class="w-full flex justify-end gap-2 p-2">
-      <button class="p-2 border border-gray-200 hover:bg-green-400 rounded-full">
-        <%= embedded_svg 'icons/chat.svg', class: 'h-7' %>
-      </button>
-        <%= link_to new_admin_report_path(@user.username),
-                    data: { turbo_frame: 'modal' },
-                    class: 'p-2 border border-gray-200 hover:bg-red-400 rounded-full' do %>
-        <%= embedded_svg 'icons/report.svg', class: 'h-7' %>
-      <% end %>
-      <button
-        class="font-bold text-lg border border-gray-200 p-1 px-2 rounded-full hover:bg-gray-50"
-      >
-        Follow
-      </button>
 
-      <button
-        class="font-bold text-lg border border-gray-200 p-1 px-2 rounded-full hover:bg-gray-50"
-      >
-        Edit Profile
-      </button>
-    </div>
-    <div class="w-full text-center">
+    <div class="w-full text-center mt-14">
       <h2 class="text-xl font-bold"><%= @user.username %></h2>
       <p class="text-gray-400"><%= @user.email %></p>
     </div>
-    <div class="w-full h-40 grid place-items-center">
-      <p>(bio? followers? following? links? favorites?)</p>
-
+    <div class="w-full h-10 flex flex justify-center gap-4">
+      <p><span class='font-bold'><%= @following_count %></span> following </p>
+      <p><span class='font-bold'><%= @follower_count %></span> followers </p>
     </div>
     <div class="w-full flex-1">
       <div class="w-full grid grid-cols-4 justify-items-center border-b border-gray-200 text-center">
-        <div class="cursor-pointer hover:bg-gray-200 w-full">
-          <p class="p-6 border-b-4 border-green-500 font-bold">Posts</p>
-        </div>
-        <div class="cursor-pointer hover:bg-gray-200 w-full">
-          <p class="p-6 font-semibold text-gray-500">Meals</p>
-        </div>
-        <div class="cursor-pointer hover:bg-gray-200 w-full">
-          <p class="p-6 font-semibold text-gray-500">Foods</p>
-        </div>
-        <div class="cursor-pointer hover:bg-gray-200 w-full">
-          <p class="p-6 font-semibold text-gray-500">Exercises</p>
-        </div>
+        <p class="p-6 border-b-4 font-bold">Posts</p>
       </div>
       <div>
-        <!-- This should be a partial render "posts" render "foods" -->
-
         <% @posts.each do |post| %>
-          
-          <div class="flex p-4 gap-4 bg-white border-b-2 border-green-200">
-            <div class="flex gap-3">
-              <div class="bg-green-200 h-10 w-10 rounded-full">
-              </div>
-            </div>
-            
-            <div class="flex-1 flex flex-col justify-center">
-              <h5 class="font-medium text-lg"><%= post.user.username %>
-                <% follow = current_user.relationships.find_by(followed_id: post.user.id) %>
-                <%  if current_user.id != post.user.id%>
-                  <% if follow.nil? %>
-                    <%= button_to "Follow", follows_path, params: { relationship: { followed_id: post.user.id } }, method: :post%>
-                  <%else%>
-                    <%= button_to "Unfollow", follow_path(post.user.id), method: :delete%>
-                  <% end %>
-                <% end %></h5> 
-               <p class="p-2 min-h-max" ><%= post.body %></p>
-               <% if post.images.attached?%>
-                 <div class="rounded-xl max-h-max w-full bg-blue-200 overflow-hidden">
-                    <% post.images.each do |image|%>
-                      <p><%= image_tag image, class: "w-full h-full object-cover" %></p>
-                    <% end %>
-                 </div>
-               <% end %>
-               <div class="flex gap-10 font-light text-lg mt-4">
-                 <div class="flex gap-2 items-center">
-                   <%= embedded_svg 'icons/comment.svg', class: 'h-8 w-8' %>
-                   <p>420</p>
-                 </div>
-                 <div class="flex gap-2 items-center">
-                   <%#= vite_image_tag 'icons/heart.svg', class: 'h-8 w-8' %>
-                   <% like = current_user.likes.find_by(post: post) %>
-                   <% if like.nil? %>
-                    <%= button_to "Like", likes_path, params: { like: { post_id: post.id } }, method: :post %>
-                   <% else %>
-                    <%= button_to "Unlike", like_path(like), method: :delete %>
-                   <% end %>
-                    <%= render 'posts/like', user: current_user, post: %>
-                 </div>
-               </div>
-            </div>
-          </div>
-          
+          <%= render 'posts/post', post: %>
         <% end %>
-        
       </div>
     </div>
   </div>

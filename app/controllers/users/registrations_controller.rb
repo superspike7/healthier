@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   layout "application", only: :edit
-  before_action :restrict_google_user, only: :edit
+  before_action :restrict_google_user, :authorize_user, only: :edit
 
   private
 

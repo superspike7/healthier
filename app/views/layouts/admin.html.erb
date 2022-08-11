@@ -30,27 +30,6 @@
               <%= embedded_svg 'icons/report.svg', class: 'h-8 stroke-white' %>
             </li>
           <% end %>
-          <%= link_to direct_conversations_path do %>
-            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full relative">
-              <%= turbo_stream_from 'unread_message_notifications' %>
-              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2" id="unread_message_<%=current_user.id%>">
-                <%= render 'direct_conversations/notification', user: current_user %>
-              </span>
-              <%= embedded_svg 'icons/chat.svg', class: 'h-8 stroke-white' %>
-            </li>
-          <% end %>
-          <%= link_to notifications_path do %>
-            <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full relative">
-              <span class="absolute bg-green-500 text-white px-2 text-sm rounded-full top-1 right-2">
-                <%= turbo_stream_from 'notification_count' %>
-                <%= render 'notifications/unread_count', user: current_user %>
-              </span>
-              <%= embedded_svg 'icons/bell.svg', class: 'h-8 stroke-white' %>
-            </li>
-          <% end %>
-          <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full">
-            <%= embedded_svg 'icons/settings.svg', class: 'h-8 stroke-white' %>
-          </li>
         </ul>
         <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'hover:bg-green-600 p-4 rounded-full' do %>
             <%= embedded_svg 'icons/logout.svg', class: 'h-8 stroke-white' %>

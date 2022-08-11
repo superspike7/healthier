@@ -11,3 +11,6 @@
   User.create!(username: "example#{random_number}", email: "example#{random_number}@example.com", password: 'abc123',
                password_confirmation: 'abc123', confirmed_at: Time.now.utc)
 end
+
+User.create!(username: 'admin123', email: 'admin@example.com', password: 'abc123',
+             password_confirmation: 'abc123', confirmed_at: Time.now.utc, admin: true)
