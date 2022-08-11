@@ -8,15 +8,19 @@ class RepetitionExercisesController < ApplicationController
   end
 
   def new
-    @rep_exercise = current_user.repetition_exercises.build
+    @rep_exercise = current_user.repetition_exercises.build(name: params[:name])
   end
 
   def create
     @rep_exercise = current_user.repetition_exercises.build(repetition_exercise_params)
-    if @rep_exercise.save
-      redirect_to root_path
-    else
-      render :new
+
+    respond_to do |format|
+      if @rep_exercise.save
+          format.turbo_stream { flash.now[:notice] = "Successfully created #{@rep_exercise.name}" }
+          format.html { redirect_to root_path, notice: "Successfully created #{@rep_exercise.name}" } 
+      else
+        render :new
+      end
     end
   end
 
