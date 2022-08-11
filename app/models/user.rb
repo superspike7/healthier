@@ -88,6 +88,10 @@ class User < ApplicationRecord
     like.notifications_as_like.destroy_all
   end
 
+  def all_exercises_to_add
+    routines + timed_exercises + repetition_exercises
+  end
+
   private
 
   def create_daily_intake
