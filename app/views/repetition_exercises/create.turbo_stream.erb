@@ -1,0 +1,3 @@
+<%= turbo_stream.append "repetition-exercises", partial: "repetition_exercises/item", locals: { exercise: @rep_exercise } %>
+<%= turbo_stream.append "rep_options", partial: "routines/option", locals: { exercise: @rep_exercise } %>
+<%= turbo_stream.append "flash", partial: "shared/flash" %>

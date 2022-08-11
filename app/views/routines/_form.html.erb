@@ -15,7 +15,7 @@
                        options_from_collection_for_select(current_user.timed_exercises, "id", "name"),
                        {},
                        class: 'col-span-4', data: {controller: "tom-select", "url": '/timed/new?name='},
-                       multiple: true, placeholder: 'add timed exercise' %>
+                       multiple: true, placeholder: 'add timed exercise', id: 'timed_options' %>
       </div>
       <div class="grid grid-cols-6 text-xl items-center grid-rows-2">
         <label class="col-span-2 text-gray-700 row-end-2">Rep Exercise</label>
@@ -23,7 +23,7 @@
                        options_from_collection_for_select(current_user.repetition_exercises, "id", "name"),
                        {},
                        class: 'col-span-4', data: {controller: "tom-select", "url": '/repetitions/new?name='},
-                       multiple: true, placeholder: 'add rep exercise' %>
+                       multiple: true, placeholder: 'add rep exercise', id: 'rep_options' %>
       </div>
     </div>
 
