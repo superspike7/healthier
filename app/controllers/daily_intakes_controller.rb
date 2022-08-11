@@ -1,12 +1,8 @@
 class DailyIntakesController < ApplicationController
   def index
-    # @nutrients_today
     @daily_intake_today = current_user.daily_intakes.last
+    @stats = Intake::NutrientsDescriptor.call(@daily_intake_today)
     render partial: 'daily_intakes/daily_intakes', locals: { intakes: @intakes }
-  end
-
-  def show
-    @daily_intake = current_user.daily_intakes.find(params[:id])
   end
 
   def create
