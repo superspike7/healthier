@@ -2,7 +2,7 @@ class ExerciseSchedulesController < ApplicationController
   before_action :authorize_user
 
   def index
-    schedules = GoogleCalendar::EventsFetcher.call(current_user) if current_user.permit_calendar?
+    schedules = GoogleCalendar::EventsFetcher.call(current_user)
     render json: schedules
   end
 
