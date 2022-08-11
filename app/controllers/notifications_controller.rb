@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  before_action :authorize_user
   after_action :mark_notifications_as_read
 
   def index

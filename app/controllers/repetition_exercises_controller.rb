@@ -1,5 +1,7 @@
 class RepetitionExercisesController < ApplicationController
+  before_action :authorize_user
   before_action :set_repetition_exercise, only: %i[edit update destroy]
+  
   def index
     @rep_exercises = current_user.repetition_exercises
     render partial: 'repetition_exercises/table'

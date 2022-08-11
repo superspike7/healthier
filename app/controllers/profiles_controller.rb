@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_user
+  before_action :authorize_user, :set_user
 
   def show
     @user = User.find_by!(username: params[:username])

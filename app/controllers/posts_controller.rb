@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+  before_action :authorize_user
+
   def index
     @posts = Post.all.with_attachments_and_user.show_latest
-    @comments = Comment.include_user_only.comment_asc
   end
 
   def show

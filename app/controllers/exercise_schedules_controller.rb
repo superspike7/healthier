@@ -1,4 +1,6 @@
 class ExerciseSchedulesController < ApplicationController
+  before_action :authorize_user
+  
   def index
     @schedules = GoogleCalendar::EventsFetcher.call(current_user) if current_user.permit_calendar?
   end

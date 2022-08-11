@@ -1,4 +1,6 @@
 class DailyIntakeFoodsController < ApplicationController
+  before_action :authorize_user
+
   def new
     @foods = current_user.foods
   end

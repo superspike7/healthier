@@ -1,4 +1,5 @@
 class FoodsController < ApplicationController
+  before_action :authorize_user
   before_action :set_food, only: %i[edit update destroy]
 
   def index

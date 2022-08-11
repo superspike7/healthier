@@ -1,4 +1,5 @@
 class TimedExercisesController < ApplicationController
+  before_action :authorize_user
   before_action :set_timed_exercise, only: %i[edit update destroy]
 
   def index
