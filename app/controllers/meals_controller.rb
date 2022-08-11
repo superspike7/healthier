@@ -8,18 +8,23 @@ class MealsController < ApplicationController
   end
 
   def new
-    @new_meal = current_user.meals.build
+    @new_meal = current_user.meals.build(name: params[:name])
     @foods = current_user.foods
   end
 
   def create
     @new_meal = current_user.meals.build(meal_params)
-    if @new_meal.save
-      @new_meal.add_food(meal_with_food_params)
-      redirect_to root_path, notice: "#{@new_meal.name} has been successfully added."
-    else
-      render :new
+
+    respond_to do |format|
+      if @new_meal.save
+        @new_meal.add_food(meal_with_food_params)
+        format.turbo_stream { flash.now[:notice] = "#{@new_meal.name} has been successfully added."}
+        format.html { redirect_to root_path, notice: "#{@new_meal.name} has been successfully added." } 
+      else
+        render :new
+      end
     end
+
   end
 
   def edit
