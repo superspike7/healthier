@@ -9,16 +9,6 @@
     <%= yield :head %>
     <%= vite_client_tag %>
     <%= vite_javascript_tag 'application' %>
-    <!--
-      If using a TypeScript entrypoint file:
-        vite_typescript_tag 'application'
-
-      If using a .jsx or .tsx entrypoint, add the extension:
-        vite_javascript_tag 'application.jsx'
-
-      Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
-    -->
-
   </head>
 
   <body>
@@ -64,9 +54,6 @@
               <%= embedded_svg 'icons/settings.svg', class: 'h-8' %>
             </li>
           <% end %>
-          <li class="p-2">
-            <button class="bg-blue-500 rounded-full p-2"><%= embedded_svg 'icons/plus.svg', class: 'h-8' %></button>
-          </li>
         </ul>
         <%= button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'hover:bg-green-300 p-4 rounded-full' do %>
             <%= embedded_svg 'icons/logout.svg', class: 'h-8' %>

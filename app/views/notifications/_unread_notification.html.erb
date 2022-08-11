@@ -1,6 +1,6 @@
 <%= link_to notification.to_notification.url, class:"flex px-8 py-4 border-b border-gray-300 hover:bg-gray-100 gap-4 bg-green-100" do %>
-  <div>
-    <span class="p-2 bg-green-200 rounded-full"><%= user_avatar(notification.to_notification.user) %></span>
+  <div class='mr-2'>
+      <%= user_avatar current_user, class: 'h-16 w-16 rounded-full' %>
   </div>
   <div class="flex-1">
     <p class="font-light">
