@@ -13,10 +13,14 @@ class TimedExercisesController < ApplicationController
 
   def create
     @timed_exercise = current_user.timed_exercises.build(timed_exercise_params)
-    if @timed_exercise.save
-      redirect_to root_path, notice: "Successfully created #{@timed_exercise.name}"
-    else
-      render :new
+
+    respond_to do |format|
+      if @timed_exercise.save
+        format.turbo_stream { flash.now[:notice] = 'Exercise Successfully Created!' }
+        format.html { redirect_to root_path, notice: "Successfully created #{@timed_exercise.name}" } 
+      else
+        render :new
+      end
     end
   end
 
