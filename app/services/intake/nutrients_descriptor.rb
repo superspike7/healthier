@@ -50,7 +50,7 @@ module Intake
         TOO_MUCH
       end
     end
-    
+
     def protein
       case @daily_intake.total_protein
       when 50..175
