@@ -9,6 +9,6 @@ class DailyIntakesController < ApplicationController
 
   def create
     current_user.daily_intakes.create
-    redirect_back_or_to root_url, notice: 'Successfully initialized a new daily intake information.'
+    redirect_to root_url, notice: 'Successfully initialized a new daily intake information.'
   end
 end
