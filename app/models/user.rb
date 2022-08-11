@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   after_create :create_daily_intake
 
-  def new_conversations 
+  def new_conversations
     recievers_ids = messages.pluck(:receiver_id).uniq
     User.where(admin: false).where.not(id: recievers_ids)
   end
