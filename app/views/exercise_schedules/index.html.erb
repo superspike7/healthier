@@ -1,9 +1,9 @@
 <% if current_user.permit_calendar? %>
   <% @schedules.each do |schedule| %>
     <div>
-      <p>Name: <%= schedule.name %>
-      <p>Start: <%= schedule.start.date_time.strftime("%b. %d, %Y %I:%M %p") %>
-      <p>End: <%= schedule.end.date_time.strftime("%b. %d, %Y %I:%M %p") %>
+      <p>Name: <%= schedule[:name] %>
+      <p>Start: <%= schedule[:start].date_time.strftime("%b. %d, %Y %I:%M %p") %>
+      <p>End: <%= schedule[:end].date_time.strftime("%b. %d, %Y %I:%M %p") %>
     </div>
   <% end %>
   <% else %>
