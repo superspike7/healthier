@@ -4,14 +4,14 @@ class DailyIntakeMealsController < ApplicationController
   end
 
   def create
-    meal = current_user.foods.find(daily_intake_meal_params[:meal])
-    current_user.daily_intakes.last.add_food_from_meal(meal)
-    redirect_back_or_to root_url, notice: "Successfully added #{meal.name} in your daily intake."
+    meals = current_user.meals.find(daily_intake_meal_params[:meals])
+    current_user.daily_intakes.last.add_foods_from_meals(meals)
+    redirect_to root_url
   end
 
   private
 
   def daily_intake_meal_params
-    params.require(:daily_intake).permit(:meal)
+    params.require(:daily_intake).permit(meals: []).tap { |param| param[:meals].reject!(&:blank?) }
   end
 end

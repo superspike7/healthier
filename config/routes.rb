@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :exercise_schedules, only: [:create, :edit, :index, :new], path: 'schedules'
 
   scope '/daily' do
-    resources :daily_intake_foods, only: [:create, :new, :destroy], path: 'food'
+    resources :daily_intake_foods, only: [:create, :new], path: 'food'
     resources :daily_intake_meals, only: [:create, :new], path: 'meal'
   end
 

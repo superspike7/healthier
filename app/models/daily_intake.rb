@@ -19,11 +19,11 @@ class DailyIntake < ApplicationRecord
     foods.sum(:protein)
   end
 
-  def add_food(food)
-    foods << food
+  def add_foods(food)
+    foods << Food.find(food[:foods])
   end
 
-  def add_food_from_meal(meal)
-    foods << meal.foods
+  def add_foods_from_meals(meals)
+    meals.each { |meal| foods << meal.foods }
   end
 end

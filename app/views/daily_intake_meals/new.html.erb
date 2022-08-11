@@ -10,12 +10,12 @@
           <h1 class="font-bold text-2xl">Add a Meal in your Daily Intake</h1>
         </div>
         <div>
-          <%= form_with model: @new_meal_in_daily_intake, url: daily_intake_meals_url do |f| %>
+          <%= form_with scope: :daily_intake, url: daily_intake_meals_url do |f| %>
             <div>
               <div class="py-10 px-7 flex flex-col gap-6">
                 <div class="grid grid-cols-6 text-xl items-center grid-rows-2 pt-5">
                   <label class="col-span-2 text-gray-700 row-end-2">Meals</label>
-                  <%= f.select :foods, 
+                  <%= f.select :meals, 
                                  options_from_collection_for_select(@meals, "id", "name"),
                                  {},
                                  class: 'col-span-4', data: {controller: "tom-select", "url": '/meals/new?name='},
