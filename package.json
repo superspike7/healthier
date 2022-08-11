@@ -19,5 +19,8 @@
     "vite": "^3.0.0",
     "vite-plugin-full-reload": "^1.0.3",
     "vite-plugin-ruby": "^3.1.0"
+  },
+  "scripts": {
+    "postinstall": "patch-package"
   }
 }
