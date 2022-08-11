@@ -27,6 +27,7 @@ class MealsController < ApplicationController
 
   def update
     if @meal.update(meal_params)
+      @meal.update_food(meal_with_food_params)
       redirect_to root_path, notice: "#{@meal.name} has been successfully updated."
     else
       render :edit

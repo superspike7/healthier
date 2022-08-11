@@ -25,6 +25,10 @@ class Meal < ApplicationRecord
     foods << Food.find(food[:food_ids])
   end
 
+  def update_food(food)
+    foods.replace(Food.find(food[:food_ids]))
+  end
+
   def remove_food(food)
     foods.destroy(food)
   end
