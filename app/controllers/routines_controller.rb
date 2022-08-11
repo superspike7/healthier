@@ -1,6 +1,6 @@
 class RoutinesController < ApplicationController
   before_action :authorize_user
-  
+
   def index
     @routines = current_user.routines
     render partial: 'routine_exercises/exercises'
@@ -29,11 +29,11 @@ class RoutinesController < ApplicationController
   private
 
   def routine_params
-    params.require(:routine).permit(:name, :description, timed: [], repetition: [])
+    params.require(:routine).permit(:name, timed: [], repetition: [])
   end
 
   def routine_only_params
-    { name: routine_params[:name], description: routine_params[:description] }
+    { name: routine_params[:name] }
   end
 
   def exercise_only_params
