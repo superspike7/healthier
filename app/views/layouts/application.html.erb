@@ -76,7 +76,9 @@
       <div class="flex-1 flex flex-col max-h-screen">
         <!-- header bar -->
         <div class="flex justify-between px-8 py-4 border-b border-gray-300 relative">
-          <%= render partial: 'shared/flash' %>
+          <%= turbo_frame_tag "flash" do %>
+            <%= render partial: 'shared/flash' %>
+          <% end %>
           <div class="flex-1">
           </div>
           <%= link_to profile_path(current_user.username) do %>

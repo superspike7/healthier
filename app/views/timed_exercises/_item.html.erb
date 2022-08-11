@@ -1,0 +1,38 @@
+<tr class="border-b border-gray-200 hover:bg-gray-100">
+  <td class="py-3 px-6 text-left whitespace-nowrap">
+    <div class="flex items-center">
+      <span class="font-medium"><%= exercise.name %></span>
+    </div>
+  </td>
+
+  <td class="py-3 px-6 text-center">
+    <div class="flex items-center">
+      <span><%= exercise.description %></span>
+    </div>
+  </td>
+
+  <td class="py-3 px-6 text-center">
+    <div class="flex items-center">
+      <span><%= exercise.hour %></span>
+    </div>
+  </td>
+
+  <td class="py-3 px-6 text-center">
+    <div class="flex items-center">
+      <span><%= exercise.minutes %></span>
+    </div>
+  </td>
+
+  <td class="py-3 px-6 text-center flex justify-center">
+    <%= link_to edit_timed_exercise_path(exercise),
+                data: { turbo_frame: 'modal' },
+                class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer' do %>
+      <%= embedded_svg 'icons/edit.svg' %>
+    <% end %>
+    <%= button_to timed_exercise_path(exercise), 
+                  class: 'w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer',
+                  method: :delete do %>
+       <%= embedded_svg 'icons/delete.svg' %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,3 @@
+<%= turbo_stream.append "timed_exercises", partial: "timed_exercises/item", locals: { exercise: @timed_exercise } %>
+<%= turbo_stream.replace "routine_form", partial: "routines/form" %>
+<%= turbo_stream.append "flash", partial: "shared/flash" %>
