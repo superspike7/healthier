@@ -3,7 +3,8 @@ class ExerciseSchedulesController < ApplicationController
 
   def index
     @schedules = GoogleCalendar::EventsFetcher.call(current_user) if current_user.permit_calendar?
-    # JSON -> @schedules.to_json, name for event name, start for start time, end for end time
+    # name for event name, start for start time, end for end time
+    render json: @schedules
   end
 
   def new
