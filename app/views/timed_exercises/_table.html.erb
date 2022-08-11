@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "dashboard_tab" do %>
+<%= turbo_frame_tag "dashboard_tab", class: 'p-2 flex flex-col col-span-7 row-span-2 gap-4' do %>
   <div class="flex items-center">
     <p class="text-xl border-b-2 border-b-gray-900 px-6 cursor-pointer">Timed Exercises</p>
     <%= link_to 'Rep Exercises', repetition_exercises_path, class: 'text-xl border-b-2 border-b-gray-400 px-6 cursor-pointer' %>
@@ -14,7 +14,7 @@
                     data: { turbo_frame: 'second-modal'},
                     class: 'bg-green-500 text-white font-bold text-lg p-2 rounded-md' %>
       </div>
-      <div class="overflow-y-auto flex-1">
+      <div class="overflow-y-scroll flex-1">
         <table class="min-w-max w-full table-auto">
           <thead>
             <tr
