@@ -14,7 +14,7 @@ class RoutinesController < ApplicationController
     @new_routine = current_user.routines.build(routine_only_params)
     if @new_routine.save
       @new_routine.add_exercise_in_routine(exercise_only_params)
-      redirect_to root_url, notice: "Successfully created #{@new_routine.name}"
+      redirect_to dashboard_url, notice: "Successfully created #{@new_routine.name}"
     else
       render :new
     end

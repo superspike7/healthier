@@ -3,12 +3,12 @@ class LikesController < ApplicationController
 
   def create
     current_user.like_post(params[:post])
-    redirect_back_or_to root_path
+    redirect_back_or_to dashboard_path
   end
 
   def destroy
     current_user.unlike_post(params[:id])
-    redirect_back_or_to root_path
+    redirect_back_or_to dashboard_path
   end
 
   private

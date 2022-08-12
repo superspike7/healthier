@@ -9,6 +9,6 @@ class DailyIntakesController < ApplicationController
 
   def create
     current_user.daily_intakes.create
-    redirect_to root_url
+    redirect_to dashboard_url
   end
 end

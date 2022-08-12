@@ -17,7 +17,7 @@ class RepetitionExercisesController < ApplicationController
     respond_to do |format|
       if @rep_exercise.save
           format.turbo_stream { flash.now[:notice] = "Successfully created #{@rep_exercise.name}" }
-          format.html { redirect_to root_path, notice: "Successfully created #{@rep_exercise.name}" } 
+          format.html { redirect_to dashboard_path, notice: "Successfully created #{@rep_exercise.name}" } 
       else
         render :new
       end
@@ -28,7 +28,7 @@ class RepetitionExercisesController < ApplicationController
 
   def update
     if @rep_exercise.update(repetition_exercise_params)
-      redirect_to root_path, notice: "Successfully updated #{@rep_exercise.name}."
+      redirect_to dashboard_path, notice: "Successfully updated #{@rep_exercise.name}."
     else
       render :edit
     end

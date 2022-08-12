@@ -12,7 +12,7 @@ class ExerciseSchedulesController < ApplicationController
 
   def create
     GoogleCalendar::EventCreator.call(current_user, exercise_schedule_params)
-    redirect_to root_url, notice: 'Successfully created an event.'
+    redirect_to dashboard_url, notice: 'Successfully created an event.'
   end
 
   def preview
