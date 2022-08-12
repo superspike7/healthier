@@ -65,10 +65,11 @@
     </div>
 
     <div class="flex gap-4 p-4 items-center">
-      <p>icon</p>
       <%= form_with model: @message, url: conversation_messages_path(conversation: @conversation.id), class: 'w-full flex gap-4' do |f| %>
         <%= f.text_field :content, placeholder: 'Start a new message', class: 'flex-1 border border-gray-800 p-3 rounded-full' %>
-        <%= f.submit 'send icon' %>
+        <button type="submit">
+          <%= embedded_svg 'icons/send.svg', class: 'h-14 rotate-90 fill-green-500' %>
+        </button>
       <% end %>
     </div>
   </div>
