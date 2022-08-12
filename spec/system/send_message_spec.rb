@@ -16,7 +16,9 @@ RSpec.describe "Sending of message", type: :system do
 
     fill_in 'message_content', with: message_body
 
-    click_on 'commit'
+    within all('form')[3] do
+      find('button').click
+    end
 
     expect(page).to have_text(message_body)
   end
