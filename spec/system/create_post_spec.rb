@@ -13,6 +13,6 @@ RSpec.describe "Create or upload a post", type: :system do
         click_on "commit"
 
         expect(page).to have_text(post_body)
-        expect("flash").to be_present
+        expect(page).to have_css("#flash")
     end
 end
