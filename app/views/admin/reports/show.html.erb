@@ -37,7 +37,7 @@
           </div>
           <div class="text-xl flex gap-2 justify-end px-2">
             <%= link_to 'View Profile', admin_user_path(@report.reported.username), class: "font-bold py-2 px-3 rounded-full bg-red-500 text-red-50" %>
-            <%= button_to 'Delete User', admin_user_path(@report.reported.id), method: :delete, data: {confirm: 'Are you sure?'}, class: "font-bold py-2 px-3 rounded-full bg-green-500 text-green-50" %>
+            <%= button_to 'Delete User', admin_user_path(@report.reported_id), method: :delete, data: {confirm: 'Are you sure?'}, class: "font-bold py-2 px-3 rounded-full bg-green-500 text-green-50" %>
           </div>
         </div>
       </div>
