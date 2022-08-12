@@ -32,7 +32,7 @@ RSpec.describe "Notification", type: :system do
   end
 
   context "when another user initialized a conversation" do
-    it 'increases notification count by 1' do
+    it 'creates a new notification' do
       Conversation.create_direct!(another_user, user)
       conversation_notification_body = 'created a conversation with you'
 
