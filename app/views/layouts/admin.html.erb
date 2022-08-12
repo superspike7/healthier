@@ -16,9 +16,7 @@
     <div class="h-screen w-screen flex">
       <!-- side navigation bar -->
       <div class="h-full w-24 bg-gray-800 flex flex-col justify-between gap-16 items-center py-5">
-        <div class="h-14 w-14 bg-gray-500 text-center text-white rounded-full flex items-center justify-center">
-          LOGO
-        </div>
+        <%= image_tag 'logo.svg', class: 'rounded-full h-16 w-16 p-1 bg-white' %>
         <ul class="flex-1 flex flex-col">
           <%= link_to admin_users_path do %>
             <li class="cursor-pointer hover:bg-green-600 p-4 rounded-full">
