@@ -16,7 +16,7 @@ class FoodsController < ApplicationController
     respond_to do |format|
       if @new_food.save
         format.turbo_stream { flash.now[:notice] = "#{@new_food.name} has been successfully added." }
-        format.html { redirect_to root_path, notice: "#{@new_food.name} has been successfully added." } 
+        format.html { redirect_to root_path, notice: "#{@new_food.name} has been successfully added." }
       else
         render :new
       end
