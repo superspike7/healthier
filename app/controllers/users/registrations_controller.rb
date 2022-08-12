@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def restrict_google_user
     unless current_user.provider.nil?
       flash[:notice] = 'Google Accounts cannot edit their email and password.'
-      redirect_back_or_to root_url
+      redirect_back_or_to dashboard_url
     end
   end
 end

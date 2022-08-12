@@ -8,7 +8,7 @@ class DailyIntakeMealsController < ApplicationController
   def create
     meals = current_user.meals.find(daily_intake_meal_params[:meals])
     current_user.daily_intakes.last.add_foods_from_meals(meals)
-    redirect_to root_url
+    redirect_to dashboard_url
   end
 
   private

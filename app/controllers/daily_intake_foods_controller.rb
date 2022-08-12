@@ -7,7 +7,7 @@ class DailyIntakeFoodsController < ApplicationController
 
   def create
     current_user.daily_intakes.last.add_foods(daily_intake_food_params)
-    redirect_to root_path, notice: 'Successfully added food/s in your daily intake.'
+    redirect_to dashboard_path, notice: 'Successfully added food/s in your daily intake.'
   end
 
   private

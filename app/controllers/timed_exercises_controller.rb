@@ -17,7 +17,7 @@ class TimedExercisesController < ApplicationController
     respond_to do |format|
       if @timed_exercise.save
         format.turbo_stream { flash.now[:notice] = "Successfully created #{@timed_exercise.name}" }
-        format.html { redirect_to root_path, notice: "Successfully created #{@timed_exercise.name}" } 
+        format.html { redirect_to dashboard_path, notice: "Successfully created #{@timed_exercise.name}" } 
       else
         render :new
       end
@@ -28,7 +28,7 @@ class TimedExercisesController < ApplicationController
 
   def update
     if @timed_exercise.update(timed_exercise_params)
-      redirect_to root_path, notice: "Successfully updated #{@timed_exercise.name}"
+      redirect_to dashboard_path, notice: "Successfully updated #{@timed_exercise.name}"
     else
       render :edit
     end

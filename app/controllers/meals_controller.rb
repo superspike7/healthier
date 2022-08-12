@@ -19,7 +19,7 @@ class MealsController < ApplicationController
       if @new_meal.save
         @new_meal.add_food(meal_with_food_params)
         format.turbo_stream { flash.now[:notice] = "#{@new_meal.name} has been successfully added."}
-        format.html { redirect_to root_path, notice: "#{@new_meal.name} has been successfully added." } 
+        format.html { redirect_to dashboard_path, notice: "#{@new_meal.name} has been successfully added." } 
       else
         render :new
       end
@@ -34,7 +34,7 @@ class MealsController < ApplicationController
   def update
     if @meal.update(meal_params)
       @meal.update_food(meal_with_food_params)
-      redirect_to root_path, notice: "#{@meal.name} has been successfully updated."
+      redirect_to dashboard_path, notice: "#{@meal.name} has been successfully updated."
     else
       render :edit
     end

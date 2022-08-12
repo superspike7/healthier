@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource)
-    current_user.admin? ? admin_users_path : root_path
+    current_user.admin? ? admin_users_path : dashboard_path
   end
 
   def set_current_user

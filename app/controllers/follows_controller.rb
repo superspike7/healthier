@@ -7,13 +7,13 @@ class FollowsController < ApplicationController
       flash[:notice] = @follow.errors.full_messages.to_sentence
     end
 
-    redirect_back_or_to root_path
+    redirect_back_or_to dashboard_path
   end
 
   def destroy
     @follow = current_user.relationships.find_by(followed_id: params[:id])
     @follow.destroy
-    redirect_back_or_to root_path
+    redirect_back_or_to dashboard_path
   end
 
   private

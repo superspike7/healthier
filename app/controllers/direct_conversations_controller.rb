@@ -23,6 +23,6 @@ class DirectConversationsController < ApplicationController
                    Conversation.create_direct!(current_user, other_user)
     redirect_to direct_conversation_url(conversation)
   rescue ActiveRecord::Rollback
-    redirect_back_or_to root_url, alert: 'Something went wrong. Please try again later.'
+    redirect_back_or_to dashboard_url, alert: 'Something went wrong. Please try again later.'
   end
 end

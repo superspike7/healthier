@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :report_post
   end
+  resource :dashboard, only: :show, controller: 'dashboard'
   resources :likes, only: [:create, :destroy]
   resources :follows, only: [:create, :destroy]
   resources :daily_intakes, only: [:new, :show]
@@ -37,7 +38,7 @@ Rails.application.routes.draw do
     resources :daily_intake_meals, only: [:create, :new], path: 'meal'
   end
 
-  root 'dashboard#index'
+  root 'static_pages#home'
 
   namespace :admin do
     resources :reports, path_names: {new: 'new/:username' }
