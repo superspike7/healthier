@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_one_attached :avatar
 
-  has_many :relationships, class_name: 'Relationship', foreign_key: 'user_id'
-  has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id'
+  has_many :relationships, class_name: 'Relationship', foreign_key: 'user_id', dependent: :destroy
+  has_many :followed_user, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :reports, class_name: 'Report', foreign_key: 'user_id', dependent: :destroy
