@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :meals, except: :show
   resources :daily_intakes, only: [:index, :create], path: 'daily'
   resources :profiles, only: [:show, :edit, :update], param: 'username', path: 'profile' do
-    resources :report_user
+    resources :report_user, only: [:new, :create]
   end
   resources :repetition_exercises, except: [:show], path: 'repetitions'
   resources :timed_exercises, except: [:show], path: 'timed'
