@@ -9,11 +9,8 @@
       <%= button_to direct_conversations_path(other_user: @user.id), class: "p-2 border border-gray-200 hover:bg-green-400 rounded-full" do %>
         <%= embedded_svg 'icons/chat.svg', class: 'h-7' %>
       <% end %>
-      <%= link_to new_profile_report_user_path(@user), data: { turbo_frame: 'modal' }, class: 'p-2 border border-gray-200 hover:bg-red-400 rounded-full' do %>
-        <%= embedded_svg 'icons/report.svg', class: 'h-7' %>
-      <% end %>
       <% unless current_user == @user %>
-        <%= link_to new_admin_report_path(@user.username),
+        <%= link_to new_profile_report_user_path(@user),
                     data: { turbo_frame: 'modal' },
                     class: 'p-2 border border-gray-200 hover:bg-red-400 rounded-full' do %>
           <%= embedded_svg 'icons/report.svg', class: 'h-7' %>
