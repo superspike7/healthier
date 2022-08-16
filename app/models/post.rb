@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many_attached :images, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_noticed_notifications model_name: 'Notification'
   has_many :reports, class_name: 'Report', foreign_key: 'post_id', dependent: :destroy
 

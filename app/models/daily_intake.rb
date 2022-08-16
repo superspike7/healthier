@@ -1,6 +1,6 @@
 class DailyIntake < ApplicationRecord
   belongs_to :user
-  has_many :daily_intake_foods
+  has_many :daily_intake_foods, dependent: :destroy
   has_many :foods, through: :daily_intake_foods
 
   def total_calories
